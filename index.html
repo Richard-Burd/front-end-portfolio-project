@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>portfolio project under construction</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <main>
+      <div class='header' data-id="header-block">
+        <h1>
+          <span class='header' id='header'>Airborne Pallet Tracker</span>
+        </h1>
+      </div>
+
+      <div class='panel' id="totals-block">
+        <h1>
+          <span class='pallet-count' id='total-label'>Total No. of Pallets:&nbsp;</span>
+          <span class='pallet-count' id='total-value'>10</span>
+          <span class='gross-weight' id='total-label'>Total Weight:&nbsp;</span>
+          <span class='gross-weight' id='total-value'>20</span>
+          <span class='gross-area' id='total-value'>30</span>
+          <span class='gross-area' id='total-label'>Total sq.ft. of Area:&nbsp;</span>
+        </h1>
+      </div>
+      <div class='panel' id="storage-area">
+        <h2>
+          <span class='storage-area-name'><h1>Storage Area Name Goes Here</h1></span>
+          <button>Create a pallet in this storage area</button>
+        </h2>
+
+          <form class='new-pallet-form' id='new-pallet-id-number'>
+            <h1>Add a pallet to this storage area form</h1>
+            <h2>
+              Name: <input class='input' type="text" name="name"></input>
+                <br><br>
+              <div class="radio-buttons">
+              Priority:
+                <div>
+                  <input class='push' type="radio" id="first-priority" name="priority" value="first-priority" checked>
+                  <label for="first-priority">Life Saving</label>
+                </div>
+                <div>
+                  <input class='push' type="radio" id="second-priority" name="priority" value="second-priority">
+                  <label for="second-priority">Urgent care</label>
+                </div>
+                <div>
+                  <input class='push' type="radio" id="third-priority" name="priority" value="fourth-priority">
+                  <label for="third-priority">Medium</label>
+                </div>
+                <div>
+                  <input class='push' type="radio" id="fourth-priority" name="priority" value="fifth-priority">
+                  <label for="fourth-priority">Sustainment</label>
+                </div>
+                <div>
+                  <input class='push' type="radio" id="fifth-priority" name="priority" value="sixth-priority">
+                  <label for="fifth-priority">Low impact</label>
+                </div>
+              </div>
+                <br><br>
+              Contents: <input class='input' type="text" contents="contents"></input>
+                <br><br>
+              Weight: <input class='input' type="text" weight="weight"></input>
+                <br><br>
+            </h2>
+          </form>
+      </div>
+
+
+
+    </main>
+
+
+    <script src="./src/index.js"></script>
+  </body>
+</html>
