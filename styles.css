@@ -54,12 +54,31 @@ body {
     float: right;
   }
 
+  h1.area-name-limit {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 2000px;
+  }
+
   button.create-pallet-button {
+    display:inline-block;
     font-size: 1.2em;
     font-style: bold;
     font-style: italic;
     color: black;
     background-color: #a0cd7bff;
+    border-radius: 30px;
+  }
+
+  button.delete-area {
+    float: right;
+    display:inline-block;
+    font-size: 1.2em;
+    font-style: bold;
+    font-style: italic;
+    color: black;
+    background-color: #cd3204ff;
     border-radius: 30px;
   }
 
@@ -83,9 +102,13 @@ body {
     background-color: white;
   }
 
-  div.radio-buttons {
-  display: flex;
-  justify-content: space-between;
+  div.radio-buttons#priorties {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  div.radio-buttons#hazmat {
+
   }
 
   input.push {
@@ -125,8 +148,17 @@ body {
   }
 
   img.hazmat-icon {
-    height: 100px;
-    width: 100px;
-    margin: 00px 75px 00px 00px;
+    height: 60px;
+    width: 60px;
+    margin: 00px 50px 50px 00px;
     float: right;
+  }
+
+  ul.pallet-contents-displayed-in-pallet-box {
+    color: teal;
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 190px;
   }
