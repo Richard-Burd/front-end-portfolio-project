@@ -30,41 +30,50 @@
           <button>Create a pallet in this storage area</button>
         </h2>
 
-          <form class='new-pallet-form' id='new-pallet-id-number'>
-            <h1>Add a pallet to this storage area form</h1>
-            <h2>
-              Name: <input class='input' type="text" name="name"></input>
-                <br><br>
-              <div class="radio-buttons">
+        <form class='new-pallet-form' id='new-pallet-id-number'>
+          <h1>Add a pallet to this storage area form</h1>
+          <h2>
+            Name: <input class='input' type="text" name="name"></input>
+              <br><br>
+            <div class="radio-buttons">
               Priority:
-                <div>
-                  <input class='push' type="radio" id="first-priority" name="priority" value="first-priority" checked>
-                  <label for="first-priority">Life Saving</label>
-                </div>
-                <div>
-                  <input class='push' type="radio" id="second-priority" name="priority" value="second-priority">
-                  <label for="second-priority">Urgent care</label>
-                </div>
-                <div>
-                  <input class='push' type="radio" id="third-priority" name="priority" value="fourth-priority">
-                  <label for="third-priority">Medium</label>
-                </div>
-                <div>
-                  <input class='push' type="radio" id="fourth-priority" name="priority" value="fifth-priority">
-                  <label for="fourth-priority">Sustainment</label>
-                </div>
-                <div>
-                  <input class='push' type="radio" id="fifth-priority" name="priority" value="sixth-priority">
-                  <label for="fifth-priority">Low impact</label>
-                </div>
+              <div>
+                <input class='push' type="radio" id="first-priority" name="priority" value="first-priority" checked>
+                <label for="first-priority">Life Saving</label>
               </div>
-                <br><br>
-              Contents: <input class='input' type="text" contents="contents"></input>
-                <br><br>
-              Weight: <input class='input' type="text" weight="weight"></input>
-                <br><br>
-            </h2>
-          </form>
+              <div>
+                <input class='push' type="radio" id="second-priority" name="priority" value="second-priority">
+                <label for="second-priority">Urgent care</label>
+              </div>
+              <div>
+                <input class='push' type="radio" id="third-priority" name="priority" value="fourth-priority">
+                <label for="third-priority">Medium</label>
+              </div>
+              <div>
+                <input class='push' type="radio" id="fourth-priority" name="priority" value="fifth-priority">
+                <label for="fourth-priority">Sustainment</label>
+              </div>
+              <div>
+                <input class='push' type="radio" id="fifth-priority" name="priority" value="sixth-priority">
+                <label for="fifth-priority">Low impact</label>
+              </div>
+            </div>
+            <br><br>
+            Contents: <input class='input' type="text" contents="contents"></input>
+            <br><br>
+            Weight: <input class='input' type="text" weight="weight"></input>
+            <br><br>
+            <input class="submit-new-pallet" type="submit">
+          </h2>
+        </form>
+        <div class="pallet-grid">
+          <div class="pallet" style="background-color: #cee1ffff; border: 17px solid red">Pallet-1</div>
+          <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid darkorange">Pallet-2</div>
+          <div class="pallet" style="background-color: #6ea6ffff; border: 17px solid green">Pallet-3</div>
+          <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid green">Pallet-4</div>
+          <div class="pallet" style="background-color: #6ea6ffff; border: 17px solid green">Pallet-5</div>
+          <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid red">Pallet-6</div>
+        </div>
       </div>
 
 

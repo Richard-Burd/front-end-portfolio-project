@@ -1,7 +1,4 @@
 /* Portfolio Project CSS */
-FIGURE OUT HOW TO COLOR THE VALUES AND THE DESCRIPTION
-SO THEY ARE DIFFERENT COLORS
-
 
 body {
     margin: 0;
@@ -27,8 +24,8 @@ body {
   div.panel {
     border: 5px solid black;
     background-color: #fff1dcff;
-    padding: 3px 20px 3px 20px;
-    margin: 30px;
+    padding: 20px 20px 20px 20px;
+    margin: 20px;
     font-family: "Calibri", Arial, sans-serif;
     font-style: italic;
   }
@@ -75,8 +72,8 @@ body {
     background-color: #e9e9e9ff;
     border: 2.5px solid black;
     border-radius: 30px;
-    margin: 30px;
-    padding: 3px 20px 3px 20px;
+    margin: 10px 10px 50px 10px;
+    padding: 20px 20px 20px 20px;
     color: black;
   }
 
@@ -96,6 +93,19 @@ body {
     height: 1.5em;
   }
 
-  input.push:active {
-    background-color: green;
+  input.submit-new-pallet {
+    border: 1.5px solid black;
+    border-radius: 20px;
+    font-size: 1em;
+    width: 5em;
+    height: 3em;
+  }
+
+  div.pallet {
+    display:inline-block;
+    height: 250px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 40px;
+    margin: 20px 20px 20px 20px;
   }
