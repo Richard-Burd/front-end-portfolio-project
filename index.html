@@ -27,7 +27,7 @@
       <div class='panel' id="storage-area">
         <h2>
           <span class='storage-area-name'><h1>Storage Area Name Goes Here</h1></span>
-          <button>Create a pallet in this storage area</button>
+          <button class="create-pallet-button">Create a pallet in this storage area</button>
         </h2>
 
         <form class='new-pallet-form' id='new-pallet-id-number'>
@@ -67,17 +67,21 @@
           </h2>
         </form>
         <div class="pallet-grid">
-          <div class="pallet" style="background-color: #cee1ffff; border: 17px solid red">Pallet-1</div>
-          <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid darkorange">Pallet-2</div>
+          <div class="pallet" style="background-color: #cee1ffff; border: 17px solid red">
+            <h1 class="pallet-title">Pallet-1<h1>
+              <a href="HAZMAT.svg"><img class="hazmat-icon" src="HAZMAT.svg" title="source: local" /></a>
+            <button class="delete-pallet">Delete</button>
+          </div>
+          <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid darkorange">
+            <h1 class="pallet-title">Pallet-2<h1>
+            <button class="delete-pallet">Delete</button>
+          </div>
           <div class="pallet" style="background-color: #6ea6ffff; border: 17px solid green">Pallet-3</div>
           <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid green">Pallet-4</div>
           <div class="pallet" style="background-color: #6ea6ffff; border: 17px solid green">Pallet-5</div>
           <div class="pallet" style="background-color: #9fc4ffff; border: 17px solid red">Pallet-6</div>
         </div>
       </div>
-
-
-
     </main>
 
 

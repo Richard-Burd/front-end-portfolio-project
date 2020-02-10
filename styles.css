@@ -54,7 +54,7 @@ body {
     float: right;
   }
 
-  button {
+  button.create-pallet-button {
     font-size: 1.2em;
     font-style: bold;
     font-style: italic;
@@ -102,10 +102,31 @@ body {
   }
 
   div.pallet {
+    position: relative;
     display:inline-block;
     height: 250px;
     width: 250px;
-    padding: 10px;
+    padding: 00px;
     border-radius: 40px;
     margin: 20px 20px 20px 20px;
+  }
+
+  h1.pallet-title {
+    text-align:center;
+  }
+
+  button.delete-pallet {
+    background-color: tomato;
+    position: absolute;
+    bottom: 0;
+    margin: 10px;
+    font-size: 0.8em;
+    border-radius: 12px;
+  }
+
+  img.hazmat-icon {
+    height: 100px;
+    width: 100px;
+    margin: 00px 75px 00px 00px;
+    float: right;
   }
