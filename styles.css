@@ -150,15 +150,16 @@ body {
   img.hazmat-icon {
     height: 60px;
     width: 60px;
-    margin: 00px 50px 50px 00px;
+    margin: 45px 10px 00px 00px;
     float: right;
   }
 
   ul.pallet-contents-displayed-in-pallet-box {
-    color: teal;
+    color: darkslategrey;
     font-size: 0.7em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 190px;
+    margin-bottom: -20px;
   }
