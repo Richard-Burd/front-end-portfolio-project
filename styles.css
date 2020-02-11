@@ -4,31 +4,28 @@ body {
     margin: 0;
     padding: 0;
     background-color: #eeeeee;
-    font: "Arial""
   }
 
-  div.header {
-    background-color: #fff1dcff;
-    padding: 3px 20px 3px 20px;
-    font-family: Arial, sans-serif;
-    font-style: bold;
-    font-size: 28px;
-    font-stretch: extra-expanded;
-    color: #b2b285ff;
-    text-align:center;
-  }
+div.header {
+  text-align:center;
+  font-family: 'Cinzel', serif;
+  color: #528162ff;
+  letter-spacing: 7px
+}
 
-  /* The left, right, & center positioning of this div are messy, so I want
-     to isolate it from the rest of the panel div's
-  */
-  div.panel {
-    border: 5px solid black;
-    background-color: #fff1dcff;
-    padding: 20px 20px 20px 20px;
-    margin: 20px;
-    font-family: "Calibri", Arial, sans-serif;
-    font-style: italic;
-  }
+img.empennage-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+div.panel {
+  border: 5px solid #4d220dff;
+  background-color: #fff1dcff;
+  padding: 0px 20px 00px 20px;
+  margin: 20px;
+}
 
   #total-label {
     color: #555520ff;
@@ -40,33 +37,24 @@ body {
 
   #totals-block {
     text-align:center;
+    font-family: 'Lora', serif;
   }
   span.pallet-count {
     float: left;
-  }
-
-  span.gross-weight {
-    margin:0 auto;
-    width:10px
   }
 
   span.gross-area {
     float: right;
   }
 
-  h1.area-name-limit {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 2000px;
+  span.storage-area-name {
+    font-family: 'Lora', serif;
+    color: #806a56ff;
   }
 
   button.create-pallet-button {
     display:inline-block;
-    font-size: 1em;
-    font-style: bold;
-    font-style: italic;
-    color: black;
+
     background-color: #a0cd7bff;
     border-radius: 30px;
   }

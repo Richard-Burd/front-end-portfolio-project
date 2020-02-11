@@ -4,32 +4,31 @@
     <meta charset="utf-8">
     <title>portfolio project under construction</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Lora&display=swap" rel="stylesheet">
   </head>
   <body>
 
     <main>
       <div class='header' data-id="header-block">
-        <h1>
-          <span class='header' id='header'>Airborne Pallet Tracker</span>
-        </h1>
+          <span class='header' id='header'><h1>Airborne Pallet Tracker</h1></span>
       </div>
-
+      <img class="empennage-image" src="https://i.imgur.com/VREuIWf.png"/>
       <div class='panel' id="totals-block">
-        <h2>
+        <h3>
           <span class='pallet-count' id='total-label'>Total No. of Pallets:&nbsp;</span>
-          <span class='pallet-count' id='total-value'>10000</span>
-          <span class='gross-weight' id='total-label'>Total Weight:&nbsp;</span>
-          <span class='gross-weight' id='total-value'>20000</span>
-          <span class='gross-area' id='total-value'>30000</span>
+          <span class='pallet-count' id='total-value'>34</span>
+          <span class='gross-weight' id='total-label'>Total Weight (lbs):&nbsp;</span>
+          <span class='gross-weight' id='total-value'>23,452</span>
+          <span class='gross-area' id='total-value'>2,534</span>
           <span class='gross-area' id='total-label'>Total sq.ft. of Area:&nbsp;</span>
-        </h2>
+        </h3>
       </div>
       <div class='panel' id="storage-area">
-        <h2>
-          <span class='storage-area-name'><h2 class='area-name-limit'>Storage Area Name Goes Here</h2></span>
+
+          <span class='storage-area-name'><h1 class='area-name-limit'>Storage Area Name Goes Here</h1></span>
           <button class="create-pallet-button">Create a pallet in this storage area</button>
           <button class="delete-area">Delete this empty area</button>
-        </h2>
+
 
         <form class='new-pallet-form' id='new-pallet-id-number'>
           <h1>Add a pallet to this storage area form</h1>
@@ -48,16 +47,20 @@
                     <label for="second-priority">Urgent care</label>
                   </div>
                   <div>
-                    <input class='push' type="radio" id="third-priority" name="priority" value="fourth-priority">
+                    <input class='push' type="radio" id="third-priority" name="priority" value="third-priority">
                     <label for="third-priority">Medium</label>
                   </div>
                   <div>
-                    <input class='push' type="radio" id="fourth-priority" name="priority" value="fifth-priority">
+                    <input class='push' type="radio" id="fourth-priority" name="priority" value="fourth-priority">
                     <label for="fourth-priority">Sustainment</label>
                   </div>
                   <div>
-                    <input class='push' type="radio" id="fifth-priority" name="priority" value="sixth-priority">
+                    <input class='push' type="radio" id="fifth-priority" name="priority" value="fifth-priority">
                     <label for="fifth-priority">Low impact</label>
+                  </div>
+                  <div>
+                    <input class='push' type="radio" id="sixth-priority" name="priority" value="sixth-priority">
+                    <label for="fifth-priority">Least Concearn</label>
                   </div>
                 </div>
               </h4>
@@ -101,7 +104,7 @@
                 <li>54 really big things that I cannot describe</li>
                 <li>Some other really big thingamagig</li>
               </ul>
-              <img class="hazmat-icon" src="HAZMAT.svg" title="source: local" /></a>
+              <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
             <button class="delete-pallet">Delete</button>
           </div>
           <div class="pallet" style="background-color: #9fc4ffff; border: 10px solid darkorange">
@@ -138,17 +141,17 @@
                 <li>54 really big things that I cannot describe</li>
                 <li>Some other really big thingamagig</li>
               </ul>
-              <img class="hazmat-icon" src="HAZMAT.svg" title="source: local" /></a>
+              <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
             <button class="delete-pallet">Delete</button>
           </div>
-          <div class="pallet" style="background-color: #e3eeffff; border: 10px solid red">
+          <div class="pallet" style="background-image: url('./436L.svg'); border: 10px solid red">
             <h1 class="pallet-title">Pallet-6<h1>
               <ul class="pallet-contents-displayed-in-pallet-box">
                 <li>20 bags of rice</li>
                 <li>54 really big things that I cannot describe</li>
                 <li style='color:#ffffff00'>false</li>
               </ul>
-            <img class="hazmat-icon" src="HAZMAT.svg" title="source: local" /></a>
+            <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
             <button class="delete-pallet">Delete</button>
           </div>
         </div>
