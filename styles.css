@@ -1,8 +1,6 @@
 /* Portfolio Project CSS */
 
 body {
-    margin: 0;
-    padding: 0;
     background-color: #eeeeee;
   }
 
@@ -10,7 +8,9 @@ div.header {
   text-align:center;
   font-family: 'Cinzel', serif;
   color: #528162ff;
-  letter-spacing: 7px
+  font-size: 36px;
+  letter-spacing: 7px;
+  font-weight: 600;
 }
 
 img.empennage-image {
@@ -23,94 +23,157 @@ img.empennage-image {
 div.panel {
   border: 5px solid #4d220dff;
   background-color: #fff1dcff;
-  padding: 0px 20px 00px 20px;
+  font-family: 'Lora', serif;
   margin: 20px;
+  padding: 15px 20px 15px 20px;
 }
 
-  #total-label {
-    color: #555520ff;
-  }
+div.panel#totals-block {
+  font-size: 22px;
+  font-weight: 700;
+}
 
-  #total-value {
-    color: #b3290cff;
-  }
+#total-label {
+  color: #555520ff;
+}
 
-  #totals-block {
-    text-align:center;
-    font-family: 'Lora', serif;
-  }
-  span.pallet-count {
-    float: left;
-  }
+#total-value {
+  color: #b3290cff;
+}
 
-  span.gross-area {
-    float: right;
-  }
+#totals-block {
+  text-align:center;
+}
 
-  span.storage-area-name {
-    font-family: 'Lora', serif;
-    color: #806a56ff;
-  }
+span.pallet-count {
+  float: left;
+}
 
-  button.create-pallet-button {
-    display:inline-block;
+span.gross-area {
+  float: right;
+}
 
-    background-color: #a0cd7bff;
-    border-radius: 30px;
-  }
+div.storage-area-name {
+  color: #806a56ff;
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: center;
+}
 
-  button.delete-area {
-    float: right;
-    display:inline-block;
-    font-size: 1em;
-    font-style: bold;
+div.form-title {
+  color: #3f4930ff;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button.master {
+  font-family: 'Righteous', cursive;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 1.2px;
+  border-radius: 12px;
+  color: #1e1e1eff;
+  background-color: #b0b17aff;
+  border: none;
+  padding: 5px 8px;
+}
+
+button.master#delete-area {
+  float: right;
+}
+
+button.master:hover#create-pallet {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+button.master:hover#delete-area {
+  background-color: tomato; /* Green */
+  color: white;
+}
+
+form.new-pallet-form {
+  background-color: #d9cca4ff;
+  border: 2.5px solid #1a2b01ff;
+  border-radius: 12px;
+  margin-top: 30px;
+  max-width: 450px;
+  padding: 00px 20px 20px 20px;
+  color: #384327ff;
+}
+
+label.new-pallet-fields {
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+
+div.radio-buttons {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  font-size: 20px;
+  font-weight: 600;
+}
+
+input.new-pallet-input {
+  width: 200px;
+  height: 25px;
+  border: 1.5px solid #64734dff;
+  border-radius: 8px;
+}
+
+input.push {
+  color: red;
+  width: 1.8em;
+  height: 1.8em;
+}
+
+td {
+  padding: 6px 20px 6px 6px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+input[type="submit"] {
+  font-family: 'Righteous', cursive;
+    font-size: 18px;
     font-style: italic;
-    color: black;
-    background-color: #cd3204ff;
-    border-radius: 30px;
-  }
+    letter-spacing: 1.2px;
+    border-radius: 12px;
+    color: #1e1e1eff;
+    background-color: #6ea175ff;
+    border: none;
+    padding: 5px 8px;
+}
 
-  button.release {
-    float: right;
-    background-color: #E1332D;
-  }
+input[type="submit"]:hover {
+  background-color: #3f5c1fff; /* Green */
+  color: white;
+}
 
-  form.new-pallet-form {
-    background-color: #e9e9e9ff;
-    border: 2.5px solid black;
-    border-radius: 30px;
-    margin: 10px 10px 50px 10px;
-    padding: 20px 20px 20px 20px;
-    color: black;
-  }
 
-  input.input {
-    font-size: 1em;
-    border: 1.5px solid black;
-    background-color: white;
-  }
 
-  div.radio-buttons#priorties {
-    display: flex;
-    justify-content: space-between;
-  }
 
-  div.radio-buttons#hazmat {
 
-  }
 
-  input.push {
-    width: 1em;
-    height: 1em;
-  }
 
-  input.submit-new-pallet {
-    border: 1px solid black;
-    border-radius: 20px;
-    font-size: 1em;
-    width: 5em;
-    height: 3em;
-  }
+
+
+
+
+
+
+
+
+
+
+
 
   div.pallet {
     position: relative;
@@ -126,6 +189,7 @@ div.panel {
     text-align:center;
   }
 
+/*
   button.delete-pallet {
     background-color: tomato;
     position: absolute;
@@ -134,7 +198,7 @@ div.panel {
     font-size: 0.5em;
     border-radius: 12px;
   }
-
+*/
   img.hazmat-icon {
     height: 60px;
     width: 60px;
@@ -152,9 +216,11 @@ div.panel {
     margin-bottom: -20px;
   }
 
+/*
   button.create-storage-area {
     font-size: 1em;
     font-style: bold;
     font-style: italic;
     border-radius: 30px;
   }
+  */
