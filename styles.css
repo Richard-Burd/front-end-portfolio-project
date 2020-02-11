@@ -142,14 +142,14 @@ td {
 
 input[type="submit"] {
   font-family: 'Righteous', cursive;
-    font-size: 18px;
-    font-style: italic;
-    letter-spacing: 1.2px;
-    border-radius: 12px;
-    color: #1e1e1eff;
-    background-color: #6ea175ff;
-    border: none;
-    padding: 5px 8px;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 1.2px;
+  border-radius: 12px;
+  color: #1e1e1eff;
+  background-color: #6ea175ff;
+  border: none;
+  padding: 5px 8px;
 }
 
 input[type="submit"]:hover {
@@ -157,33 +157,67 @@ input[type="submit"]:hover {
   color: white;
 }
 
+div.pallets {
+  display:inline-block;
+}
+
+div.pallet-box {
+  background-image: url("./436L.svg");
+  background-position: center;
+  background-size: 280px 280px;
+  height: 210px;
+  width: 210px;
+  border-radius: 40px;
+
+  /* This is the "iffy" part where the grid begins */
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-areas:
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+}
+
+label.pallet-name {
+  color:red;
+}
+
+div.red-timescale {
+  border: 10px solid firebrick;
+}
+
+div.green-timescale {
+  border: 10px solid forestgreen;
+}
+
+div.amber-timescale {
+  border: 10px solid goldenrod;
+}
+
+div.lightweight {
+  background-color: lightcyan;
+}
+
+div.middleweight {
+  background-color: lightskyblue;
+}
+
+div.heavyweight {
+  background-color: lightseagreen;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  div.pallet {
-    position: relative;
-    display:inline-block;
-    height: 210px;
-    width: 210px;
-    padding: 00px;
-    border-radius: 40px;
-    margin: 20px 20px 20px 20px;
-  }
+/*
+div.pallet {
+  position: relative;
+  display:inline-block;
+  height: 210px;
+  width: 210px;
+  padding: 00px;
+  border-radius: 40px;
+  margin: 20px 20px 20px 20px;
+}
 
   h1.pallet-title {
     text-align:center;
