@@ -157,8 +157,31 @@ input[type="submit"]:hover {
   color: white;
 }
 
-div.pallets {
-  display:inline-block;
+@media only screen and (min-width: 450px) {
+  div.pallets {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  div.pallets {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 1120px) {
+  div.pallets {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 20px;
+  }
 }
 
 div.pallet-box {
@@ -169,14 +192,15 @@ div.pallet-box {
   width: 210px;
   border-radius: 40px;
 
-  /* This is the "iffy" part where the grid begins */
+  /* This is the "iffy" part where the grid begins
   display: grid;
   grid-template-columns: 50px 50px 50px 50px;
   grid-template-rows: 50px 50px 50px 50px;
   grid-template-areas:
     "header header header header"
     "main main . sidebar"
-    "footer footer footer footer";
+    "footer footer footer footer"
+  */
 }
 
 label.pallet-name {
@@ -207,54 +231,7 @@ div.heavyweight {
   background-color: lightseagreen;
 }
 
-
-/*
-div.pallet {
-  position: relative;
-  display:inline-block;
-  height: 210px;
-  width: 210px;
-  padding: 00px;
-  border-radius: 40px;
-  margin: 20px 20px 20px 20px;
+img.hazmat-icon {
+  height: 60px;
+  width: 60px;
 }
-
-  h1.pallet-title {
-    text-align:center;
-  }
-
-/*
-  button.delete-pallet {
-    background-color: tomato;
-    position: absolute;
-    bottom: 0;
-    margin: 10px;
-    font-size: 0.5em;
-    border-radius: 12px;
-  }
-*/
-  img.hazmat-icon {
-    height: 60px;
-    width: 60px;
-    margin: 25px 10px 00px 00px;
-    float: right;
-  }
-
-  ul.pallet-contents-displayed-in-pallet-box {
-    color: darkslategrey;
-    font-size: 0.5em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 140px;
-    margin-bottom: -20px;
-  }
-
-/*
-  button.create-storage-area {
-    font-size: 1em;
-    font-style: bold;
-    font-style: italic;
-    border-radius: 30px;
-  }
-  */
