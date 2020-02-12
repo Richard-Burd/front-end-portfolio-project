@@ -184,6 +184,15 @@ input[type="submit"]:hover {
   }
 }
 
+@media only screen and (min-width: 1400px) {
+  div.pallets {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(5, 1fr);
+    grid-row-gap: 20px;
+  }
+}
+
 div.pallet-box {
   background-image: url("./436L.svg");
   background-position: center;
