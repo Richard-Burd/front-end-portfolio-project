@@ -199,6 +199,9 @@ div.pallet-box {
   height: 210px;
   width: 210px;
   border-radius: 40px;
+
+  /* This is needed to position elements inside the boxes properly */
+  position: relative;
 }
 
 div.red-timescale {
@@ -228,12 +231,19 @@ div.heavyweight {
   background-color: #ffd5d3ff;
 }
 
+div.pallet-name {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  font-style: italic;
+  color: #4c4c4cff;
+  text-align: center;
+}
+
 img.hazmat-icon {
   height: 60px;
   width: 60px;
-}
-
-div.pallet-name {
-  color: red;
-  text-align: center;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
 }
