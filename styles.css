@@ -53,12 +53,29 @@ span.gross-area {
   float: right;
 }
 
-div.storage-area-name {
-  color: #806a56ff;
+div.storage-area {
   font-size: 35px;
   font-weight: 700;
   margin-bottom: 15px;
   text-align: center;
+}
+
+span.storage-area-name {
+  color: #806a56ff;
+}
+
+span.storage-area-name::after {
+  opacity: 0;
+  content: ".............";
+}
+
+span.storage-area-value {
+  color: #993027ff;
+}
+
+span.storage-area-value::after {
+  color: #806a56ff;
+  content: " sq.ft. of area";
 }
 
 div.form-title {
@@ -96,6 +113,14 @@ button.master:hover#delete-area {
   color: white;
 }
 
+input[type="text"] {
+  background-color: #d4e5e1ff;
+  color: #4d7269ff;
+  font-family: 'Lora', serif;
+  font-size:20px;
+  font-weight: 600;
+}
+
 form.new-pallet-form {
   background-color: #d9cca4ff;
   border: 2.5px solid #1a2b01ff;
@@ -115,8 +140,6 @@ label.new-pallet-fields {
 
 
 div.radio-buttons {
-  /* display: flex; */
-  /* justify-content: space-between; */
   font-size: 20px;
   font-weight: 600;
 }
@@ -202,6 +225,7 @@ div.pallet-box {
 
   /* This is needed to position elements inside the boxes properly */
   position: relative;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 div.red-timescale {
@@ -232,12 +256,61 @@ div.heavyweight {
 }
 
 div.pallet-name {
-  font-family: 'Fira Sans', sans-serif;
   font-size: 40px;
   font-weight: 700;
   font-style: italic;
   color: #4c4c4cff;
   text-align: center;
+  padding-top: 10px;
+}
+
+ul.pallet-contents-displayed-in-pallet-box {
+  font-size: 20px;
+  font-weight: 700;
+  color: #242424ff;
+  list-style: none;
+  position: absolute;
+
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  left: -30px;
+  top: 45px;
+}
+
+button.delete-pallet {
+  font-family: 'Righteous', cursive;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 1.2px;
+  border-radius: 12px;
+  color: #1e1e1eff;
+  background-color: #b0b17aff;
+  border: none;
+  padding: 5px 8px;
+  position: absolute;
+  bottom: 11px;
+  left: 11px;
+}
+
+button.delete-pallet:hover {
+  background-color: tomato;
+  color: white;
+}
+
+div.pallet-weight {
+  font-size: 20px;
+  font-weight: 700;
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #242424ff;
+}
+
+div.pallet-weight::after {
+  font-weight: bold;
+  content: " lbs";
 }
 
 img.hazmat-icon {
@@ -246,4 +319,10 @@ img.hazmat-icon {
   position: absolute;
   bottom: 8px;
   right: 8px;
+}
+
+form.new-storage-area-form {
+  color: #523b1cff;
+  display: flex;
+  justify-content: space-between;
 }

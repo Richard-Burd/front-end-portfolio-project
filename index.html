@@ -25,24 +25,23 @@
       </div>
 
       <div class='panel' id="storage-area">
-        <div class='storage-area-name'>Storage Area Name Goes Here</div>
+        <div class='storage-area'>
+          <span class='storage-area-name'>Storage Area Name Goes Here</span>
+          <span class='storage-area-value'>2,549</span>
+        </div>
         <button class="master" id='create-pallet'>Create a pallet in this storage area</button>
         <button class="master" id='delete-area'>Delete this empty area</button>
 
         <form class='new-pallet-form' id='new-pallet-id-number'>
           <div class='form-title'>Add a pallet to this storage area</div>
-          <div class='space-maker'>
-            <br><br><br>
-          </div>
-          <div class='new-pallet-fields' id='name'>
+          <div class='space-maker'><br><br><br></div>
+          <div>
             <label class='new-pallet-fields' id='name'>Name:</label>
             <input class='new-pallet-input' id='name' type="text" name="name">
           </div>
-          <div class='space-maker'>
-            <br><br><br>
-          </div>
-          <div class='new-pallet-fields' id='priority'>
-            <label class='new-pallet-fields' id='name'>Priority:</label>
+          <div class='space-maker'><br><br><br></div>
+          <div>
+            <label class='new-pallet-fields' id='priority'>Priority:</label>
             <div class="radio-buttons" id="priorties">
               <div>
                 <input class='push' type="radio" id="first-priority" name="priority" value="first-priority" checked>
@@ -70,34 +69,25 @@
               </div>
             </div>
           </div>
-          <div class='space-maker'>
-            <br><br><br>
-          </div>
-
-
+          <div class='space-maker'><br><br><br></div>
 
           <table>
             <label class='new-pallet-fields' id='contents'>Contents:</label>
-
             <tr class="contents" id="first-content">
               <td>1.)</td>
               <td><input class='new-pallet-input' type="text" contents="1st content"/></td>
             </tr>
-
             <tr class="contents" id="second-content">
               <td>2.)</td>
               <td><input class='new-pallet-input' type="text" contents="2nd content"/></td>
             </tr>
-
             <tr class="contents" id="third-content">
               <td>3.)</td>
               <td><input class='new-pallet-input' type="text" contents="3rd content"/></td>
             </tr>
           </table>
 
-          <div class='space-maker'>
-            <br><br><br>
-          </div>
+          <div class='space-maker'><br><br><br></div>
           <div class='new-pallet-fields' id='hazmat'>
             <label class='new-pallet-fields' id='hazmat'>HAZMAT:</label>
             <div class="radio-buttons" id="hazmat">
@@ -110,12 +100,11 @@
                 <label for="false">no</label>
               </div>
             </div>
-            <div class='space-maker'>
-              <br><br><br>
-            </div>
+            <div class='space-maker'><br><br><br></div>
           </div>
-            <input class="master" type="submit" value="Create a new pallet">
+          <input class="master" type="submit" value="Create a new pallet">
         </form>
+        <!-- the new pallet form ends here -->
 
         <div class='space-maker'>
           <br>
@@ -124,13 +113,24 @@
         <div class="pallets">
           <div class="pallet-box red-timescale lightweight" id="1">
             <div class='pallet-name'>Pallet-1</div>
+            <ul class="pallet-contents-displayed-in-pallet-box">
+              <li>20 bags of rice</li>
+              <li>54 really big things that I cannot describe</li>
+              <li>Some other really big thingamagig</li>
+            </ul>
             <button class="delete-pallet" id="1">Delete</button>
+            <div class='pallet-weight'>521</div>
           </div>
 
 
           <div class="pallet-box green-timescale middleweight" id="2">
             <div class='pallet-name'>Pallet-2</div>
+            <ul class="pallet-contents-displayed-in-pallet-box">
+              <li>20 bags of rice</li>
+              <li>54 really big things that I cannot describe</li>
+            </ul>
             <button class="delete-pallet" id="2">Delete</button>
+            <div class='pallet-weight'>319</div>
           </div>
 
 
@@ -142,147 +142,57 @@
               <li>Some other really big thingamagig</li>
             </ul>
             <button class="delete-pallet" id="3">Delete</button>
+            <div class='pallet-weight'>921</div>
             <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
           </div>
 
 
           <div class="pallet-box amber-timescale heavyweight" id="4">
             <div class='pallet-name'>Pallet-4</div>
+            <ul class="pallet-contents-displayed-in-pallet-box">
+              <li>Some other really big thingamagig</li>
+            </ul>
             <button class="delete-pallet" id="4">Delete</button>
+            <div class='pallet-weight'>723</div>
             <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
           </div>
 
           <div class="pallet-box amber-timescale heavyweight" id="4">
             <div class='pallet-name'>Pallet-4</div>
+            <ul class="pallet-contents-displayed-in-pallet-box">
+              <li>20 bags of rice</li>
+              <li>54 really big things that I cannot describe</li>
+              <li>Some other really big thingamagig</li>
+            </ul>
             <button class="delete-pallet" id="4">Delete</button>
-              <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
-          </div>
-
-        </div>
-
-
-
-
-      </div>
-
-
-
-
-
-
-<!--
-
-
-
-
-
-            <br><br>
-            <h3>
-            Contents:
-            <div class="contents" id="first-content">
-              1.) <input class='input' type="text" contents="1st content"></input>
-            </div>
-            <br>
-            <div class="contents" id="second-content">
-              2.) <input class='input' type="text" contents="2nd content"></input>
-            </div>
-            <br>
-            <div class="contents" id="third-content">
-              3.) <input class='input' type="text" contents="3rd content"></input>
-            </div>
-            <br><br>
-            Weight: <input class='input' type="text" weight="weight"></input>
-            <br><br>
-            <div class="radio-buttons" id="hazmat">
-              HAZMAT:
-              <div>
-                <input class='push' type="radio" id="true" name="hazmat" value="true">
-                <label for="true">yes</label>
-              </div>
-              <div>
-                <input class='push' type="radio" id="false" name="hazmat" value="false">
-                <label for="false">no</label>
-              </div>
-            </div>
-            <br><br>
-            <input class="submit-new-pallet" type="submit">
-
-          </div>
-
-
-        <div class="pallet-grid">
-          <div class="pallet" style="background-color: #e3eeffff; border: 10px solid red">
-            <h1 class="pallet-title">Pallet-1<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li>Some other really big thingamagig</li>
-              </ul>
-              <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
-            <button class="delete-pallet">Delete</button>
-          </div>
-          <div class="pallet" style="background-color: #9fc4ffff; border: 10px solid darkorange">
-            <h1 class="pallet-title">Pallet-2<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li>Some other really big thingamagig</li>
-              </ul>
-            <button class="delete-pallet">Delete</button>
-          </div>
-          <div class="pallet" style="background-color: #3ba6ffff; border: 10px solid green">
-            <h1 class="pallet-title">Pallet-3<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li>Some other really big thingamagig</li>
-              </ul>
-            <button class="delete-pallet">Delete</button>
-          </div>
-          <div class="pallet" style="background-color: #9fc4ffff; border: 10px solid green">
-            <h1 class="pallet-title">Pallet-4<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li>Some other really big thingamagig</li>
-              </ul>
-            <button class="delete-pallet">Delete</button>
-          </div>
-          <div class="pallet" style="background-color: #3ba6ffff; border: 10px solid green">
-            <h1 class="pallet-title">Pallet-5<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li>Some other really big thingamagig</li>
-              </ul>
-              <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
-            <button class="delete-pallet">Delete</button>
-          </div>
-          <div class="pallet" style="background-image: url('./436L.svg'); border: 10px solid red">
-            <h1 class="pallet-title">Pallet-6<h1>
-              <ul class="pallet-contents-displayed-in-pallet-box">
-                <li>20 bags of rice</li>
-                <li>54 really big things that I cannot describe</li>
-                <li style='color:#ffffff00'>false</li>
-              </ul>
+            <div class='pallet-weight'>1,323</div>
             <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
-            <button class="delete-pallet">Delete</button>
           </div>
         </div>
+        <!-- end of pallet grid -->
       </div>
-      <div class='panel' id="create-new-storage-area">
-        <form class='new-storage-area-form' id='new-storage-area-id-number'>
-          <button class="create-storage-area">
-            <h2>Create a new storage area</h2>
-          </button>
-          Name: <input class='input' type="text" name="name"></input>
-          Total Area: <input class='input' type="text" name="name"></input>
-          <input class="submit-new-pallet" type="submit">
+
+
+<!-- <input class="master" type="submit" value="Create a new pallet"> -->
+
+      <div class='panel' id="2">
+        <form class='new-storage-area-form'>
+          <div>
+            <label class='new-pallet-fields' id='name'>Name:</label>
+            <input class='new-pallet-input' id='name' type="text" name="name">
+          </div>
+          <div>
+            <label class='new-pallet-fields' id='name'>Total storage area:</label>
+            <input class='new-pallet-input' id='name' type="text" name="name">
+          </div>
+          <input class="master" type="submit" value="Create a new storage area">
         </form>
       </div>
+
+
+
+
     </main>
-
-
     <script src="./src/index.js"></script>
   </body>
 </html>
