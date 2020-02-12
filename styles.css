@@ -194,26 +194,11 @@ input[type="submit"]:hover {
 }
 
 div.pallet-box {
-  background-image: url("./436L.svg");
   background-position: center;
-  background-size: 280px 280px;
+  background-size: 220px 220px;
   height: 210px;
   width: 210px;
   border-radius: 40px;
-
-  /* This is the "iffy" part where the grid begins
-  display: grid;
-  grid-template-columns: 50px 50px 50px 50px;
-  grid-template-rows: 50px 50px 50px 50px;
-  grid-template-areas:
-    "header header header header"
-    "main main . sidebar"
-    "footer footer footer footer"
-  */
-}
-
-label.pallet-name {
-  color:red;
 }
 
 div.red-timescale {
@@ -229,18 +214,26 @@ div.amber-timescale {
 }
 
 div.lightweight {
-  background-color: lightcyan;
+  background-image: url("./436L_net_green.svg");
+  background-color: #dcffd3ff;
 }
 
 div.middleweight {
-  background-color: lightskyblue;
+  background-image: url("./436L_net_amber.svg");
+  background-color: #fff7d3ff;
 }
 
 div.heavyweight {
-  background-color: lightseagreen;
+  background-image: url("./436L_net_red.svg");
+  background-color: #ffd5d3ff;
 }
 
 img.hazmat-icon {
   height: 60px;
   width: 60px;
+}
+
+div.pallet-name {
+  color: red;
+  text-align: center;
 }
