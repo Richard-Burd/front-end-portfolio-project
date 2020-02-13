@@ -1,0 +1,1 @@
+createPallet(2)
