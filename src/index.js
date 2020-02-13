@@ -1,53 +1,60 @@
-function createPallet(storageAreaID){
+function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
 
-  let palletbuilder1 = document.createElement('div')
-      palletbuilder1.setAttribute('class', 'pallet-box red-timescale lightweight')
-      palletbuilder1.setAttribute('data-pallet-id', 'X')
+  let palletBuilder1 = document.createElement('div')
+      palletBuilder1.setAttribute('class', `pallet-box ${timeScale}-timescale ${weightScale}`)
+      palletBuilder1.setAttribute('data-pallet-id', palletId )
 
-  let palletbuilder2 = document.createElement('div')
-      palletbuilder2.setAttribute('class', 'pallet-name')
-      palletbuilder2.innerText = "JavPallet"
+  let palletBuilder2 = document.createElement('div')
+      palletBuilder2.setAttribute('class', 'pallet-name')
+      palletBuilder2.innerText = palletName
 
-  let palletbuilder3 = document.createElement('ul')
-      palletbuilder3.setAttribute('class', 'pallet-contents-displayed-in-pallet-box')
+  let palletBuilder3 = document.createElement('ul')
+      palletBuilder3.setAttribute('class', 'pallet-contents-displayed-in-pallet-box')
 
-  let palletbuilder4 = document.createElement('li')
-      palletbuilder4.innerText = "1st Item X"
+  let palletBuilder4 = document.createElement('li')
+      palletBuilder4.innerText = firstItem
 
-  let palletbuilder5 = document.createElement('li')
-      palletbuilder5.innerText = "2nd Item X"
+  let palletBuilder5 = document.createElement('li')
+      palletBuilder5.innerText = secondItem
 
-  let palletbuilder6 = document.createElement('li')
-      palletbuilder6.innerText = "3rd Item X"
+  let palletBuilder6 = document.createElement('li')
+      palletBuilder6.innerText = thirdItem
 
-  let palletbuilder7 = document.createElement('button')
-      palletbuilder7.setAttribute('class', 'delete-pallet')
-      palletbuilder7.innerText = "Delete"
+  let palletBuilder7 = document.createElement('button')
+      palletBuilder7.setAttribute('class', 'delete-pallet')
+      palletBuilder7.innerText = "Delete"
 
-  let palletbuilder8 = document.createElement('div')
-      palletbuilder8.setAttribute('class', 'pallet-weight')
-      palletbuilder8.innerText = "X,XXX"
+  let palletBuilder8 = document.createElement('div')
+      palletBuilder8.setAttribute('class', 'pallet-weight')
+      palletBuilder8.innerText = weight
 
-  let palletbuilder9 = document.createElement('img')
-      palletbuilder9.setAttribute('class', 'hazmat-icon')
-      palletbuilder9.setAttribute('src', 'HAZMAT.svg')
-      palletbuilder9.setAttribute('title', 'hazmat-icon')
+// if hazerdous (hazmat) materials are present, the hazmat icon will appear
+if (hazmat == true) {
+  let palletBuilder9 = document.createElement('img')
+      palletBuilder9.setAttribute('class', 'hazmat-icon')
+      palletBuilder9.setAttribute('src', 'HAZMAT.svg')
+      palletBuilder9.setAttribute('title', 'hazmat-icon')
 
+      palletBuilder1.appendChild(palletBuilder9) // arranging subcomponents
+}
       // first the inner scope gets built
-      palletbuilder3.appendChild(palletbuilder4)
-      palletbuilder3.appendChild(palletbuilder5)
-      palletbuilder3.appendChild(palletbuilder6)
+      palletBuilder3.appendChild(palletBuilder4) // arranging subcomponents
+      palletBuilder3.appendChild(palletBuilder5) // arranging subcomponents
+      palletBuilder3.appendChild(palletBuilder6) // arranging subcomponents
 
       // then the outer scope gets built
-      palletbuilder1.appendChild(palletbuilder2)
-      palletbuilder1.appendChild(palletbuilder3)
-      palletbuilder1.appendChild(palletbuilder7)
-      palletbuilder1.appendChild(palletbuilder8)
-      palletbuilder1.appendChild(palletbuilder9)
+      palletBuilder1.appendChild(palletBuilder2) // arranging subcomponents
+      palletBuilder1.appendChild(palletBuilder3) // arranging subcomponents
+      palletBuilder1.appendChild(palletBuilder7) // arranging subcomponents
+      palletBuilder1.appendChild(palletBuilder8) // arranging subcomponents
 
+  // this takes the completed pallet and places it into the correct node ont the DOM
   let insertPoint = document.querySelector(`[data-pallet-group="${storageAreaID}"]`)
-      insertPoint.appendChild(palletbuilder1)
+      insertPoint.appendChild(palletBuilder1)
 }
 
+function createStorageArea(){
+  let storageAreaBuilder1 = document.createElement('div')
+}
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

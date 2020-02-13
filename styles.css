@@ -264,6 +264,8 @@ div.heavyweight {
 }
 
 div.pallet-name {
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 40px;
   font-weight: 700;
   font-style: italic;
