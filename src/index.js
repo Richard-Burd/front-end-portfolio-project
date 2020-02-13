@@ -55,6 +55,33 @@ if (hazmat == true) {
 
 function createStorageArea(){
   let storageAreaBuilder1 = document.createElement('div')
+      storageAreaBuilder1.setAttribute('class', 'panel')
+      storageAreaBuilder1.setAttribute('data-storage-area-id', "3")
+
+  let storageAreaBuilder2 = document.createElement('div')
+      storageAreaBuilder2.setAttribute('class', 'storage-area')
+
+  let storageAreaBuilder3 = document.createElement('span')
+      storageAreaBuilder3.setAttribute('class', 'storage-area-name')
+      storageAreaBuilder3.innerText = "My New Storage Area Name"
+
+  let storageAreaBuilder4 = document.createElement('span')
+      storageAreaBuilder4.setAttribute('class', 'storage-area-value')
+
+  let storageAreaBuilder5 = document.createElement('button')
+      storageAreaBuilder5.setAttribute('class', 'master')
+      storageAreaBuilder5.setAttribute('id', 'create-pallet')
+
+  let storageAreaBuilder6 = document.createElement('button')
+      storageAreaBuilder6.setAttribute('class', 'master')
+      storageAreaBuilder6.setAttribute('id', 'delete-area')
+
+  let storageAreaBuilder7 = document.createElement('div')
+      storageAreaBuilder7.setAttribute('class', 'pallets')
+      storageAreaBuilder7.setAttribute('data-pallet-group', '2')
+
+  // NEXT STEP: the "appendChild" elements need to be made
+  
 }
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
