@@ -84,7 +84,7 @@ div.form-title {
   font-weight: 700;
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 60px;
 }
 
 button.master {
@@ -147,6 +147,7 @@ label.new-pallet-fields {
 div.radio-buttons {
   font-size: 20px;
   font-weight: 600;
+  margin-bottom: 60px;
 }
 
 input.new-pallet-input {
@@ -156,10 +157,18 @@ input.new-pallet-input {
   border-radius: 8px;
 }
 
+input.new-pallet-input#name {
+  margin-bottom: 60px;
+}
+
 input.push {
   color: red;
   width: 1.8em;
   height: 1.8em;
+}
+
+table {
+  margin-bottom: 60px;
 }
 
 td {

@@ -53,21 +53,21 @@ if (hazmat == true) {
       insertPoint.appendChild(palletBuilder1)
 }
 
-function createStorageArea(){
+function createStorageArea(storageAreaName, storageAreaID, squareFootage){
   let storageAreaBuilder1 = document.createElement('div')
       storageAreaBuilder1.setAttribute('class', 'panel')
-      storageAreaBuilder1.setAttribute('data-storage-area-id', "3")
+      storageAreaBuilder1.setAttribute('data-storage-area-id', storageAreaID)
 
   let storageAreaBuilder2 = document.createElement('div')
       storageAreaBuilder2.setAttribute('class', 'storage-area')
 
   let storageAreaBuilder3 = document.createElement('span')
       storageAreaBuilder3.setAttribute('class', 'storage-area-name')
-      storageAreaBuilder3.innerText = "My New Storage Area Name"
+      storageAreaBuilder3.innerText = storageAreaName
 
   let storageAreaBuilder4 = document.createElement('span')
       storageAreaBuilder4.setAttribute('class', 'storage-area-value')
-      storageAreaBuilder4.innerText = "3,321"
+      storageAreaBuilder4.innerText = squareFootage
 
   let storageAreaBuilder5 = document.createElement('button')
       storageAreaBuilder5.setAttribute('class', 'master')
@@ -101,6 +101,12 @@ function createStorageArea(){
           // here we execute the final placement on the DOM
           insertScope.insertBefore(storageAreaBuilder1, insertBeforeMe)
 
+}
+
+function createNewPalletForm(){
+  let newPalletFormBuilder1 = document.createElement('form')
+      newPalletFormBuilder1.setAttribute('class', 'new-pallet-form')
+      newPalletFormBuilder1.setAttribute('data-pallet-form-id', "1")
 }
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

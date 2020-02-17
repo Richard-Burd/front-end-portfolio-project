@@ -2,4 +2,4 @@ createPallet(2, 6, "JavPallet", "red", "lightweight", "1st Item", "2nd Item", "M
 
 // this function is under construction
 // the "appendChild" elements need to be made
-createStorageArea()
+createStorageArea("My Storage Area", "3", "843")

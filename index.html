@@ -8,13 +8,10 @@
   </head>
   <body>
     <main>
-
       <div class='header' data-id="header-block">
           <span class='header' id='header'>Airborne Pallet Tracker</span>
       </div>
-
       <img class="empennage-image" src="https://i.imgur.com/VREuIWf.png"/>
-
       <div class='panel' id="totals-block">
           <span class='pallet-count' id='total-label'>Total No. of Pallets:&nbsp;</span>
           <span class='pallet-count' id='total-value'>34</span>
@@ -23,7 +20,6 @@
           <span class='gross-area' id='total-value'>2,534</span>
           <span class='gross-area' id='total-label'>Total sq.ft. of Area:&nbsp;</span>
       </div>
-
       <div class='panel' data-storage-area-id="1">
         <div class='storage-area'>
           <span class='storage-area-name'>Storage Area Name Goes Here</span>
@@ -31,15 +27,12 @@
         </div>
         <button class="master" id='create-pallet'>Create a pallet in this storage area</button>
         <button class="master" id='delete-area'>Delete this empty area</button>
-
-        <form class='new-pallet-form' id='new-pallet-id-number'>
+        <form class='new-pallet-form' data-pallet-form-id="1">
           <div class='form-title'>Add a pallet to this storage area</div>
-          <div class='space-maker'><br><br><br></div>
           <div>
             <label class='new-pallet-fields' id='name'>Name:</label>
             <input class='new-pallet-input' id='name' type="text" name="name">
           </div>
-          <div class='space-maker'><br><br><br></div>
           <div>
             <label class='new-pallet-fields' id='priority'>Priority:</label>
             <div class="radio-buttons" id="priorties">
@@ -69,7 +62,6 @@
               </div>
             </div>
           </div>
-          <div class='space-maker'><br><br><br></div>
 
           <table>
             <label class='new-pallet-fields' id='contents'>Contents:</label>
@@ -87,7 +79,6 @@
             </tr>
           </table>
 
-          <div class='space-maker'><br><br><br></div>
           <div class='new-pallet-fields' id='hazmat'>
             <label class='new-pallet-fields' id='hazmat'>HAZMAT:</label>
             <div class="radio-buttons" id="hazmat">
@@ -100,7 +91,6 @@
                 <label for="false">no</label>
               </div>
             </div>
-            <div class='space-maker'><br><br><br></div>
           </div>
           <input class="master" type="submit" value="Create a new pallet">
         </form>
@@ -118,7 +108,6 @@
             <div class='pallet-weight'>521</div>
           </div>
 
-
           <div class="pallet-box green-timescale middleweight" data-pallet-id="2">
             <div class='pallet-name'>Pallet-2</div>
               <ul class="pallet-contents-displayed-in-pallet-box">
@@ -128,7 +117,6 @@
             <button class="delete-pallet">Delete</button>
             <div class='pallet-weight'>319</div>
           </div>
-
 
           <div class="pallet-box amber-timescale heavyweight" data-pallet-id="3">
             <div class='pallet-name'>Pallet-3</div>
@@ -141,7 +129,6 @@
             <div class='pallet-weight'>921</div>
             <img class="hazmat-icon" src="HAZMAT.svg" title="hazmat-icon" />
           </div>
-
 
           <div class="pallet-box amber-timescale heavyweight" data-pallet-id="4">
             <div class='pallet-name'>Pallet-4</div>
@@ -204,9 +191,6 @@
           <input class="master" type="submit" value="Create a new storage area">
         </form>
       </div>
-
-
-
 
     </main>
     <script src="./src/index.js"></script>
