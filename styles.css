@@ -337,3 +337,21 @@ form.new-storage-area-form {
   display: flex;
   justify-content: space-between;
 }
+
+/* ///////Note: there is a lot of overlap here with the new pallet form/////// */
+/* ///////the fonts, font colors, and font sizes need to have a common criteria /////// */
+label.new-storage-area-fields {
+  font-family: 'Lora', serif;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  color: #4d220dff;
+}
+
+input.new-storage-area-input {
+  width: 200px;
+  height: 25px;
+  border: 1.5px solid #4d220dff;
+  border-radius: 8px;
+}
