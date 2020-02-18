@@ -74,10 +74,15 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder5.setAttribute('id', 'create-pallet')
       storageAreaBuilder5.innerText = 'Create a pallet in this storage area'
 
+      // this the the delete button for empty areas:
   let storageAreaBuilder6 = document.createElement('button')
       storageAreaBuilder6.setAttribute('class', 'master')
       storageAreaBuilder6.setAttribute('id', 'delete-area')
       storageAreaBuilder6.innerText = 'Delete this empty area'
+
+  let storageAreaBuilder6B = document.createElement('div')
+      storageAreaBuilder6B.setAttribute('class', 'new-pallet-form-placeholder')
+      storageAreaBuilder6B.setAttribute('data-new-pallet-form-storage-area-id', storageAreaID)
 
   let storageAreaBuilder7 = document.createElement('div')
       storageAreaBuilder7.setAttribute('class', 'pallets')
@@ -88,6 +93,7 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder2.appendChild(storageAreaBuilder4) // arranging subcomponents
       storageAreaBuilder1.appendChild(storageAreaBuilder5) // arranging subcomponents
       storageAreaBuilder1.appendChild(storageAreaBuilder6) // arranging subcomponents
+      storageAreaBuilder1.appendChild(storageAreaBuilder6B) // arranging subcomponents
       storageAreaBuilder1.appendChild(storageAreaBuilder7) // arranging subcomponents
 
       // this takes the completed storage area and places it into the correct node ont the DOM
@@ -102,7 +108,7 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
 
 }
 
-function createNewPalletForm(){
+function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder1 = document.createElement('form')
       newPalletFormBuilder1.setAttribute('class', 'new-pallet-form')
 
@@ -306,10 +312,45 @@ function createNewPalletForm(){
       newPalletFormBuilder1.appendChild(newPalletFormBuilder35) // arranging subcomponents
 
   // this takes the completed new pallet form and places it into a main directory
-  let insertPoint = document.querySelector('div.new-pallet-form-placeholder')
+  let insertPoint = document.querySelector(`[data-new-pallet-form-storage-area-id="${storageAreaID}"]`)
       insertPoint.appendChild(newPalletFormBuilder1)
 
 }
+
+// You can only delete an area that is empty & doesn't have any pallets in it.
+// This function iterates over all areas & removes the delete button from those containing pallets
+function removeDeleteButtonFromStorageArea(storageAreaID){
+  // more code needed to specify the panel & if panel is empty, it should have a delete button
+  target = document.getElementById('delete-area');
+  parent = target.parentNode;
+  parent.removeChild(target);
+}
+
+<button class="master" id="delete-area">Delete this empty area</button>
+
+
+// The following is seed data:
+createStorageArea("North Tarmac", "1", "12,300")
+createStorageArea("Clamshell", "2", "8,500")
+createStorageArea("West Lot", "3", "15,700")
+createStorageArea("Old Storage", "4", "3,000")
+createStorageArea("Connex Yard", "5", "6,700")
+
+createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "724", false)
+createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
+createPallet(1, 3, "436L-12", "green", "heavyweight", "1st Item", "2nd Item", "My New Pallet", "124", true)
+createPallet(1, 4, "436L-15", "red", "middleweight", "1st Item", "2nd Item", "My New Pallet", "724", true)
+createPallet(1, 5, "436L-5W", "red", "lightweight", "1st Item", "2nd Item", "My New Pallet", "724", false)
+createPallet(1, 6, "436L-G2", "amber", "lightweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
+createPallet(2, 7, "436L-PQ", "red", "middleweight", "1st Item", "2nd Item", "My New Pallet", "724", false)
+createPallet(2, 8, "436L-16", "green", "lightweight", "1st Item", "2nd Item", "My New Pallet", "724", true)
+createPallet(2, 9, "436L-M1", "amber", "lightweight", "1st Item", "2nd Item", "My New Pallet", "724", false)
+createPallet(5, 10, "436L-12A", "red", "heavyweight", "1st Item", "2nd Item", "My New Pallet", "724", false)
+createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "My New Pallet", "724", false)
+createPallet(5, 12, "436L-J9", "amber", "lightweight", "shoes", "towels", "WD-40", "394", true)
+createPallet(5, 13, "436L-54", "red", "lightweight", "1st Item", "2nd Item", "My New Pallet", "724", true)
+createPallet(5, 13, "436L-22", "green", "heavyweight", "1st Item", "2nd Item", "My New Pallet", "724", true)
+
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
