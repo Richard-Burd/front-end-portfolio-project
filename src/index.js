@@ -28,15 +28,15 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
       palletBuilder8.setAttribute('class', 'pallet-weight')
       palletBuilder8.innerText = weight
 
-// if hazerdous (hazmat) materials are present, the hazmat icon will appear
-if (hazmat == true) {
-  let palletBuilder9 = document.createElement('img')
-      palletBuilder9.setAttribute('class', 'hazmat-icon')
-      palletBuilder9.setAttribute('src', 'HAZMAT.svg')
-      palletBuilder9.setAttribute('title', 'hazmat-icon')
+  // if hazerdous (hazmat) materials are present, the hazmat icon will appear
+  if (hazmat == true) {
+    let palletBuilder9 = document.createElement('img')
+        palletBuilder9.setAttribute('class', 'hazmat-icon')
+        palletBuilder9.setAttribute('src', 'HAZMAT.svg')
+        palletBuilder9.setAttribute('title', 'hazmat-icon')
 
-      palletBuilder1.appendChild(palletBuilder9) // arranging subcomponents
-}
+        palletBuilder1.appendChild(palletBuilder9) // arranging subcomponents
+  }
       // first the inner scope gets built
       palletBuilder3.appendChild(palletBuilder4) // arranging subcomponents
       palletBuilder3.appendChild(palletBuilder5) // arranging subcomponents
@@ -81,9 +81,8 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
 
   let storageAreaBuilder7 = document.createElement('div')
       storageAreaBuilder7.setAttribute('class', 'pallets')
-      storageAreaBuilder7.setAttribute('data-pallet-group', '3')
+      storageAreaBuilder7.setAttribute('data-pallet-group', storageAreaID)
 
-      // first the inner scope gets built
       storageAreaBuilder1.appendChild(storageAreaBuilder2) // arranging subcomponents
       storageAreaBuilder2.appendChild(storageAreaBuilder3) // arranging subcomponents
       storageAreaBuilder2.appendChild(storageAreaBuilder4) // arranging subcomponents
@@ -106,7 +105,69 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
 function createNewPalletForm(){
   let newPalletFormBuilder1 = document.createElement('form')
       newPalletFormBuilder1.setAttribute('class', 'new-pallet-form')
-      newPalletFormBuilder1.setAttribute('data-pallet-form-id', "1")
+
+  let newPalletFormBuilder2 = document.createElement('div')
+      newPalletFormBuilder2.setAttribute('class', 'form-title')
+      newPalletFormBuilder2.innerText = 'Add a pallet to this storage area'
+
+  let newPalletFormBuilder3 = document.createElement('label')
+      newPalletFormBuilder3.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder3.setAttribute('id', 'name')
+      newPalletFormBuilder3.innerText = 'Name:'
+
+  let newPalletFormBuilder4 = document.createElement('input')
+      newPalletFormBuilder4.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder4.setAttribute('id', 'name')
+      newPalletFormBuilder4.setAttribute('type', 'text')
+      newPalletFormBuilder4.setAttribute('name', 'name')
+
+  let newPalletFormBuilder5 = document.createElement('div')
+      newPalletFormBuilder5.setAttribute('class', 'priority-section')
+
+  let newPalletFormBuilder6 = document.createElement('label')
+      newPalletFormBuilder6.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder6.setAttribute('id', 'priority')
+      newPalletFormBuilder6.innerText = "Priority:"
+
+  let newPalletFormBuilder7 = document.createElement('div')
+      newPalletFormBuilder7.setAttribute('class', 'radio-buttons')
+      newPalletFormBuilder7.setAttribute('id', 'priorties')
+
+  // These are the different categories of concearns that the buttons will be generated for:
+  let arrayOfConcearns = ["Life Saving", "Urgent care", "Medium", "Sustainment", "Low impact", "Least concearn"]
+
+  // Iterates over the arrayOfConcearns and generates HTML for each element.
+  for (const singleConcearn of arrayOfConcearns){
+      dashNRegex = singleConcearn.replace(/\s+/g, '-').toLowerCase()
+      let newPalletFormBuilder8 = document.createElement('div')
+          newPalletFormBuilder8.setAttribute('class', `${dashNRegex}-input-n-label`)
+          newPalletFormBuilder8.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
+
+      let newPalletFormBuilder9 = document.createElement('input')
+          newPalletFormBuilder9.setAttribute('class', 'push')
+          newPalletFormBuilder9.setAttribute('type', 'radio')
+          newPalletFormBuilder9.setAttribute('name', 'priority')
+          newPalletFormBuilder9.setAttribute('value', `${dashNRegex}`)
+          newPalletFormBuilder9.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
+
+      let newPalletFormBuilder10 = document.createElement('label')
+          newPalletFormBuilder10.setAttribute('for', `${dashNRegex}`)
+          newPalletFormBuilder10.innerText = "Life saving"
+          newPalletFormBuilder10.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
+
+          newPalletFormBuilder8.appendChild(newPalletFormBuilder9)  // arranging subcomponents
+          newPalletFormBuilder8.appendChild(newPalletFormBuilder10) // arranging subcomponents
+
+      // <div class="radio-buttons" id="priorties">
+      let insertPoint = newPalletFormBuilder7
+          insertPoint.appendChild(newPalletFormBuilder8)
+  }
+  let newPalletFormBuilder11 = document.createElement('table')
+
+      newPalletFormBuilder12 = document.createElement('label')
+      newPalletFormBuilder12.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder12.innerText = "Contents:"
 }
+
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

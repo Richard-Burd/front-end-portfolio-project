@@ -12,7 +12,7 @@
           <span class='header' id='header'>Airborne Pallet Tracker</span>
       </div>
       <img class="empennage-image" src="https://i.imgur.com/VREuIWf.png"/>
-      <div class='panel' id="totals-block">
+      <div class='panel totals-block'>
           <span class='pallet-count' id='total-label'>Total No. of Pallets:&nbsp;</span>
           <span class='pallet-count' id='total-value'>34</span>
           <span class='gross-weight' id='total-label'>Total Weight (lbs):&nbsp;</span>
@@ -27,44 +27,44 @@
         </div>
         <button class="master" id='create-pallet'>Create a pallet in this storage area</button>
         <button class="master" id='delete-area'>Delete this empty area</button>
-        <form class='new-pallet-form' data-pallet-form-id="1">
+        <form class='new-pallet-form'>
           <div class='form-title'>Add a pallet to this storage area</div>
-          <div>
+
             <label class='new-pallet-fields' id='name'>Name:</label>
             <input class='new-pallet-input' id='name' type="text" name="name">
-          </div>
-          <div>
+
+          <div class='priority-section'>
             <label class='new-pallet-fields' id='priority'>Priority:</label>
             <div class="radio-buttons" id="priorties">
-              <div>
-                <input class='push' type="radio" id="first-priority" name="priority" value="first-priority" checked>
-                <label for="first-priority">Life Saving</label>
+              <div class='first-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="first-priority">
+                <label for="first-priority">Life saving</label>
               </div>
-              <div>
-                <input class='push' type="radio" id="second-priority" name="priority" value="second-priority">
+              <div class='second-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="second-priority">
                 <label for="second-priority">Urgent care</label>
               </div>
-              <div>
-                <input class='push' type="radio" id="third-priority" name="priority" value="third-priority">
+              <div class='third-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="third-priority">
                 <label for="third-priority">Medium</label>
               </div>
-              <div>
-                <input class='push' type="radio" id="fourth-priority" name="priority" value="fourth-priority">
+              <div class='fourth-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="fourth-priority">
                 <label for="fourth-priority">Sustainment</label>
               </div>
-              <div>
-                <input class='push' type="radio" id="fifth-priority" name="priority" value="fifth-priority">
+              <div class='fifth-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="fifth-priority">
                 <label for="fifth-priority">Low impact</label>
               </div>
-              <div>
-                <input class='push' type="radio" id="sixth-priority" name="priority" value="sixth-priority">
+              <div class='sixth-priority-input-n-label'>
+                <input class='push' type="radio" name="priority" value="sixth-priority">
                 <label for="fifth-priority">Least Concearn</label>
               </div>
             </div>
           </div>
 
           <table>
-            <label class='new-pallet-fields' id='contents'>Contents:</label>
+            <label class='new-pallet-fields'>Contents:</label>
             <tr class="contents" id="first-content">
               <td>1.)</td>
               <td><input class='new-pallet-input' type="text" contents="1st content"/></td>
@@ -178,7 +178,8 @@
         </div>
       </div>
 
-      <div class='panel' id="2">
+
+      <div class='panel'>
         <form class='new-storage-area-form'>
           <div>
             <label class='new-storage-area-fields' id='name'>Name:</label>

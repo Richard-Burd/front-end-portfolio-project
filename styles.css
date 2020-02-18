@@ -28,9 +28,10 @@ div.panel {
   padding: 15px 20px 15px 20px;
 }
 
-div.panel#totals-block {
+div.totals-block {
   font-size: 22px;
   font-weight: 700;
+  text-align:center;
 }
 
 #total-label {
@@ -39,10 +40,6 @@ div.panel#totals-block {
 
 #total-value {
   color: #b3290cff;
-}
-
-#totals-block {
-  text-align:center;
 }
 
 span.pallet-count {
@@ -186,7 +183,7 @@ input[type="submit"] {
   color: #1e1e1eff;
   background-color: #6ea175ff;
   border: none;
-  padding: 5px 8px;
+  padding: 6px 8px;
 }
 
 input[type="submit"]:hover {
@@ -341,7 +338,6 @@ form.new-storage-area-form {
 /* ///////Note: there is a lot of overlap here with the new pallet form/////// */
 /* ///////the fonts, font colors, and font sizes need to have a common criteria /////// */
 label.new-storage-area-fields {
-  font-family: 'Lora', serif;
   font-size: 25px;
   font-weight: 600;
   margin-top: 18px;
