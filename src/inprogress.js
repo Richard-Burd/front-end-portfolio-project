@@ -3,3 +3,5 @@ createPallet(2, 6, "JavPallet", "red", "lightweight", "1st Item", "2nd Item", "M
 createStorageArea("My Storage Area", "3", "843")
 
 createNewPalletForm(1)
+
+removeDeleteButtonFromStorageArea(1)
