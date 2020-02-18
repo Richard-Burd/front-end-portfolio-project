@@ -167,6 +167,75 @@ function createNewPalletForm(){
       newPalletFormBuilder12 = document.createElement('label')
       newPalletFormBuilder12.setAttribute('class', 'new-pallet-fields')
       newPalletFormBuilder12.innerText = "Contents:"
+
+  let newPalletFormBuilder13 = document.createElement('tr')
+      newPalletFormBuilder13.setAttribute('class', 'contents')
+      newPalletFormBuilder13.setAttribute('id', 'first-content')
+
+  let newPalletFormBuilder14 = document.createElement('td')
+      newPalletFormBuilder14.innerText = "1.)"
+
+  let newPalletFormBuilder15 = document.createElement('td')
+
+  let newPalletFormBuilder16 = document.createElement('input')
+      newPalletFormBuilder16.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder16.setAttribute('type', 'text')
+      newPalletFormBuilder16.setAttribute('contents', '1st-content')
+
+      // note that 17 has been deleted
+
+  let newPalletFormBuilder18 = document.createElement('tr')
+      newPalletFormBuilder18.setAttribute('class', 'contents')
+      newPalletFormBuilder18.setAttribute('id', 'second-content')
+
+  let newPalletFormBuilder19 = document.createElement('td')
+      newPalletFormBuilder19.innerText = "2.)"
+
+  let newPalletFormBuilder20 = document.createElement('td')
+
+  let newPalletFormBuilder21 = document.createElement('input')
+      newPalletFormBuilder21.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder21.setAttribute('type', 'text')
+      newPalletFormBuilder21.setAttribute('contents', '2nd-content')
+
+  let newPalletFormBuilder22 = document.createElement('tr')
+      newPalletFormBuilder22.setAttribute('class', 'contents')
+      newPalletFormBuilder22.setAttribute('id', 'third-content')
+
+  let newPalletFormBuilder23 = document.createElement('td')
+      newPalletFormBuilder23.innerText = "3.)"
+
+  let newPalletFormBuilder24 = document.createElement('td')
+
+  let newPalletFormBuilder25 = document.createElement('input')
+      newPalletFormBuilder25.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder25.setAttribute('type', 'text')
+      newPalletFormBuilder25.setAttribute('contents', '3rd-content')
+
+      // first the inner-most scope gets built in the table
+      newPalletFormBuilder15.appendChild(newPalletFormBuilder16) // arranging subcomponents
+      newPalletFormBuilder20.appendChild(newPalletFormBuilder21) // arranging subcomponents
+      newPalletFormBuilder24.appendChild(newPalletFormBuilder25) // arranging subcomponents
+
+      // then the middle scope gets built in the table
+      newPalletFormBuilder13.appendChild(newPalletFormBuilder14) // arranging subcomponents
+      newPalletFormBuilder13.appendChild(newPalletFormBuilder15) // arranging subcomponents
+      newPalletFormBuilder18.appendChild(newPalletFormBuilder19) // arranging subcomponents
+      newPalletFormBuilder18.appendChild(newPalletFormBuilder20) // arranging subcomponents
+      newPalletFormBuilder22.appendChild(newPalletFormBuilder23) // arranging subcomponents
+      newPalletFormBuilder22.appendChild(newPalletFormBuilder24) // arranging subcomponents
+
+      // then the outer-most scope gets built in the table
+      newPalletFormBuilder11.appendChild(newPalletFormBuilder12) // arranging subcomponents
+      newPalletFormBuilder11.appendChild(newPalletFormBuilder13) // arranging subcomponents
+      newPalletFormBuilder11.appendChild(newPalletFormBuilder18) // arranging subcomponents
+      newPalletFormBuilder11.appendChild(newPalletFormBuilder22) // arranging subcomponents
+
+      // here the table will go into the form
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder11) // arranging subcomponents
+
+      // now the rest of the form has to be made; left off on
+      // the HAZMAT section of the new pallet form.
 }
 
 // This is needed to query the data sets in the HTML:

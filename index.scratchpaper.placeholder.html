@@ -1,0 +1,79 @@
+<form class='new-pallet-form'>........................................................1
+  <div class='form-title'>Add a pallet to this storage area</div>.....................2  goes in 1
+
+    <label class='new-pallet-fields' id='name'>Name:</label>..........................3  goes in 1
+    <input class='new-pallet-input' id='name' type="text" name="name">................4  goes in 1
+
+  <div class='priority-section'>......................................................5  goes in 1
+    <label class='new-pallet-fields' id='priority'>Priority:</label>..................6  goes in 5
+    <div class="radio-buttons" id="priorties">........................................7  goes in 5
+
+      <div class='first-priority-input-n-label'>......................................8
+        <input class='push' type="radio" name="priority" value="first-priority">......9
+        <label for="first-priority">Life saving</label>...............................10
+      </div>
+
+      <div class='second-priority-input-n-label'>.....................................8
+        <input class='push' type="radio" name="priority" value="second-priority">.....9
+        <label for="second-priority">Urgent care</label>..............................10
+      </div>
+      <div class='third-priority-input-n-label'>......................................8
+        <input class='push' type="radio" name="priority" value="third-priority">......9
+        <label for="third-priority">Medium</label>....................................10
+      </div>
+      <div class='forth-priority-input-n-label'>......................................8
+        <input class='push' type="radio" name="priority" value="fourth-priority">.....9
+        <label for="fourth-priority">Sustainment</label>..............................10
+      </div>
+      <div class='fifth-priority-input-n-label'>......................................8
+        <input class='push' type="radio" name="priority" value="fifth-priority">......9
+        <label for="fifth-priority">Low impact</label>................................10
+      </div>
+      <div class='sixth-priority-input-n-label'>......................................8
+        <input class='push' type="radio" name="priority" value="sixth-priority">......9
+        <label for="fifth-priority">Least Concearn</label>............................10
+      </div>
+    </div>
+  </div>
+
+
+  <table>.............................................................................11
+    <label class='new-pallet-fields'>Contents:</label>................................12 goes in 11
+
+    <tr class="contents" id="first-content">..........................................13 goes in 11
+      <td>1.)</td>....................................................................14   goes in 13
+      <td>............................................................................15   goes in 13
+        <input class='new-pallet-input' type="text" contents="1st-content"/>..........16     goes in 15
+      </td>
+    </tr>
+    <tr class="contents" id="second-content">.........................................18 goes in 11
+      <td>2.)</td>....................................................................19   goes in 18
+      <td>............................................................................20   goes in 18
+        <input class='new-pallet-input' type="text" contents="2nd-content"/>..........21     goes in 20
+      </td>
+    </tr>
+    <tr class="contents" id="third-content">..........................................22 goes in 11
+      <td>3.)</td>....................................................................23   goes in 22
+      <td>............................................................................24   goes in 22
+        <input class='new-pallet-input' type="text" contents="3rd-content"/>..........25     goes in 24
+      </td>
+    </tr>
+  </table>
+
+
+  <div class='new-pallet-fields' id='hazmat'>.........................................26
+    <label class='new-pallet-fields' id='hazmat'>HAZMAT:</label>
+    <div class="radio-buttons" id="hazmat">
+      <div>
+        <input class='push' type="radio" id="true" name="hazmat" value="true">
+        <label for="true">yes</label>
+      </div>
+      <div>
+        <input class='push' type="radio" id="false" name="hazmat" value="false">
+        <label for="false">no</label>
+      </div>
+    </div>
+  </div>
+
+  <input class="master" type="submit" value="Create a new pallet">
+</form>
