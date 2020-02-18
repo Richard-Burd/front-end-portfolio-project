@@ -113,7 +113,7 @@ function createNewPalletForm(){
   let newPalletFormBuilder3 = document.createElement('label')
       newPalletFormBuilder3.setAttribute('class', 'new-pallet-fields')
       newPalletFormBuilder3.setAttribute('id', 'name')
-      newPalletFormBuilder3.innerText = 'Name:'
+      newPalletFormBuilder3.innerText = 'Name: '
 
   let newPalletFormBuilder4 = document.createElement('input')
       newPalletFormBuilder4.setAttribute('class', 'new-pallet-input')
@@ -132,6 +132,14 @@ function createNewPalletForm(){
   let newPalletFormBuilder7 = document.createElement('div')
       newPalletFormBuilder7.setAttribute('class', 'radio-buttons')
       newPalletFormBuilder7.setAttribute('id', 'priorties')
+
+      // building out the first section before getting to the table further below
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder2) // arranging subcomponents
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder3) // arranging subcomponents
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder4) // arranging subcomponents
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder5) // arranging subcomponents
+      newPalletFormBuilder5.appendChild(newPalletFormBuilder6) // arranging subcomponents
+      newPalletFormBuilder5.appendChild(newPalletFormBuilder7) // arranging subcomponents
 
   // These are the different categories of concearns that the buttons will be generated for:
   let arrayOfConcearns = ["Life Saving", "Urgent care", "Medium", "Sustainment", "Low impact", "Least concearn"]
@@ -152,7 +160,7 @@ function createNewPalletForm(){
 
       let newPalletFormBuilder10 = document.createElement('label')
           newPalletFormBuilder10.setAttribute('for', `${dashNRegex}`)
-          newPalletFormBuilder10.innerText = "Life saving"
+          newPalletFormBuilder10.innerText = singleConcearn
           newPalletFormBuilder10.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
 
           newPalletFormBuilder8.appendChild(newPalletFormBuilder9)  // arranging subcomponents
@@ -162,6 +170,8 @@ function createNewPalletForm(){
       let insertPoint = newPalletFormBuilder7
           insertPoint.appendChild(newPalletFormBuilder8)
   }
+
+  // The beginning of the table starts on the next line below:
   let newPalletFormBuilder11 = document.createElement('table')
 
       newPalletFormBuilder12 = document.createElement('label')
@@ -173,6 +183,7 @@ function createNewPalletForm(){
       newPalletFormBuilder13.setAttribute('id', 'first-content')
 
   let newPalletFormBuilder14 = document.createElement('td')
+      newPalletFormBuilder14.setAttribute('class', 'table-labels')
       newPalletFormBuilder14.innerText = "1.)"
 
   let newPalletFormBuilder15 = document.createElement('td')
@@ -180,15 +191,16 @@ function createNewPalletForm(){
   let newPalletFormBuilder16 = document.createElement('input')
       newPalletFormBuilder16.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder16.setAttribute('type', 'text')
-      newPalletFormBuilder16.setAttribute('contents', '1st-content')
+      newPalletFormBuilder16.setAttribute('name', '1st-content')
 
-      // note that 17 has been deleted
+  //  note that newPalletFormBuilder17 has been deleted
 
   let newPalletFormBuilder18 = document.createElement('tr')
       newPalletFormBuilder18.setAttribute('class', 'contents')
       newPalletFormBuilder18.setAttribute('id', 'second-content')
 
   let newPalletFormBuilder19 = document.createElement('td')
+      newPalletFormBuilder19.setAttribute('class', 'table-labels')
       newPalletFormBuilder19.innerText = "2.)"
 
   let newPalletFormBuilder20 = document.createElement('td')
@@ -196,13 +208,14 @@ function createNewPalletForm(){
   let newPalletFormBuilder21 = document.createElement('input')
       newPalletFormBuilder21.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder21.setAttribute('type', 'text')
-      newPalletFormBuilder21.setAttribute('contents', '2nd-content')
+      newPalletFormBuilder21.setAttribute('name', '2nd-content')
 
   let newPalletFormBuilder22 = document.createElement('tr')
       newPalletFormBuilder22.setAttribute('class', 'contents')
       newPalletFormBuilder22.setAttribute('id', 'third-content')
 
   let newPalletFormBuilder23 = document.createElement('td')
+      newPalletFormBuilder23.setAttribute('class', 'table-labels')
       newPalletFormBuilder23.innerText = "3.)"
 
   let newPalletFormBuilder24 = document.createElement('td')
@@ -210,7 +223,7 @@ function createNewPalletForm(){
   let newPalletFormBuilder25 = document.createElement('input')
       newPalletFormBuilder25.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder25.setAttribute('type', 'text')
-      newPalletFormBuilder25.setAttribute('contents', '3rd-content')
+      newPalletFormBuilder25.setAttribute('name', '3rd-content')
 
       // first the inner-most scope gets built in the table
       newPalletFormBuilder15.appendChild(newPalletFormBuilder16) // arranging subcomponents
@@ -230,12 +243,72 @@ function createNewPalletForm(){
       newPalletFormBuilder11.appendChild(newPalletFormBuilder13) // arranging subcomponents
       newPalletFormBuilder11.appendChild(newPalletFormBuilder18) // arranging subcomponents
       newPalletFormBuilder11.appendChild(newPalletFormBuilder22) // arranging subcomponents
-
-      // here the table will go into the form
       newPalletFormBuilder1.appendChild(newPalletFormBuilder11) // arranging subcomponents
+      // The section on the table ends on the line above
+      // newPalletFormBuilder1.appendChild(newPalletFormBuilder11) // arranging subcomponents
 
       // now the rest of the form has to be made; left off on
       // the HAZMAT section of the new pallet form.
+  let newPalletFormBuilder26 = document.createElement('div')
+      newPalletFormBuilder26.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder26.setAttribute('id', 'hazmat')
+
+  let newPalletFormBuilder27 = document.createElement('label')
+      newPalletFormBuilder27.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder27.setAttribute('id', 'hazmat')
+      newPalletFormBuilder27.innerText = "HAZMAT:"
+
+  let newPalletFormBuilder28 = document.createElement('div')
+      newPalletFormBuilder28.setAttribute('class', 'radio-buttons')
+      newPalletFormBuilder28.setAttribute('id', 'hazmat')
+
+  let newPalletFormBuilder29 = document.createElement('div')
+
+  let newPalletFormBuilder30 = document.createElement('input')
+      newPalletFormBuilder30.setAttribute('class', 'push')
+      newPalletFormBuilder30.setAttribute('type', 'radio')
+      newPalletFormBuilder30.setAttribute('id', 'true')
+      newPalletFormBuilder30.setAttribute('name', 'hazmat')
+      newPalletFormBuilder30.setAttribute('value', 'true')
+
+  let newPalletFormBuilder31 = document.createElement('label')
+      newPalletFormBuilder31.setAttribute('for', 'true')
+      newPalletFormBuilder31.innerText = "yes"
+
+  let newPalletFormBuilder32 = document.createElement('div')
+
+  let newPalletFormBuilder33 = document.createElement('input')
+      newPalletFormBuilder33.setAttribute('class', 'push')
+      newPalletFormBuilder33.setAttribute('type', 'radio')
+      newPalletFormBuilder33.setAttribute('id', 'false')
+      newPalletFormBuilder33.setAttribute('name', 'hazmat')
+      newPalletFormBuilder33.setAttribute('value', 'false')
+
+  let newPalletFormBuilder34 = document.createElement('label')
+      newPalletFormBuilder34.setAttribute('for', 'false')
+      newPalletFormBuilder34.innerText = "no"
+
+  let newPalletFormBuilder35 = document.createElement('input')
+      newPalletFormBuilder35.setAttribute('class', 'master')
+      newPalletFormBuilder35.setAttribute('type', 'submit')
+      newPalletFormBuilder35.setAttribute('value', 'Create a new pallet')
+
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder26) // arranging subcomponents
+      newPalletFormBuilder26.appendChild(newPalletFormBuilder27) // arranging subcomponents
+      newPalletFormBuilder26.appendChild(newPalletFormBuilder28) // arranging subcomponents
+      newPalletFormBuilder28.appendChild(newPalletFormBuilder29) // arranging subcomponents
+      newPalletFormBuilder29.appendChild(newPalletFormBuilder30) // arranging subcomponents
+      newPalletFormBuilder29.appendChild(newPalletFormBuilder31) // arranging subcomponents
+      newPalletFormBuilder28.appendChild(newPalletFormBuilder32) // arranging subcomponents
+      newPalletFormBuilder32.appendChild(newPalletFormBuilder33) // arranging subcomponents
+      newPalletFormBuilder32.appendChild(newPalletFormBuilder34) // arranging subcomponents
+
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder35) // arranging subcomponents
+
+  // this takes the completed new pallet form and places it into a main directory
+  let insertPoint = document.querySelector('div.new-pallet-form-placeholder')
+      insertPoint.appendChild(newPalletFormBuilder1)
+
 }
 
 // This is needed to query the data sets in the HTML:
