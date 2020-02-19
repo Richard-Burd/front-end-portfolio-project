@@ -387,7 +387,12 @@ function totalPalletWeight(){
 }
 
 function totalSquareFootage(){
-
+  let areaValues = []
+  // <span class="storage-area-value">12,300</span>
+  let areaVolumes = document.querySelectorAll('span.storage-area-value');
+  //
+  //
+  // LEFT OFF HERE //
 }
 
 
