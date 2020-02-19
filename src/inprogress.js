@@ -4,4 +4,6 @@ createStorageArea("My Storage Area", "3", "843")
 
 createNewPalletForm(1)
 
-removeDeleteButtonFromStorageArea(1)
+// removeDeleteButtonFromStorageArea(1)
+
+removeDeleteButtonsWhereNecessary()

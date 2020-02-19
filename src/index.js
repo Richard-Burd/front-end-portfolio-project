@@ -320,14 +320,18 @@ function createNewPalletForm(storageAreaID){
 // You can only delete an area that is empty & doesn't have any pallets in it.
 // This function iterates over all areas & removes the delete button from those containing pallets
 function removeDeleteButtonFromStorageArea(storageAreaID){
-  // more code needed to specify the panel & if panel is empty, it should have a delete button
   startpoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`)
-            // document.querySelector(`[data-storage-area-id="${1}"]`) <= This line of code works
-            // if this exists, do the delete: startpoint.querySelector('div.pallet-box')
   if (startpoint.querySelector('div.pallet-box') != null){
     target = startpoint.querySelector('#delete-area');
     parent = target.parentNode;
     parent.removeChild(target);
+  }
+}
+
+function removeDeleteButtonsWhereNecessary(){
+  const panelArray = document.querySelectorAll('div.panel'); //=> NodeList(7) [div.panel.totals-block, div.panel, div.panel, div.panel, div.panel, div.panel, div.panel]
+  for (let e = 1; e < panelArray.length; e++) {
+    removeDeleteButtonFromStorageArea(e);
   }
 }
 
@@ -342,18 +346,20 @@ createStorageArea("Connex Yard", "5", "6,700")
 
 createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "724", false)
 createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
-createPallet(1, 3, "436L-12", "green", "heavyweight", "1st Item", "2nd Item", "Buckwheat", "124", true)
-createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "2nd Item", "Rice", "724", true)
-createPallet(1, 5, "436L-5W", "red", "lightweight", "1st Item", "Cloth diapers", "misc. clothes", "724", false)
-createPallet(1, 6, "436L-G2", "amber", "lightweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
-createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "bandages", "724", false)
-createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "My New Pallet", "724", true)
-createPallet(2, 9, "436L-M1", "amber", "lightweight", "Flour", "vaccines", "Shoes-adult-women", "724", false)
+createPallet(1, 3, "436L-12", "green", "heavyweight", "Buckwheat", "Salt", " ", "124", true)
+createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "Gause", "Rice", "724", true)
+createPallet(1, 5, "436L-5W", "red", "lightweight", "Farrekeh", "Cloth diapers", "misc. clothes", "724", false)
+createPallet(1, 6, "436L-G2", "amber", "middleweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
+createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "Bandages", "724", false)
+createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "Construction tools", "724", true)
+createPallet(2, 9, "436L-M1", "amber", "middleweight", "Flour", "Vaccines", "Misc. shoes for adults", "724", false)
 createPallet(5, 10, "436L-12A", "red", "heavyweight", "Maze", "Rice", "My New Pallet", "724", false)
 createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "Towels", "724", false)
-createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "towels", "WD-40", "394", true)
-createPallet(5, 13, "436L-54", "red", "lightweight", "1st Item", "Dried figs", "toddler clothes", "724", true)
-createPallet(5, 13, "436L-22", "green", "heavyweight", "1st Item", "Fenoa", "Dried cans of Tuna", "724", true)
+createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", "WD-40", "394", true)
+createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "724", true)
+createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "724", true)
+
+removeDeleteButtonsWhereNecessary()
 
 
 // This is needed to query the data sets in the HTML:
