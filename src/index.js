@@ -73,6 +73,15 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder5.setAttribute('class', 'master')
       storageAreaBuilder5.setAttribute('id', 'create-pallet')
       storageAreaBuilder5.innerText = 'Create a pallet in this storage area'
+      storageAreaBuilder5.addEventListener('click', event => {
+        if (storageAreaBuilder5.innerText == 'Create a pallet in this storage area') {
+          createNewPalletForm(storageAreaID);
+          storageAreaBuilder5.innerText = 'Remove New Pallet Form'
+        } else {
+          removeNewPalletForm(storageAreaID);
+          storageAreaBuilder5.innerText = 'Create a pallet in this storage area'
+        }
+      })
 
       // this the the delete button for empty areas:
   let storageAreaBuilder6 = document.createElement('button')
@@ -316,25 +325,43 @@ function createNewPalletForm(storageAreaID){
       insertPoint.appendChild(newPalletFormBuilder1)
 
 }
+// <div class="new-pallet-form-placeholder" data-new-pallet-form-storage-area-id="1">
+function removeNewPalletForm(storageAreaID){
+  parent = document.querySelector(`[data-new-pallet-form-storage-area-id="${storageAreaID}"]`)
+  target = parent.querySelector('form.new-pallet-form');
+  parent.removeChild(target);
+}
 
 // You can only delete an area that is empty & doesn't have any pallets in it.
 // This function iterates over all areas & removes the delete button from those containing pallets
 function removeDeleteButtonFromStorageArea(storageAreaID){
-  startpoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`)
+  const startpoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
   if (startpoint.querySelector('div.pallet-box') != null){
-    target = startpoint.querySelector('#delete-area');
-    parent = target.parentNode;
+    let target = startpoint.querySelector('#delete-area');
+    let parent = target.parentNode;
     parent.removeChild(target);
   }
 }
 
 function removeDeleteButtonsWhereNecessary(){
-  const panelArray = document.querySelectorAll('div.panel'); //=> NodeList(7) [div.panel.totals-block, div.panel, div.panel, div.panel, div.panel, div.panel, div.panel]
-  for (let e = 1; e < panelArray.length; e++) {
+  let panelArray = document.querySelectorAll('div.panel');
+  for (let e = 1; e < panelArray.length - 1; e++) {
     removeDeleteButtonFromStorageArea(e);
   }
 }
 
+function totalNumberOfPallets(){
+  value = document.querySelectorAll('div.pallet-box').length
+  document.querySelector('span.pallet-count#total-value').innerText = value;
+}
+// <div class="pallet-weight">124</div>
+function totalPalletWeight(){
+
+}
+
+function totalSquareFootage(){
+
+}
 
 
 // The following is seed data:
@@ -361,6 +388,7 @@ createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "
 
 removeDeleteButtonsWhereNecessary()
 
+totalNumberOfPallets()
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
