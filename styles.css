@@ -189,6 +189,7 @@ input[type="submit"] {
   background-color: #6ea175ff;
   border: none;
   padding: 6px 8px;
+  margin-top: 20px;
 }
 
 input[type="submit"]:hover {

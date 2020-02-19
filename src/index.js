@@ -303,6 +303,17 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder34.setAttribute('for', 'false')
       newPalletFormBuilder34.innerText = "no"
 
+  let newPalletFormBuilder34B = document.createElement('label')
+      newPalletFormBuilder34B.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder34B.setAttribute('id', 'weight')
+      newPalletFormBuilder34B.innerText = 'Weight: '
+
+  let newPalletFormBuilder34C = document.createElement('input')
+      newPalletFormBuilder34C.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder34C.setAttribute('id', 'weight')
+      newPalletFormBuilder34C.setAttribute('type', 'text')
+      newPalletFormBuilder34C.setAttribute('name', 'weight')
+
   let newPalletFormBuilder35 = document.createElement('input')
       newPalletFormBuilder35.setAttribute('class', 'master')
       newPalletFormBuilder35.setAttribute('type', 'submit')
@@ -317,6 +328,9 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder28.appendChild(newPalletFormBuilder32) // arranging subcomponents
       newPalletFormBuilder32.appendChild(newPalletFormBuilder33) // arranging subcomponents
       newPalletFormBuilder32.appendChild(newPalletFormBuilder34) // arranging subcomponents
+
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder34B) // arranging subcomponents
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder34C) // arranging subcomponents
 
       newPalletFormBuilder1.appendChild(newPalletFormBuilder35) // arranging subcomponents
 
@@ -350,12 +364,25 @@ function removeDeleteButtonsWhereNecessary(){
   }
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function totalNumberOfPallets(){
-  value = document.querySelectorAll('div.pallet-box').length
+  let value = document.querySelectorAll('div.pallet-box').length
   document.querySelector('span.pallet-count#total-value').innerText = value;
 }
-// <div class="pallet-weight">124</div>
+
 function totalPalletWeight(){
+  let weightValues = []
+  let palletWeights = document.querySelectorAll('div.pallet-weight');
+  for (const singleWeight of palletWeights) {
+    //console.log(parseInt(singleWeight.innerText.replace(/\,/g, '')))
+    weightValues.push(parseInt(singleWeight.innerText.replace(/\,/g, '')))
+  }
+  calcOutput = numberWithCommas(weightValues.reduce((a, b) => a + b, 0))
+  // <span class="gross-weight" id="total-value">Unknown</span>
+  document.querySelector('span.gross-weight#total-value').innerText = calcOutput;
 
 }
 
@@ -371,24 +398,26 @@ createStorageArea("West Lot", "3", "15,700")
 createStorageArea("Old Storage", "4", "3,000")
 createStorageArea("Connex Yard", "5", "6,700")
 
-createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "724", false)
+createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
 createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
-createPallet(1, 3, "436L-12", "green", "heavyweight", "Buckwheat", "Salt", " ", "124", true)
-createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "Gause", "Rice", "724", true)
-createPallet(1, 5, "436L-5W", "red", "lightweight", "Farrekeh", "Cloth diapers", "misc. clothes", "724", false)
+createPallet(1, 3, "436L-12", "green", "heavyweight", "Buckwheat", "Salt", " ", "1,024", true)
+createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "Gause", "Rice", "704", true)
+createPallet(1, 5, "436L-5W", "red", "lightweight", "Farrekeh", "Cloth diapers", "misc. clothes", "509", false)
 createPallet(1, 6, "436L-G2", "amber", "middleweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
-createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "Bandages", "724", false)
-createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "Construction tools", "724", true)
-createPallet(2, 9, "436L-M1", "amber", "middleweight", "Flour", "Vaccines", "Misc. shoes for adults", "724", false)
-createPallet(5, 10, "436L-12A", "red", "heavyweight", "Maze", "Rice", "My New Pallet", "724", false)
-createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "Towels", "724", false)
+createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "Bandages", "720", false)
+createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "Construction tools", "203", true)
+createPallet(2, 9, "436L-M1", "amber", "middleweight", "Flour", "Vaccines", "Misc. shoes for adults", "264", false)
+createPallet(5, 10, "436L-12A", "red", "heavyweight", "Maze", "Rice", "My New Pallet", "702", false)
+createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "Towels", "1,000", false)
 createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", "WD-40", "394", true)
-createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "724", true)
-createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "724", true)
+createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "777", true)
+createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)
 
 removeDeleteButtonsWhereNecessary()
 
 totalNumberOfPallets()
+
+totalPalletWeight()
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
