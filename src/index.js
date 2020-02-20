@@ -303,16 +303,20 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder34.setAttribute('for', 'false')
       newPalletFormBuilder34.innerText = "no"
 
-  let newPalletFormBuilder34B = document.createElement('label')
-      newPalletFormBuilder34B.setAttribute('class', 'new-pallet-fields')
-      newPalletFormBuilder34B.setAttribute('id', 'weight')
-      newPalletFormBuilder34B.innerText = 'Weight: '
+  let newPalletFormBuilder34A = document.createElement('div')
+      newPalletFormBuilder34A.setAttribute('class', 'new-pallet-fields')
+      newPalletFormBuilder34A.setAttribute('id', 'weight')
 
-  let newPalletFormBuilder34C = document.createElement('input')
-      newPalletFormBuilder34C.setAttribute('class', 'new-pallet-input')
+  let newPalletFormBuilder34C = document.createElement('label')
+      newPalletFormBuilder34C.setAttribute('class', 'new-pallet-fields')
       newPalletFormBuilder34C.setAttribute('id', 'weight')
-      newPalletFormBuilder34C.setAttribute('type', 'text')
-      newPalletFormBuilder34C.setAttribute('name', 'weight')
+      newPalletFormBuilder34C.innerText = 'Weight: '
+
+  let newPalletFormBuilder34D = document.createElement('input')
+      newPalletFormBuilder34D.setAttribute('class', 'new-pallet-input')
+      newPalletFormBuilder34D.setAttribute('id', 'weight')
+      newPalletFormBuilder34D.setAttribute('type', 'text')
+      newPalletFormBuilder34D.setAttribute('name', 'weight')
 
   let newPalletFormBuilder35 = document.createElement('input')
       newPalletFormBuilder35.setAttribute('class', 'master')
@@ -329,8 +333,9 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder32.appendChild(newPalletFormBuilder33) // arranging subcomponents
       newPalletFormBuilder32.appendChild(newPalletFormBuilder34) // arranging subcomponents
 
-      newPalletFormBuilder1.appendChild(newPalletFormBuilder34B) // arranging subcomponents
-      newPalletFormBuilder1.appendChild(newPalletFormBuilder34C) // arranging subcomponents
+      newPalletFormBuilder1.appendChild(newPalletFormBuilder34A) // arranging subcomponents
+      newPalletFormBuilder34A.appendChild(newPalletFormBuilder34C) // arranging subcomponents
+      newPalletFormBuilder34A.appendChild(newPalletFormBuilder34D) // arranging subcomponents
 
       newPalletFormBuilder1.appendChild(newPalletFormBuilder35) // arranging subcomponents
 
@@ -349,9 +354,9 @@ function removeNewPalletForm(storageAreaID){
 // You can only delete an area that is empty & doesn't have any pallets in it.
 // This function iterates over all areas & removes the delete button from those containing pallets
 function removeDeleteButtonFromStorageArea(storageAreaID){
-  const startpoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
-  if (startpoint.querySelector('div.pallet-box') != null){
-    let target = startpoint.querySelector('#delete-area');
+  const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
+  if (startPoint.querySelector('div.pallet-box') != null){
+    let target = startPoint.querySelector('#delete-area');
     let parent = target.parentNode;
     parent.removeChild(target);
   }
@@ -381,7 +386,6 @@ function totalPalletWeight(){
     weightValues.push(parseInt(singleWeight.innerText.replace(/\,/g, '')))
   }
   calcOutput = numberWithCommas(weightValues.reduce((a, b) => a + b, 0))
-  // <span class="gross-weight" id="total-value">Unknown</span>
   document.querySelector('span.gross-weight#total-value').innerText = calcOutput;
 
 }
@@ -389,10 +393,47 @@ function totalPalletWeight(){
 function totalSquareFootage(){
   let areaValues = []
   // <span class="storage-area-value">12,300</span>
-  let areaVolumes = document.querySelectorAll('span.storage-area-value');
-  //
-  //
-  // LEFT OFF HERE //
+  let areaSpaces = document.querySelectorAll('span.storage-area-value');
+  for (const singleSpace of areaSpaces) {
+    areaValues.push(parseInt(singleSpace.innerText.replace(/\,/g, '')))
+  }
+  calcOutput = numberWithCommas(areaValues.reduce((a, b) => a + b, 0))
+  document.querySelector('span.gross-area#total-value').innerText = calcOutput;
+}
+
+function checkToSeeIfStorageAreaIsFull(storageAreaID){
+  const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
+  // this code hardwires the space required for each pallet to be 103 square feet
+  // this is based on the size of a 436L pallet (88in x 108in) with 24 inches of clearance around each pallet
+  let squareFootageRequiredForPallets = startPoint.querySelectorAll('div.pallet-box').length * 103;
+  let storageAreaValue = startPoint.querySelector('span.storage-area-value').innerText;
+  // transform the string to an integer
+  let realStorageAreaValue = parseInt(storageAreaValue.replace(/,/g, ''), 10);
+
+  if (realStorageAreaValue <= squareFootageRequiredForPallets){
+    // This button currently has an event listener on it; the only way to get rid of the eventListener
+    // is to remove the button and re-create it.
+    let target = startPoint.querySelector('button.master#create-pallet')
+    let parent = target.parentNode;
+        parent.removeChild(target)
+
+    let replacementButton = document.createElement('button')
+        replacementButton.setAttribute('class', 'master')
+        replacementButton.setAttribute('id', 'create-pallet')
+        replacementButton.innerText = "Storage Area Full"
+
+        let insertScope = startPoint
+        let insertBeforeMe = startPoint.querySelector('div.new-pallet-form-placeholder')
+            insertScope.insertBefore(replacementButton, insertBeforeMe)
+
+  }
+}
+
+function labelButtonForStorageAreasThatAreFull(){
+  let panelArray = document.querySelectorAll('div.panel');
+  for (let e = 1; e < panelArray.length - 1; e++) {
+    checkToSeeIfStorageAreaIsFull(e);
+  }
 }
 
 
@@ -401,7 +442,7 @@ createStorageArea("North Tarmac", "1", "12,300")
 createStorageArea("Clamshell", "2", "8,500")
 createStorageArea("West Lot", "3", "15,700")
 createStorageArea("Old Storage", "4", "3,000")
-createStorageArea("Connex Yard", "5", "6,700")
+createStorageArea("Connex Yard", "5", "500")
 
 createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
 createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
@@ -423,6 +464,10 @@ removeDeleteButtonsWhereNecessary()
 totalNumberOfPallets()
 
 totalPalletWeight()
+
+totalSquareFootage()
+
+labelButtonForStorageAreasThatAreFull()
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

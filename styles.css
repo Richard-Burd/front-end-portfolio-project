@@ -179,6 +179,10 @@ td.table-labels {
   padding-left: 70px;
 }
 
+div.new-pallet-fields#weight {
+  margin-bottom: 60px;
+}
+
 input[type="submit"] {
   font-family: 'Righteous', cursive;
   font-size: 18px;
@@ -189,7 +193,6 @@ input[type="submit"] {
   background-color: #6ea175ff;
   border: none;
   padding: 6px 8px;
-  margin-top: 20px;
 }
 
 input[type="submit"]:hover {
