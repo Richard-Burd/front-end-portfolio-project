@@ -1,22 +1,27 @@
 class StorageAreasController < ApplicationController
   def index
-    storage_area = StorageArea.all
-    render json: storage_area
+    storage_areas = StorageArea.all
+    render json: storage_areas
   end
 
   def show
-
+    storage_area = StorageArea.find_by(id: params[:id])
+    render json: storage_area
   end
 
   def create
-
+    storageAreaData = {
+      name: params[:java_script_name],
+      area: params[:java_script_area]
+    }
+    StorageArea.create(storageAreaData)
   end
 
   def destroy
-    # pokemon = Pokemon.find_by(:id => params[:id])
-    # if pokemon.present?
-    #     Pokemon.destroy(pokemon.id)
-    #     head :no_content
-    # end
+    storage_area = StorageArea.find_by(:id => params[:id])
+    if storage_area.present?
+        StorageArea.destroy(pallet.id)
+        head :no_content
+    end
   end
 end

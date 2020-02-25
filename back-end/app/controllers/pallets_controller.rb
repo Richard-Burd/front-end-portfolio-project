@@ -5,18 +5,23 @@ class PalletsController < ApplicationController
   end
 
   def show
-
+    pallet = Pallet.find_by(id: params[:id])
+    render json: pallet
   end
 
   def create
-
+    palletData = {
+      name: params[:java_script_name],
+      weight: params[:java_script_weight]
+    }
+    Pallet.create(palletData)
   end
 
   def destroy
-    # pokemon = Pokemon.find_by(:id => params[:id])
-    # if pokemon.present?
-    #     Pokemon.destroy(pokemon.id)
-    #     head :no_content
-    # end
+    pallet = Pallet.find_by(:id => params[:id])
+    if pallet.present?
+        Pallet.destroy(pallet.id)
+        head :no_content
+    end
   end
 end
