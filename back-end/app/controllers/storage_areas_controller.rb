@@ -1,0 +1,2 @@
+class StorageAreasController < ApplicationController
+end
