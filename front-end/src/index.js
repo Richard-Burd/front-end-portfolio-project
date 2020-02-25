@@ -32,7 +32,7 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
   if (hazmat == true) {
     let palletBuilder9 = document.createElement('img')
         palletBuilder9.setAttribute('class', 'hazmat-icon')
-        palletBuilder9.setAttribute('src', 'HAZMAT.svg')
+        palletBuilder9.setAttribute('src', 'src/images/HAZMAT.svg')
         palletBuilder9.setAttribute('title', 'hazmat-icon')
 
         palletBuilder1.appendChild(palletBuilder9) // arranging subcomponents
@@ -387,7 +387,6 @@ function totalPalletWeight(){
   }
   calcOutput = numberWithCommas(weightValues.reduce((a, b) => a + b, 0))
   document.querySelector('span.gross-weight#total-value').innerText = calcOutput;
-
 }
 
 function totalSquareFootage(){
@@ -425,7 +424,6 @@ function checkToSeeIfStorageAreaIsFull(storageAreaID){
         let insertScope = startPoint
         let insertBeforeMe = startPoint.querySelector('div.new-pallet-form-placeholder')
             insertScope.insertBefore(replacementButton, insertBeforeMe)
-
   }
 }
 

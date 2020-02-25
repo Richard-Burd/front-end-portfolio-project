@@ -256,17 +256,17 @@ div.amber-timescale {
 }
 
 div.lightweight {
-  background-image: url("./436L_net_green.svg");
+  background-image: url("./src/images/436L_net_green.svg");
   background-color: #dcffd3ff;
 }
 
 div.middleweight {
-  background-image: url("./436L_net_amber.svg");
+  background-image: url("./src/images/436L_net_amber.svg");
   background-color: #fff7d3ff;
 }
 
 div.heavyweight {
-  background-image: url("./436L_net_red.svg");
+  background-image: url("./src/images/436L_net_red.svg");
   background-color: #ffd5d3ff;
 }
 
