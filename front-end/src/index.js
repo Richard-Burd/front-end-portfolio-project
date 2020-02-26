@@ -1,3 +1,55 @@
+const BASE_URL = "http://localhost:3000"
+const PALLETS_URL = `${BASE_URL}/pallets`
+const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
+
+function createANewPallet(pallet_data){
+ fetch(PALLETS_URL, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       Accept: "application/json"
+     },
+     body: JSON.stringify({
+       "java_script_name": pallet_data.name.value,
+       "java_script_weight": pallet_data.weight.value
+     })
+   })
+   .then(function(json) {
+     console.log(json);
+     // some action will go here involving a page re-load
+   });
+}
+
+// function createANewPallet(pallet_data){
+//   fetch(PALLETS_URL, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Accept: "application/json"
+//       },
+//       body: JSON.stringify({
+//         "java_script_name": pallet_data.name.value,
+//         "java_script_species": pallet_data.weight.value
+//       })
+//     })
+//     .then(function(json) {
+//       console.log(json);
+//       // some action will go here involving a page re-load
+//     });
+// }
+
+function deleteASpecifiedPallet(palletId) {
+  return fetch(`${PALLETS_URL}/${palletId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json"
+      },
+    }),
+ // This will refresh the page
+ window.location.reload(); // alternative => document.location.reload(true);
+}
+
 function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
 
   let palletBuilder1 = document.createElement('div')
@@ -120,6 +172,10 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
 function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder1 = document.createElement('form')
       newPalletFormBuilder1.setAttribute('class', 'new-pallet-form')
+      newPalletFormBuilder1.addEventListener('submit', event => {
+        event.preventDefault()
+        createANewPallet(event.target)
+      })
 
   let newPalletFormBuilder2 = document.createElement('div')
       newPalletFormBuilder2.setAttribute('class', 'form-title')
@@ -318,9 +374,11 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder34D.setAttribute('type', 'text')
       newPalletFormBuilder34D.setAttribute('name', 'weight')
 
+  // This is the submit button for the new pallet form
   let newPalletFormBuilder35 = document.createElement('input')
       newPalletFormBuilder35.setAttribute('class', 'master')
       newPalletFormBuilder35.setAttribute('type', 'submit')
+      newPalletFormBuilder35.setAttribute('name', 'submit') /////////////////////////////////////////// This may or not be required to get the form to submit properly
       newPalletFormBuilder35.setAttribute('value', 'Create a new pallet')
 
       newPalletFormBuilder1.appendChild(newPalletFormBuilder26) // arranging subcomponents
@@ -466,6 +524,8 @@ totalPalletWeight()
 totalSquareFootage()
 
 labelButtonForStorageAreasThatAreFull()
+
+
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
