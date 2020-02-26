@@ -12,8 +12,9 @@ StorageArea.create!(name: "Clamshell", area: 7000)
 StorageArea.create!(name: "East-End", area: 7000)
 StorageArea.create!(name: "West-Village", area: 7000)
 
-=begin
 Pallet.create!(name:"436L-01", priority: "first-priority", first_content: "Bottled Water", second_content: "Rice", third_content: "Sugar", weight: 198, hazmat:false, storage_area_id: 1)
+
+=begin
 Pallet.create!(name:"436L-02", priority: "second-priority", first_content: "Canola Oil", second_content: "Craked Wheat", third_content: "WD-40", weight: 115, hazmat:true, storage_area_id: 1)
 Pallet.create!(name:"436L-03", priority: "fifth-priority", first_content: "Coils", second_content: "Sprok0ets", third_content: "Seeds", weight: 100, hazmat:false, storage_area_id: 1)
 Pallet.create!(name:"436L-04", priority: "third-priority", first_content: "Matches", second_content: "Dried Beans", third_content: "Oil", weight: 132, hazmat:true, storage_area_id: 1)

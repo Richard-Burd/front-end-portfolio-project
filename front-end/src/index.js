@@ -26,23 +26,38 @@ function createANewPallet(pallet_data){
    });
 }
 
-// function createANewPallet(pallet_data){
-//   fetch(PALLETS_URL, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Accept: "application/json"
-//       },
-//       body: JSON.stringify({
-//         "java_script_name": pallet_data.name.value,
-//         "java_script_species": pallet_data.weight.value
-//       })
-//     })
-//     .then(function(json) {
-//       console.log(json);
-//       // some action will go here involving a page re-load
-//     });
-// }
+function createANewStorageArea(storage_area_data){
+ fetch(STORAGE_AREAS_URL, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       Accept: "application/json"
+     },
+     body: JSON.stringify({
+       "java_script_name": storage_area_data.name.value,
+       "java_script_area": storage_area_data.area.value,
+     })
+   })
+   .then(function(json) {
+     console.log(json);
+     // some action will go here involving a page re-load
+   });
+}
+
+// NOTE: this doesn't change the storage areas themselves, but rather, it
+// re-colors the pallets inside the storage areas when a pallet is added to
+// or deleted from the storage area
+function updateAStorageArea(storageAreaId){
+  return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json"
+      },
+    }),
+ // This will refresh the page
+ window.location.reload(); // alternative => document.location.reload(true);
+}
 
 function deleteASpecifiedPallet(palletId) {
   return fetch(`${PALLETS_URL}/${palletId}`, {
@@ -503,6 +518,14 @@ function labelButtonForStorageAreasThatAreFull(){
   }
 }
 
+function listenForNewStorageAreaFormSubmittal(){
+  newStorageAreaForm = document.querySelector("form.new-storage-area-form")
+  newStorageAreaForm.addEventListener('submit', event => {
+    event.preventDefault()
+    createANewStorageArea(event.target)
+  })
+}
+
 
 // The following is seed data:
 createStorageArea("North Tarmac", "1", "12,300")
@@ -536,7 +559,7 @@ totalSquareFootage()
 
 labelButtonForStorageAreasThatAreFull()
 
-
+listenForNewStorageAreaFormSubmittal()
 
 // This is needed to query the data sets in the HTML:
 // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
