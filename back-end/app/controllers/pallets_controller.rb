@@ -15,6 +15,10 @@ class PalletsController < ApplicationController
     palletData = {
       name: params[:java_script_name],
       weight: params[:java_script_weight],
+      priority: params[:java_script_priority],
+      first_content: params[:java_script_first_content],
+      second_content: params[:java_script_second_content],
+      third_content: params[:java_script_third_content],
       storage_area_id: params[:java_script_storage_area_id]
     }
     Pallet.create(palletData)

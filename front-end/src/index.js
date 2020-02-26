@@ -12,6 +12,10 @@ function createANewPallet(pallet_data){
      body: JSON.stringify({
        "java_script_name": pallet_data.name.value,
        "java_script_weight": pallet_data.weight.value,
+       "java_script_priority": pallet_data.priority.value,
+       "java_script_first_content": pallet_data.first_content.value,
+       "java_script_second_content": pallet_data.second_content.value,
+       "java_script_third_content": pallet_data.third_content.value,
        "java_script_storage_area_id": pallet_data.storage_area_id.value
      })
    })
@@ -218,7 +222,7 @@ function createNewPalletForm(storageAreaID){
 
   // Iterates over the arrayOfConcearns and generates HTML for each element.
   for (const singleConcearn of arrayOfConcearns){
-      dashNRegex = singleConcearn.replace(/\s+/g, '-').toLowerCase()
+      dashNRegex = singleConcearn // .replace(/\s+/g, '-').toLowerCase() /////////////////////this prevents the form from pushing data to the rails api...apparently dashes are a no-go
       let newPalletFormBuilder8 = document.createElement('div')
           newPalletFormBuilder8.setAttribute('class', `${dashNRegex}-input-n-label`)
           newPalletFormBuilder8.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
@@ -263,7 +267,7 @@ function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder16 = document.createElement('input')
       newPalletFormBuilder16.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder16.setAttribute('type', 'text')
-      newPalletFormBuilder16.setAttribute('name', '1st-content')
+      newPalletFormBuilder16.setAttribute('name', 'first_content')
 
   //  note that newPalletFormBuilder17 has been deleted
 
@@ -280,7 +284,7 @@ function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder21 = document.createElement('input')
       newPalletFormBuilder21.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder21.setAttribute('type', 'text')
-      newPalletFormBuilder21.setAttribute('name', '2nd-content')
+      newPalletFormBuilder21.setAttribute('name', 'second_content')
 
   let newPalletFormBuilder22 = document.createElement('tr')
       newPalletFormBuilder22.setAttribute('class', 'contents')
@@ -295,7 +299,7 @@ function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder25 = document.createElement('input')
       newPalletFormBuilder25.setAttribute('class', 'new-pallet-input')
       newPalletFormBuilder25.setAttribute('type', 'text')
-      newPalletFormBuilder25.setAttribute('name', '3rd-content')
+      newPalletFormBuilder25.setAttribute('name', 'third_content')
 
       // first the inner-most scope gets built in the table
       newPalletFormBuilder15.appendChild(newPalletFormBuilder16) // arranging subcomponents

@@ -14,6 +14,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_221159) do
 
   create_table "pallets", force: :cascade do |t|
     t.string "name"
+    t.string "priority"
+    t.string "first_content"
+    t.string "second_content"
+    t.string "third_content"
     t.integer "weight"
     t.integer "storage_area_id"
   end
