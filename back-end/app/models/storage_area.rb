@@ -32,7 +32,7 @@ class StorageArea < ApplicationRecord
 
   def calculate_weight_for_2_pallets
     total_pallet_order.first.weight_category = "green"
-    total_pallet_order.first.weight_category = "amber"
+    total_pallet_order.second.weight_category = "amber"
   end
 
   def calculate_weight_for_3_pallets # StorageArea.all[0].calculate_weight_for_3_pallets
@@ -43,9 +43,11 @@ class StorageArea < ApplicationRecord
 
   def duplicate_pallet_weight_values_have_same_weight_category # StorageArea.all[1].duplicate_pallet_weight_values_have_same_weight_category
     total_pallet_order.each_with_index do |element, index |
-      if element.weight == total_pallet_order[index-1].weight
+      if element.weight == total_pallet_order[index-1].weight && element !=  total_pallet_order.first # because then you'd loop back to the last pallet in the array
         # puts "This one is: #{element.weight}, the previous one is #{total_pallet_order[index-1].weight}"
         element.weight_category = total_pallet_order[index-1].weight_category
+      elsif total_pallet_order.first.weight_category == "green" && total_pallet_order.first.weight == total_pallet_order.second.weight
+        total_pallet_order.second.weight_category = "green"
       end
     end
   end
