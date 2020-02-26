@@ -17,6 +17,12 @@ class PalletsController < ApplicationController
     }
     Pallet.create(palletData) # this will be removed when the code below is ready to be introduced
 
+
+#################LEFT OFF HERE########################
+# so this is fundementally wrong; the storage area actually needs to be updated in the
+# storage area update action, not here.  Javascript needs to update when it creates this new pallet
+
+
     # # All pallets in the storage area will need to be re-colored when a new pallet is introduced
     # # The following code will be run once I can get a new pallet to be simply created with a new name & weight
     # pallet = Pallet.create(palletData)

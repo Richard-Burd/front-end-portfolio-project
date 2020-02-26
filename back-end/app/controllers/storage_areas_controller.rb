@@ -17,6 +17,11 @@ class StorageAreasController < ApplicationController
     StorageArea.create(storageAreaData)
   end
 
+  def update
+    #################### NOTE: LEFT OFF HERE
+    # you need to update this each time a pallet is created in it.
+  end
+
   def destroy
     storage_area = StorageArea.find_by(:id => params[:id])
     if storage_area.present?
