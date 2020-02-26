@@ -16,6 +16,7 @@ function createANewPallet(pallet_data){
        "java_script_first_content": pallet_data.first_content.value,
        "java_script_second_content": pallet_data.second_content.value,
        "java_script_third_content": pallet_data.third_content.value,
+       "java_script_hazmat": pallet_data.hazmat.value,
        "java_script_storage_area_id": pallet_data.storage_area_id.value
      })
    })

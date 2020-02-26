@@ -19,7 +19,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_221159) do
     t.string "second_content"
     t.string "third_content"
     t.integer "weight"
+    t.boolean "hazmat"
     t.integer "storage_area_id"
+    t.string "weight_category"
+    t.string "priority_category"
   end
 
   create_table "storage_areas", force: :cascade do |t|

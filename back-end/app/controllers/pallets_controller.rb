@@ -19,6 +19,7 @@ class PalletsController < ApplicationController
       first_content: params[:java_script_first_content],
       second_content: params[:java_script_second_content],
       third_content: params[:java_script_third_content],
+      hazmat: params[:java_script_hazmat],
       storage_area_id: params[:java_script_storage_area_id]
     }
     Pallet.create(palletData)

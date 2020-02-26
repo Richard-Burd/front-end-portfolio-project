@@ -7,10 +7,10 @@ class CreatePallets < ActiveRecord::Migration[6.0]
       t.string :second_content
       t.string :third_content
       t.integer :weight
-    #  t.boolean :hazmat
-       t.integer :storage_area_id
-    #  t.string :weight_category
-    #  t.string :priority_category
+      t.boolean :hazmat
+      t.integer :storage_area_id
+      t.string :weight_category
+      t.string :priority_category
     end
   end
 end
