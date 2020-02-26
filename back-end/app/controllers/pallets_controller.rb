@@ -14,7 +14,8 @@ class PalletsController < ApplicationController
   def create
     palletData = {
       name: params[:java_script_name],
-      weight: params[:java_script_weight]
+      weight: params[:java_script_weight],
+      storage_area_id: params[:java_script_storage_area_id]
     }
     Pallet.create(palletData)
   end

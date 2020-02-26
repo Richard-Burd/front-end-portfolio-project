@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_221159) do
   create_table "pallets", force: :cascade do |t|
     t.string "name"
     t.integer "weight"
+    t.integer "storage_area_id"
   end
 
   create_table "storage_areas", force: :cascade do |t|

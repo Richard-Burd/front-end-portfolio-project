@@ -11,7 +11,8 @@ function createANewPallet(pallet_data){
      },
      body: JSON.stringify({
        "java_script_name": pallet_data.name.value,
-       "java_script_weight": pallet_data.weight.value
+       "java_script_weight": pallet_data.weight.value,
+       "java_script_storage_area_id": pallet_data.storage_area_id.value
      })
    })
    .then(function(json) {
@@ -374,6 +375,10 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder34D.setAttribute('type', 'text')
       newPalletFormBuilder34D.setAttribute('name', 'weight')
 
+  let newPalletFormBuilder34E = document.createElement('input')
+      newPalletFormBuilder34E.setAttribute('name', 'storage_area_id')
+      newPalletFormBuilder34E.setAttribute('value', `${storageAreaID}`)
+
   // This is the submit button for the new pallet form
   let newPalletFormBuilder35 = document.createElement('input')
       newPalletFormBuilder35.setAttribute('class', 'master')
@@ -394,6 +399,7 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder1.appendChild(newPalletFormBuilder34A) // arranging subcomponents
       newPalletFormBuilder34A.appendChild(newPalletFormBuilder34C) // arranging subcomponents
       newPalletFormBuilder34A.appendChild(newPalletFormBuilder34D) // arranging subcomponents
+      newPalletFormBuilder34A.appendChild(newPalletFormBuilder34E) // arranging subcomponents
 
       newPalletFormBuilder1.appendChild(newPalletFormBuilder35) // arranging subcomponents
 

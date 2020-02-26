@@ -9,7 +9,10 @@
 StorageArea.create!(name: "South Park", area: 12000)
 StorageArea.create!(name: "North Tarmac", area: 7000)
 StorageArea.create!(name: "Clamshell", area: 7000)
+StorageArea.create!(name: "East-End", area: 7000)
+StorageArea.create!(name: "West-Village", area: 7000)
 
+=begin
 Pallet.create!(name:"436L-01", priority: "first-priority", first_content: "Bottled Water", second_content: "Rice", third_content: "Sugar", weight: 198, hazmat:false, storage_area_id: 1)
 Pallet.create!(name:"436L-02", priority: "second-priority", first_content: "Canola Oil", second_content: "Craked Wheat", third_content: "WD-40", weight: 115, hazmat:true, storage_area_id: 1)
 Pallet.create!(name:"436L-03", priority: "fifth-priority", first_content: "Coils", second_content: "Sprok0ets", third_content: "Seeds", weight: 100, hazmat:false, storage_area_id: 1)
@@ -27,3 +30,4 @@ Pallet.create!(name:"436L-13", priority: "third-priority", first_content: "Match
 Pallet.create!(name:"436L-14", priority: "first-priority", first_content: "Bottled Water", second_content: "Rice", third_content: "Sugar", weight: 150, hazmat:false, storage_area_id: 2, weight_category: "green")
 Pallet.create!(name:"436L-15", priority: "second-priority", first_content: "Canola Oil", second_content: "Craked Wheat", third_content: "WD-40", weight: 100, hazmat:true, storage_area_id: 2, weight_category: "green")
 Pallet.create!(name:"436L-16", priority: "first-priority", first_content: "Coils", second_content: "Sprokets", third_content: "Seeds", weight: 231, hazmat:false, storage_area_id: 2, weight_category: "amber")
+=end

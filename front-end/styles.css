@@ -118,6 +118,10 @@ input[type="text"] {
   font-weight: 600;
 }
 
+input[name="storage_area_id"] {
+  visibility: hidden;
+}
+
 form.new-pallet-form {
   /*
   background-image: url("https://i.imgur.com/47zSFyH.png");
