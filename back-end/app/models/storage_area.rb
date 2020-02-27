@@ -27,51 +27,28 @@ class StorageArea < ApplicationRecord
   def calculate_weight_for_1_pallet # StorageArea.all[0].calculate_weight_for_1_pallet
     self.pallets.each do |pallet|
       pallet.weight_category = "green"
+      pallet.save
     end
   end
 
   def calculate_weight_for_2_pallets
     total_pallet_order.first.weight_category = "green"
     total_pallet_order.second.weight_category = "amber"
+    total_pallet_order.each{|pallet| pallet.save}
   end
 
   def calculate_weight_for_3_pallets # StorageArea.all[0].calculate_weight_for_3_pallets
     total_pallet_order.first.weight_category = "green"
     total_pallet_order.second.weight_category = "amber"
     total_pallet_order.last.weight_category = "red"
-  end
-
-  def duplicate_pallet_weight_values_have_same_weight_category # StorageArea.all[1].duplicate_pallet_weight_values_have_same_weight_category
-    total_pallet_order.each_with_index do |element, index |
-      if element.weight == total_pallet_order[index-1].weight && element !=  total_pallet_order.first # because then you'd loop back to the last pallet in the array
-        # puts "This one is: #{element.weight}, the previous one is #{total_pallet_order[index-1].weight}"
-        element.weight_category = total_pallet_order[index-1].weight_category
-      elsif total_pallet_order.first.weight_category == "green" && total_pallet_order.first.weight == total_pallet_order.second.weight
-        total_pallet_order.second.weight_category = "green"
-      end
-    end
-  end
-
-  def single_lightest_pallet_set_to_green # StorageArea.all[1].single_lightest_pallet_set_to_green
-    if total_pallet_order.first.weight < total_pallet_order.second.weight
-      total_pallet_order.first.weight_category = "green"
-    end
-  end
-
-  def single_heaviest_pallet_set_to_red # StorageArea.all[1].single_heaviest_pallet_set_to_red
-    if total_pallet_order.last.weight > total_pallet_order[-2].weight
-      total_pallet_order.last.weight_category = "red"
-    end
+    total_pallet_order.each{|pallet| pallet.save}
   end
 
   def calculate_weight_for_3_plus_pallets # StorageArea.all[0].calculate_weight_for_3_plus_pallets
     mean_average = total_pallet_weight / total_pallets # my_var_1
 
     pallets_below_mean_average = self.pallets.where("weight <= ?", mean_average)
-    ordered_pallets_below_mean_average = pallets_below_mean_average.sort_by(&:weight)
-    # index_pallet = ordered_pallets_below_mean_average.last #my_var_2 ... this is currently unused and will be deleted
 
-    # One-third of all pallets should be Amber, but that one-third will be offset to the mean average
     one_third_of_pallets = round_div(total_pallets, 3) # my_var_3
     half_of_that_one_third = round_div(one_third_of_pallets, 2) # my_var_4
 
@@ -80,15 +57,10 @@ class StorageArea < ApplicationRecord
     green_pallets = self.pallets.where("weight < ?", lower_value_amber_pallets.last.weight).sort_by(&:weight) # my_var_7
     red_pallets = self.pallets.where("weight > ?", higher_value_amber_pallets.last.weight).sort_by(&:weight) # my_var_8
 
-    lightest_pallet = total_pallet_order = self.pallets.sort_by(&:weight).first # my_var_9
-    heaviest_pallet = total_pallet_order = self.pallets.sort_by(&:weight).last # my_var_10
-    higher_value_amber_pallets.last # my_var_11
-    lower_value_amber_pallets.last # my_var_12
-
-    # Methods to assign amber values
     def assign_weight_categories(pallet_set, color_value)
       pallet_set.each do |pallet|
         pallet.weight_category = color_value
+        pallet.save
       end
     end
 
@@ -96,6 +68,42 @@ class StorageArea < ApplicationRecord
     assign_weight_categories(higher_value_amber_pallets, "amber")
     assign_weight_categories(green_pallets, "green")
     assign_weight_categories(red_pallets, "red")
-    final_pallet_weight_category_assignment = green_pallets + lower_value_amber_pallets.reverse + higher_value_amber_pallets + red_pallets
+  end
+
+  def duplicate_pallet_weight_values_have_same_weight_category # StorageArea.all[1].duplicate_pallet_weight_values_have_same_weight_category
+    total_pallet_order.each_with_index do |element, index |
+      if element.weight == total_pallet_order[index-1].weight && element !=  total_pallet_order.first # because then you'd loop back to the last pallet in the array
+        # puts "This one is: #{element.weight}, the previous one is #{total_pallet_order[index-1].weight}"
+        element.weight_category = total_pallet_order[index-1].weight_category
+        element.save
+      elsif total_pallet_order.first.weight_category == "green" && total_pallet_order.first.weight == total_pallet_order.second.weight
+        total_pallet_order.second.weight_category = "green"
+        total_pallet_order.second.save
+      end
+    end
+  end
+
+  def assign_pallet_priority_categories
+    self.pallets.each do |pallet|
+      if pallet.priority == "first-priority" || pallet.priority == "second-priority"
+        pallet.priority_category = "green"
+      elsif pallet.priority == "third-priority" || pallet.priority == "forth-priority"
+        pallet.priority_category = "amber"
+      else
+        pallet.priority_category = "red"
+      end
+    end
+    self.pallets.each{|pallet| pallet.save}
   end
 end
+  # def single_lightest_pallet_set_to_green # StorageArea.all[1].single_lightest_pallet_set_to_green
+  #   if total_pallet_order.first.weight < total_pallet_order.second.weight
+  #     total_pallet_order.first.weight_category = "green"
+  #   end
+  # end
+
+  # def single_heaviest_pallet_set_to_red # StorageArea.all[1].single_heaviest_pallet_set_to_red
+  #   if total_pallet_order.last.weight > total_pallet_order[-2].weight
+  #     total_pallet_order.last.weight_category = "red"
+  #   end
+  # end

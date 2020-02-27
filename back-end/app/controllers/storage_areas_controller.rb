@@ -22,24 +22,17 @@ class StorageAreasController < ApplicationController
   def update
     storage_area = StorageArea.find_by(id: params[:id])
 
-    # Although I am able to manually fire off this line of code when I use a binding.pry,
-    # I cannot get it to work automatically for some reason
-    # save_pallets = storage_area.pallets.each{|pallet| pallet.save}
-
     if storage_area.pallets.count == 1
       storage_area.calculate_weight_for_1_pallet
-      storage_area.pallets.each{|pallet| pallet.save}
     elsif storage_area.pallets.count == 2
       storage_area.calculate_weight_for_2_pallets
-      storage_area.pallets.each{|pallet| pallet.save}
-      storage_area.duplicate_pallet_weight_values_have_same_weight_category
-      storage_area.pallets.each{|pallet| pallet.save}
     elsif storage_area.pallets.count == 3
       storage_area.calculate_weight_for_3_pallets
-      storage_area.pallets.each{|pallet| pallet.save}
-      storage_area.duplicate_pallet_weight_values_have_same_weight_category
-      storage_area.pallets.each{|pallet| pallet.save}
+    else
+      storage_area.calculate_weight_for_3_plus_pallets
     end
+    storage_area.duplicate_pallet_weight_values_have_same_weight_category
+    storage_area.assign_pallet_priority_categories
   end
 
   def destroy

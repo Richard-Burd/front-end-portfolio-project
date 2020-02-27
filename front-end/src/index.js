@@ -1,3 +1,19 @@
+//////////////////// LEFT OFF HERE - NEXT STEPS ////////////////////////////
+
+// 0.) figure out how to put the createANewStorageArea(storage_area_data) function inside the createANewPallet(pallet_data) function and the deleteASpecifiedPallet(palletId) function as well
+
+// 1.) create a Javascript Pallet object; it will have all the parameters except "priority"
+
+// 2.) create a Javascript Storage-Area object; it will have "name" and "area"
+
+// 3.) figure out how to populate the 2 objects from backend data
+
+// 4.) figure out how to render that data into the DOM
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
@@ -45,8 +61,9 @@ function createANewStorageArea(storage_area_data){
 }
 
 // NOTE: this doesn't change the storage areas themselves, but rather, it
-// re-colors the pallets inside the storage areas when a pallet is added to
-// or deleted from the storage area
+// re-colors the pallets accordith to their relative weight compared to other
+// pallets inside the same storage area when a pallet is added to
+// or deleted from that same storage area
 function updateAStorageArea(storageAreaId){
   return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
       method: 'PATCH',
@@ -61,6 +78,18 @@ function updateAStorageArea(storageAreaId){
 
 function deleteASpecifiedPallet(palletId) {
   return fetch(`${PALLETS_URL}/${palletId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json"
+      },
+    }),
+ // This will refresh the page
+ window.location.reload(); // alternative => document.location.reload(true);
+}
+
+function deleteASpecifiedStorageArea(storageAreaId) {
+  return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
