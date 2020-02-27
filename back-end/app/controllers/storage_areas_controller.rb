@@ -26,12 +26,14 @@ class StorageAreasController < ApplicationController
       storage_area.calculate_weight_for_1_pallet
     elsif storage_area.pallets.count == 2
       storage_area.calculate_weight_for_2_pallets
+      storage_area.duplicate_pallet_weight_values_have_same_weight_category
     elsif storage_area.pallets.count == 3
       storage_area.calculate_weight_for_3_pallets
+      storage_area.single_heaviest_pallet_set_to_red
+      storage_area.duplicate_pallet_weight_values_have_same_weight_category
     else
       storage_area.calculate_weight_for_3_plus_pallets
     end
-    storage_area.duplicate_pallet_weight_values_have_same_weight_category
     storage_area.assign_pallet_priority_categories
   end
 

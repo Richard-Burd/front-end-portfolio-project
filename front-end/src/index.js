@@ -64,6 +64,10 @@ fetch(PALLETS_URL)
   })
   .then(function(json) {
     console.log("pallet has been added");
+    removeDeleteButtonsWhereNecessary();
+    labelButtonForStorageAreasThatAreFull();
+    totalNumberOfPallets();
+    totalPalletWeight();
   })
 }
 
@@ -89,6 +93,8 @@ function createANewPallet(pallet_data){
    })
    .then(function(json) {
      console.log(json);
+     updateAStorageArea(pallet_data.storage_area_id.value)
+     document.location.reload(true);
      // some action will go here involving a page re-load
    });
 }
@@ -122,20 +128,20 @@ function updateAStorageArea(storageAreaId){
         Accept: "application/json"
       },
     }),
- // This will refresh the page
- window.location.reload(); // alternative => document.location.reload(true);
+  // This will refresh the page
+  document.location.reload(true);
 }
 
-function deleteASpecifiedPallet(palletId) {
+function deleteASpecifiedPallet(palletId, storageAreaID) {
   return fetch(`${PALLETS_URL}/${palletId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: "application/json"
-      },
-    }),
- // This will refresh the page
- window.location.reload(); // alternative => document.location.reload(true);
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: "application/json"
+    },
+  }),
+  updateAStorageArea(storageAreaID)
+  document.location.reload(true);
 }
 
 function deleteASpecifiedStorageArea(storageAreaId) {
@@ -175,6 +181,10 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
   let palletBuilder7 = document.createElement('button')
       palletBuilder7.setAttribute('class', 'delete-pallet')
       palletBuilder7.innerText = "Delete"
+      palletBuilder7.addEventListener('click', event => {
+        deleteASpecifiedPallet(palletId, storageAreaID)
+        event.preventDefault()
+      })
 
   let palletBuilder8 = document.createElement('div')
       palletBuilder8.setAttribute('class', 'pallet-weight')
@@ -634,16 +644,17 @@ createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried 
 createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)
 */
 importStorageAreasFromRailsAPItoDOM()
+importPalletsFromRailsAPItoDOM()
 
 removeDeleteButtonsWhereNecessary()
 
-totalNumberOfPallets()
+// totalNumberOfPallets()
 
-totalPalletWeight()
+// totalPalletWeight()
 
 // totalSquareFootage()
 
-labelButtonForStorageAreasThatAreFull()
+// labelButtonForStorageAreasThatAreFull()
 
 listenForNewStorageAreaFormSubmittal()
 

@@ -11,6 +11,12 @@ StorageArea.create!(name: "North Tarmac", area: 3000)
 StorageArea.create!(name: "Clamshell", area: 2000)
 StorageArea.create!(name: "East-End", area: 1000)
 StorageArea.create!(name: "West-Village", area: 2000)
+
+Pallet.create!(name:"436L-01", priority: "first-priority", first_content: "Bottled Water", second_content: "Rice", third_content: "Sugar", weight: 100, hazmat:false, storage_area_id: 1, weight_category: "lightweight", priority_category: "green")
+Pallet.create!(name:"436L-02", priority: "second-priority", first_content: "Canola Oil", second_content: "Craked Wheat", third_content: "WD-40", weight: 250, hazmat:true, storage_area_id: 1, weight_category: "middleweight", priority_category: "amber")
+Pallet.create!(name:"436L-03", priority: "fifth-priority", first_content: "Coils", second_content: "Sprok0ets", third_content: "Seeds", weight: 300, hazmat:false, storage_area_id: 1, weight_category: "heavyweight", priority_category: "red")
+Pallet.create!(name:"436L-04", priority: "third-priority", first_content: "Matches", second_content: "Dried Beans", third_content: "Oil", weight: 350, hazmat:true, storage_area_id: 2, weight_category: "lightweight", priority_category: "green")
+
 =begin
 Pallet.create!(name:"436L-01", priority: "first-priority", first_content: "Bottled Water", second_content: "Rice", third_content: "Sugar", weight: 198, hazmat:false, storage_area_id: 1)
 Pallet.create!(name:"436L-02", priority: "second-priority", first_content: "Canola Oil", second_content: "Craked Wheat", third_content: "WD-40", weight: 115, hazmat:true, storage_area_id: 1)
