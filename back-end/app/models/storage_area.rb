@@ -26,21 +26,21 @@ class StorageArea < ApplicationRecord
 
   def calculate_weight_for_1_pallet # StorageArea.all[0].calculate_weight_for_1_pallet
     self.pallets.each do |pallet|
-      pallet.weight_category = "green"
+      pallet.weight_category = "lightweight"
       pallet.save
     end
   end
 
   def calculate_weight_for_2_pallets
-    total_pallet_order.first.weight_category = "green"
-    total_pallet_order.second.weight_category = "amber"
+    total_pallet_order.first.weight_category = "lightweight"
+    total_pallet_order.second.weight_category = "middleweight"
     total_pallet_order.each{|pallet| pallet.save}
   end
 
   def calculate_weight_for_3_pallets # StorageArea.all[0].calculate_weight_for_3_pallets
-    total_pallet_order.first.weight_category = "green"
-    total_pallet_order.second.weight_category = "amber"
-    total_pallet_order.last.weight_category = "red"
+    total_pallet_order.first.weight_category = "lightweight"
+    total_pallet_order.second.weight_category = "middleweight"
+    total_pallet_order.last.weight_category = "heavyweight"
     total_pallet_order.each{|pallet| pallet.save}
   end
 
@@ -64,10 +64,13 @@ class StorageArea < ApplicationRecord
       end
     end
 
-    assign_weight_categories(lower_value_amber_pallets, "amber")
-    assign_weight_categories(higher_value_amber_pallets, "amber")
-    assign_weight_categories(green_pallets, "green")
-    assign_weight_categories(red_pallets, "red")
+    # Assign all pallets to green first as the default value, then go from there.
+    assign_weight_categories(self.pallets, "lightweight")
+    assign_weight_categories(lower_value_amber_pallets, "middleweight")
+    assign_weight_categories(higher_value_amber_pallets, "middleweight")
+    # assign_weight_categories(green_pallets, "lightweight")
+    assign_weight_categories(red_pallets, "heavyweight")
+    binding.pry
   end
 
   def duplicate_pallet_weight_values_have_same_weight_category # StorageArea.all[1].duplicate_pallet_weight_values_have_same_weight_category
@@ -76,8 +79,8 @@ class StorageArea < ApplicationRecord
         # puts "This one is: #{element.weight}, the previous one is #{total_pallet_order[index-1].weight}"
         element.weight_category = total_pallet_order[index-1].weight_category
         element.save
-      elsif total_pallet_order.first.weight_category == "green" && total_pallet_order.first.weight == total_pallet_order.second.weight
-        total_pallet_order.second.weight_category = "green"
+      elsif total_pallet_order.first.weight_category == "lightweight" && total_pallet_order.first.weight == total_pallet_order.second.weight
+        total_pallet_order.second.weight_category = "lightweight"
         total_pallet_order.second.save
       end
     end
@@ -98,12 +101,12 @@ class StorageArea < ApplicationRecord
 end
   # def single_lightest_pallet_set_to_green # StorageArea.all[1].single_lightest_pallet_set_to_green
   #   if total_pallet_order.first.weight < total_pallet_order.second.weight
-  #     total_pallet_order.first.weight_category = "green"
+  #     total_pallet_order.first.weight_category = "lightweight"
   #   end
   # end
 
   # def single_heaviest_pallet_set_to_red # StorageArea.all[1].single_heaviest_pallet_set_to_red
   #   if total_pallet_order.last.weight > total_pallet_order[-2].weight
-  #     total_pallet_order.last.weight_category = "red"
+  #     total_pallet_order.last.weight_category = "heavyweight"
   #   end
   # end

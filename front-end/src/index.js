@@ -25,7 +25,7 @@ class StorageArea {
   }
 }
 
-function importStorageAreaClassInstancesFromRailsAPI(){
+function importStorageAreasFromRailsAPItoDOM(){
 fetch(STORAGE_AREAS_URL)
   .then(function(response) {
     return response.json();
@@ -40,29 +40,34 @@ fetch(STORAGE_AREAS_URL)
   })
 }
 
-function createPalletClassInstancesFromRailsAPI(){
+function importPalletsFromRailsAPItoDOM(){
 fetch(PALLETS_URL)
   .then(function(response) {
     return response.json();
   })
   .then(function(json) {
     for (const element of json) {
-      // function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat )
+  // createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
+  // createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat )
       createPallet(
-        element.storage_area_id, // storageAreaID
-        element.id, // palletId
-        element.name, // palletName
-        element.priority_category, // timeScale
-        element.weight_category, // weightScale
-        element.first_content, // firstItem
-        element.second_content, // secondItem
-        element.third_content, // thirdItem
-        element.weight, // weight
-        element.hazmat // hazmat
-      )
+        element.storage_area_id,
+        element.id,
+        element.name,
+        element.priority_category,
+        element.weight_category,
+        element.first_content,
+        element.second_content,
+        element.third_content,
+        element.weight,
+        element.hazmat)
     }
-  });
+  })
+  .then(function(json) {
+    console.log("pallet has been added");
+  })
 }
+
+
 
 function createANewPallet(pallet_data){
  fetch(PALLETS_URL, {
@@ -89,21 +94,20 @@ function createANewPallet(pallet_data){
 }
 
 function createANewStorageArea(storage_area_data){
- fetch(STORAGE_AREAS_URL, {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-       Accept: "application/json"
-     },
-     body: JSON.stringify({
-       "java_script_name": storage_area_data.name.value,
-       "java_script_area": storage_area_data.area.value,
-     })
-   })
-   .then(function(json) {
-     console.log(json);
-     // some action will go here involving a page re-load
-   });
+  fetch(STORAGE_AREAS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      "java_script_name": storage_area_data.name.value,
+      "java_script_area": storage_area_data.area.value,
+    })
+  })
+  .then(function(json) {
+    document.location.reload(true);
+  });
 }
 
 // NOTE: this doesn't change the storage areas themselves, but rather, it
@@ -236,6 +240,11 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder6.setAttribute('class', 'master')
       storageAreaBuilder6.setAttribute('id', 'delete-area')
       storageAreaBuilder6.innerText = 'Delete this empty area'
+      storageAreaBuilder6.addEventListener('click', event => {
+        deleteASpecifiedStorageArea(storageAreaID)
+        event.preventDefault()
+        //deleteASpecifiedStorageArea(storageAreaID)
+      })
 
   let storageAreaBuilder6B = document.createElement('div')
       storageAreaBuilder6B.setAttribute('class', 'new-pallet-form-placeholder')
@@ -594,13 +603,12 @@ function labelButtonForStorageAreasThatAreFull(){
 }
 
 function listenForNewStorageAreaFormSubmittal(){
-  newStorageAreaForm = document.querySelector("form.new-storage-area-form")
-  newStorageAreaForm.addEventListener('submit', event => {
-    event.preventDefault()
-    createANewStorageArea(event.target)
+  let newStorageAreaForm = document.querySelector("form.new-storage-area-form")
+      newStorageAreaForm.addEventListener('submit', event => {
+        event.preventDefault()
+        createANewStorageArea(event.target)
   })
 }
-
 
 // The following is seed data:
 /*
@@ -625,7 +633,7 @@ createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", 
 createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "777", true)
 createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)
 */
-importStorageAreaClassInstancesFromRailsAPI()
+importStorageAreasFromRailsAPItoDOM()
 
 removeDeleteButtonsWhereNecessary()
 

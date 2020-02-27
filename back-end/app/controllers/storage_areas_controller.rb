@@ -38,7 +38,7 @@ class StorageAreasController < ApplicationController
   def destroy
     storage_area = StorageArea.find_by(:id => params[:id])
     if storage_area.present?
-        StorageArea.destroy(pallet.id)
+        StorageArea.destroy(storage_area.id)
         head :no_content
     end
   end
