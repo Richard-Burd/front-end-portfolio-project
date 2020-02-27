@@ -1,22 +1,68 @@
-//////////////////// LEFT OFF HERE - NEXT STEPS ////////////////////////////
-
-// 0.) figure out how to put the createANewStorageArea(storage_area_data) function inside the createANewPallet(pallet_data) function and the deleteASpecifiedPallet(palletId) function as well
-
-// 1.) create a Javascript Pallet object; it will have all the parameters except "priority"
-
-// 2.) create a Javascript Storage-Area object; it will have "name" and "area"
-
-// 3.) figure out how to populate the 2 objects from backend data
-
-// 4.) figure out how to render that data into the DOM
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
+
+class Pallet {
+  constructor(id, name, weight, first_content, second_content, third_content, hazmat, storage_area_id, weight_category, priority_category) {
+    this.id = id;
+    this.name = name;
+    this.weight = weight;
+    this.first_content = first_content;
+    this.second_content = second_content;
+    this.third_content = third_content;
+    this.hazmat = hazmat;
+    this.storage_area_id = storage_area_id;
+    this.weight_category = weight_category;
+    this.priority_category = priority_category;
+  }
+}
+
+class StorageArea {
+  constructor(id, name, area) {
+    this.id = id;
+    this.name = name;
+    this.area = area;
+  }
+}
+
+function importStorageAreaClassInstancesFromRailsAPI(){
+fetch(STORAGE_AREAS_URL)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    for (const element of json) {
+      createStorageArea(element.name, element.id, element.area)
+    }
+  })
+  .then(function(json) {
+    totalSquareFootage();
+  })
+}
+
+function createPalletClassInstancesFromRailsAPI(){
+fetch(PALLETS_URL)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    for (const element of json) {
+      // function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat )
+      createPallet(
+        element.storage_area_id, // storageAreaID
+        element.id, // palletId
+        element.name, // palletName
+        element.priority_category, // timeScale
+        element.weight_category, // weightScale
+        element.first_content, // firstItem
+        element.second_content, // secondItem
+        element.third_content, // thirdItem
+        element.weight, // weight
+        element.hazmat // hazmat
+      )
+    }
+  });
+}
 
 function createANewPallet(pallet_data){
  fetch(PALLETS_URL, {
@@ -557,6 +603,7 @@ function listenForNewStorageAreaFormSubmittal(){
 
 
 // The following is seed data:
+/*
 createStorageArea("North Tarmac", "1", "12,300")
 createStorageArea("Clamshell", "2", "8,500")
 createStorageArea("West Lot", "3", "15,700")
@@ -577,6 +624,8 @@ createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "To
 createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", "WD-40", "394", true)
 createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "777", true)
 createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)
+*/
+importStorageAreaClassInstancesFromRailsAPI()
 
 removeDeleteButtonsWhereNecessary()
 
@@ -584,7 +633,7 @@ totalNumberOfPallets()
 
 totalPalletWeight()
 
-totalSquareFootage()
+// totalSquareFootage()
 
 labelButtonForStorageAreasThatAreFull()
 
