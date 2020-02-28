@@ -65,7 +65,7 @@ fetch(PALLETS_URL)
   .then(function(json) {
     console.log("pallet has been added");
     removeDeleteButtonsWhereNecessary();
-    labelButtonForStorageAreasThatAreFull();
+    labelButtonForStorageAreasThatAreFull()
     totalNumberOfPallets();
     totalPalletWeight();
   })

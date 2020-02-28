@@ -33,6 +33,7 @@ class StorageAreasController < ApplicationController
       storage_area.duplicate_pallet_weight_values_have_same_weight_category
     else
       storage_area.calculate_weight_for_3_plus_pallets
+      storage_area.duplicate_pallet_weight_values_have_same_weight_category
     end
     storage_area.assign_pallet_priority_categories
   end

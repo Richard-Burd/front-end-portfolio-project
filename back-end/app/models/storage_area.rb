@@ -71,6 +71,20 @@ class StorageArea < ApplicationRecord
     assign_weight_categories(higher_value_amber_pallets, "middleweight")
     assign_weight_categories(green_pallets, "lightweight")
     assign_weight_categories(red_pallets, "heavyweight")
+
+    # For small numbers of pallets, this method is necessary when the math above fails to execute
+    # def assign_remaining_empty_weight_categories
+    #   total_pallet_order.each_with_index do |pallet, index|
+    #     if pallet.weight_category == nil && pallet !=  total_pallet_order.first
+    #       pallet.weight_category = total_pallet_order[index-1].weight_category
+    #     else
+    #       pallet.weight_category = "lightweight"
+    #     end
+    #     pallet.save
+    #   end
+    # end
+
+    # assign_remaining_empty_weight_categories
   end
 
   def duplicate_pallet_weight_values_have_same_weight_category # StorageArea.all[1].duplicate_pallet_weight_values_have_same_weight_category
