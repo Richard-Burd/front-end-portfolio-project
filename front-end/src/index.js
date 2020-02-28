@@ -10,36 +10,44 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
+class PostItNote {
+  constructor(text, backgroundColor) {
+    this.text = text;
+    this.backgroundColor = backgroundColor;
+  }
+  generateRandomColor() {
+    let selector = Math.floor(Math.random() * 4)
+    switch(selector) {
+      case 0:
+        return "#FF7C7C";
+        break;
+      case 1:
+        return "#FFF77CF";
+        break;
+      case 2:
+        return "#7CFF7E";
+        break;
+      case 3:
+        return "#7CE5FF";
+        break;
+      case 4:
+        return "#D97CFF";
+        break;
+    }
+  }
+}
 
+evan = new PostItNote("This is my message", 1)
+evan.backgroundColor = evan.generateRandomColor()
+evan.backgroundColor
+
+evan = new PostItNote("This is my message", 1)
+evan.backgroundColor = evan.generateRandomColor()
+evan.backgroundColor
 
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
-
-class Pallet {
-  constructor(id, name, weight, first_content, second_content, third_content, hazmat, storage_area_id, weight_category, priority_category) {
-    this.id = id;
-    this.name = name;
-    this.weight = weight;
-    this.first_content = first_content;
-    this.second_content = second_content;
-    this.third_content = third_content;
-    this.hazmat = hazmat;
-    this.storage_area_id = storage_area_id;
-    this.weight_category = weight_category;
-    this.priority_category = priority_category;
-  }
-}
-
-class StorageArea {
-  constructor(id, name, area) {
-    this.id = id;
-    this.name = name;
-    this.area = area;
-  }
-}
-
-function importStorageAreasFromRailsAPItoJavascriptObjectClass(){}
 
 function importStorageAreasFromRailsAPItoDOM(){
 fetch(STORAGE_AREAS_URL)
@@ -81,7 +89,7 @@ fetch(PALLETS_URL)
   .then(function(json) {
     console.log("pallet has been added");
     removeDeleteButtonsWhereNecessary();
-    labelButtonForStorageAreasThatAreFull()
+    labelButtonForStorageAreasThatAreFull();
     totalNumberOfPallets();
     totalPalletWeight();
   })
@@ -109,8 +117,8 @@ function createANewPallet(pallet_data){
    })
    .then(function(json) {
      console.log(json);
-     updateAStorageArea(pallet_data.storage_area_id.value)
-     document.location.reload(true);
+     updateAStorageArea(pallet_data.storage_area_id.value) // this will reload the page
+     // document.location.reload(true);
      // some action will go here involving a page re-load
    });
 }
@@ -156,8 +164,8 @@ function deleteASpecifiedPallet(palletId, storageAreaID) {
       Accept: "application/json"
     },
   }),
-  updateAStorageArea(storageAreaID)
-  document.location.reload(true);
+  updateAStorageArea(storageAreaID); // this will reload the page
+  // document.location.reload(true);
 }
 
 function deleteASpecifiedStorageArea(storageAreaId) {
