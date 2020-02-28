@@ -1,9 +1,10 @@
 //////////////////////// LEFT OFF HERE ////////////////////////////////////////
 
-// 1.) create a Javascript class object for a post-it note
-// 2.) create a button that lets you add a post-it somewhere at the top of the page
+// 1.) go back & create a set of good, complete, and reason-worded seed data to test things out more fully.
+
+// 2.) - done
 // 3.) create a graphic for the post-it note that looks cool & has a bent corner-background icon
-// 4.) make a class static method that selects from one of 6 bright colors
+// 4.) - done
 // 5.) the post-it note has a place for you to add text to it and that is all
 // 6.) refreshing the page delete all post-it notes, they are not saved to the database
 

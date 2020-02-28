@@ -100,6 +100,11 @@ button.master#delete-area {
   float: right;
 }
 
+button.master:hover#create-post-it-note {
+  background-color: #FFFD7C;
+  color: #43420E;
+}
+
 button.master:hover#create-pallet {
   background-color: #4CAF50; /* Green */
   color: white;
