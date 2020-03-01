@@ -15,7 +15,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-
+/*
 class PostItNote {
   constructor(text, backgroundColor) {
     this.text = text;
@@ -50,7 +50,7 @@ evan.backgroundColor
 evan = new PostItNote("This is my message", 1)
 evan.backgroundColor = evan.generateRandomColor()
 evan.backgroundColor
-
+*/
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
@@ -242,7 +242,7 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
 
   // this takes the completed pallet and places it into the correct node ont the DOM
   let insertPoint = document.querySelector(`[data-pallet-group="${storageAreaID}"]`)
-      insertPoint.appendChild(palletBuilder1)
+      insertPoint.appendChild(palletBuilder1)///////////////////////////////////////////////////////////THIS IS CAUSING A BUG
 }
 
 function createStorageArea(storageAreaName, storageAreaID, squareFootage){
@@ -579,11 +579,17 @@ function removeNewPalletForm(storageAreaID){
 function removeDeleteButtonsWhereNecessary(){
   let panelArray = document.querySelectorAll('div.panel');
   panelArray.forEach(function(panelArray) {
-    if (panelArray.querySelector('div.pallet-box') != null){
-      let target = panelArray.querySelector('#delete-area');
-      let parent = target.parentNode;
-      parent.removeChild(target);
+
+    if (panelArray.querySelector('div.pallets') != null){
+
+      if (panelArray.querySelector('div.pallet-box') != null){
+        let target = panelArray.querySelector('#delete-area');
+        let parent = target.parentNode; ///////////////////////////////////////////THIS IS CAUSING A BUG
+        parent.removeChild(target);
+      }
+
     }
+
   });
 }
 
@@ -618,38 +624,71 @@ function totalSquareFootage(){
   document.querySelector('span.gross-area#total-value').innerText = calcOutput;
 }
 
-function checkToSeeIfStorageAreaIsFull(storageAreaID){
-  const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
-  // this code hardwires the space required for each pallet to be 103 square feet
-  // this is based on the size of a 436L pallet (88in x 108in) with 24 inches of clearance around each pallet
-  let squareFootageRequiredForPallets = startPoint.querySelectorAll('div.pallet-box').length * 103;
-  let storageAreaValue = startPoint.querySelector('span.storage-area-value').innerText;
-  // transform the string to an integer
-  let realStorageAreaValue = parseInt(storageAreaValue.replace(/,/g, ''), 10);
+// function checkToSeeIfStorageAreaIsFull(storageAreaID){
+//   const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
+//   // this code hardwires the space required for each pallet to be 103 square feet
+//   // this is based on the size of a 436L pallet (88in x 108in) with 24 inches of clearance around each pallet
+//   let squareFootageRequiredForPallets = startPoint.querySelectorAll('div.pallet-box').length * 103;
+//   let storageAreaValue = startPoint.querySelector('span.storage-area-value').innerText;
+//   // transform the string to an integer
+//   let realStorageAreaValue = parseInt(storageAreaValue.replace(/,/g, ''), 10);
+//
+//   if (realStorageAreaValue <= squareFootageRequiredForPallets){
+//     // This button currently has an event listener on it; the only way to get rid of the eventListener
+//     // is to remove the button and re-create it.
+//     let target = startPoint.querySelector('button.master#create-pallet')
+//     let parent = target.parentNode;
+//         parent.removeChild(target)
+//
+//     let replacementButton = document.createElement('button')
+//         replacementButton.setAttribute('class', 'master')
+//         replacementButton.setAttribute('id', 'create-pallet')
+//         replacementButton.innerText = "Storage Area Full"
+//
+//         let insertScope = startPoint
+//         let insertBeforeMe = startPoint.querySelector('div.new-pallet-form-placeholder')
+//             insertScope.insertBefore(replacementButton, insertBeforeMe)
+//   }
+// }
 
-  if (realStorageAreaValue <= squareFootageRequiredForPallets){
-    // This button currently has an event listener on it; the only way to get rid of the eventListener
-    // is to remove the button and re-create it.
-    let target = startPoint.querySelector('button.master#create-pallet')
-    let parent = target.parentNode;
-        parent.removeChild(target)
-
-    let replacementButton = document.createElement('button')
-        replacementButton.setAttribute('class', 'master')
-        replacementButton.setAttribute('id', 'create-pallet')
-        replacementButton.innerText = "Storage Area Full"
-
-        let insertScope = startPoint
-        let insertBeforeMe = startPoint.querySelector('div.new-pallet-form-placeholder')
-            insertScope.insertBefore(replacementButton, insertBeforeMe)
-  }
-}
+// function labelButtonForStorageAreasThatAreFull(){
+//   let panelArray = document.querySelectorAll('div.panel');
+//   for (let e = 1; e < panelArray.length - 1; e++) {
+//     checkToSeeIfStorageAreaIsFull(e);
+//   }
+// }
 
 function labelButtonForStorageAreasThatAreFull(){
-  let panelArray = document.querySelectorAll('div.panel');
-  for (let e = 1; e < panelArray.length - 1; e++) {
-    checkToSeeIfStorageAreaIsFull(e);
-  }
+  let deleteButtonArray = document.querySelectorAll('div.storage-area');
+  deleteButtonArray.forEach(function(deleteButtonArray) {
+  let palletCollectionParent = deleteButtonArray.parentNode;
+  let palletsArray = palletCollectionParent.querySelectorAll('div.pallet-box')
+  let squareFootageRequiredForPallets = palletsArray.length * 103;
+  let storageAreaValue = palletCollectionParent.querySelector('span.storage-area-value').innerText;
+  let realStorageAreaValue = parseInt(storageAreaValue.replace(/,/g, ''), 10);
+    if (realStorageAreaValue <= squareFootageRequiredForPallets){
+      // This button currently has an event listener on it; the only way to get rid of the eventListener
+      // is to remove the button and re-create it.
+      let theParent = deleteButtonArray.parentNode;
+
+
+
+
+
+      let target = theParent.querySelector('button.master#create-pallet')
+      let parent = target.parentNode;
+          parent.removeChild(target)
+
+      let replacementButton = document.createElement('button')
+          replacementButton.setAttribute('class', 'master')
+          replacementButton.setAttribute('id', 'create-pallet')
+          replacementButton.innerText = "Storage Area Full"
+
+          let insertScope = theParent
+          let insertBeforeMe = theParent.querySelector('div.new-pallet-form-placeholder')
+              insertScope.insertBefore(replacementButton, insertBeforeMe)
+    }
+  });
 }
 
 function listenForNewStorageAreaFormSubmittal(){
