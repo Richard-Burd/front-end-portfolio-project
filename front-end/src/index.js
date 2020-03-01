@@ -1,10 +1,15 @@
 //////////////////////// LEFT OFF HERE ////////////////////////////////////////
 
-// 1.) go back & create a set of good, complete, and reason-worded seed data to test things out more fully.
+// 1.) When a storage area is deleted, the storage area below it will gain a "delete" button
+//     even if the storage area is not empty...the storage area will also loose the ability to
+//     detect that it is full and not allow you to add a apllet to it.
 
 // 2.) - done
-// 3.) create a graphic for the post-it note that looks cool & has a bent corner-background icon
-// 4.) - done
+// 3.)
+
+
+
+// 4.) create a graphic for the post-it note that looks cool & has a bent corner-background icon
 // 5.) the post-it note has a place for you to add text to it and that is all
 // 6.) refreshing the page delete all post-it notes, they are not saved to the database
 
@@ -165,7 +170,7 @@ function deleteASpecifiedPallet(palletId, storageAreaID) {
       Accept: "application/json"
     },
   }),
-  updateAStorageArea(storageAreaID); // this will reload the page
+  updateAStorageArea(storageAreaID); // this will reload the page like
   // document.location.reload(true);
 }
 
@@ -556,20 +561,30 @@ function removeNewPalletForm(storageAreaID){
 
 // You can only delete an area that is empty & doesn't have any pallets in it.
 // This function iterates over all areas & removes the delete button from those containing pallets
-function removeDeleteButtonFromStorageArea(storageAreaID){
-  const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
-  if (startPoint.querySelector('div.pallet-box') != null){
-    let target = startPoint.querySelector('#delete-area');
-    let parent = target.parentNode;
-    parent.removeChild(target);
-  }
-}
+// function removeDeleteButtonFromStorageArea(storageAreaID){
+//   const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
+//   if (startPoint.querySelector('div.pallet-box') != null){
+//     let target = startPoint.querySelector('#delete-area');
+//     let parent = target.parentNode;
+//     parent.removeChild(target);
+//   }
+// }
 
+// function removeDeleteButtonsWhereNecessary(){
+//   let panelArray = document.querySelectorAll('div.panel');
+//   for (let e = 1; e < panelArray.length - 1; e++) {
+//     removeDeleteButtonFromStorageArea(e); //////////////// This bug is that this won't work when the "e"
+//   }
+// }
 function removeDeleteButtonsWhereNecessary(){
   let panelArray = document.querySelectorAll('div.panel');
-  for (let e = 1; e < panelArray.length - 1; e++) {
-    removeDeleteButtonFromStorageArea(e);
-  }
+  panelArray.forEach(function(panelArray) {
+    if (panelArray.querySelector('div.pallet-box') != null){
+      let target = panelArray.querySelector('#delete-area');
+      let parent = target.parentNode;
+      parent.removeChild(target);
+    }
+  });
 }
 
 function numberWithCommas(x) {
