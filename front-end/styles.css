@@ -11,6 +11,7 @@ div.header {
   font-size: 36px;
   letter-spacing: 7px;
   font-weight: 600;
+  clear:both;
 }
 
 
@@ -24,19 +25,22 @@ img.post-it-note-image {
 }
 
 .textpanel {
-    position: relative;
+  position: relative;
+  float: left;
 }
+
 .textpanel img {
-    display: block;
+  display: block;
 }
+
 .textpanel textarea {
-    position: absolute;
-    top: 50px;
-    left: 80px;
-    height: 200px;
-    width: 200px;
-    background-color: rgba(255,255,255,0.0);
-    border-color: rgba(255,255,255,0.0);
+  position: absolute;
+  top: 50px;
+  left: 80px;
+  height: 200px;
+  width: 200px;
+  background-color: rgba(255,255,255,0.0);
+  border-color: rgba(255,255,255,0.0);
 }
 
 textarea:focus, input:focus{
