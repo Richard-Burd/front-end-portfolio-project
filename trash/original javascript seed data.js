@@ -1,0 +1,22 @@
+// The following is seed data:
+
+createStorageArea("North Tarmac", "1", "12,300")
+createStorageArea("Clamshell", "2", "8,500")
+createStorageArea("West Lot", "3", "15,700")
+createStorageArea("Old Storage", "4", "3,000")
+createStorageArea("Connex Yard", "5", "500")
+
+createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
+createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
+createPallet(1, 3, "436L-12", "green", "heavyweight", "Buckwheat", "Salt", " ", "1,024", true)
+createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "Gause", "Rice", "704", true)
+createPallet(1, 5, "436L-5W", "red", "lightweight", "Farrekeh", "Cloth diapers", "misc. clothes", "509", false)
+createPallet(1, 6, "436L-G2", "amber", "middleweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
+createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "Bandages", "720", false)
+createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "Construction tools", "203", true)
+createPallet(2, 9, "436L-M1", "amber", "middleweight", "Flour", "Vaccines", "Misc. shoes for adults", "264", false)
+createPallet(5, 10, "436L-12A", "red", "heavyweight", "Maze", "Rice", "My New Pallet", "702", false)
+createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "Towels", "1,000", false)
+createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", "WD-40", "394", true)
+createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "777", true)
+createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)

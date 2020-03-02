@@ -1,21 +1,12 @@
 //////////////////////// LEFT OFF HERE ////////////////////////////////////////
 
-// 1.) When a storage area is deleted, the storage area below it will gain a "delete" button
-//     even if the storage area is not empty...the storage area will also loose the ability to
-//     detect that it is full and not allow you to add a apllet to it.
-
-// 2.) - done
-// 3.)
-
-
-
-// 4.) create a graphic for the post-it note that looks cool & has a bent corner-background icon
-// 5.) the post-it note has a place for you to add text to it and that is all
-// 6.) refreshing the page delete all post-it notes, they are not saved to the database
-
+// 1.) create a graphic for the post-it that is the right size (smaller) & will accept a background color
+// 2.) The edge of the post-it-note is the same color as the background
+// 3.) the post-it note has a place for you to add text to it and that is all
+// 4.) refreshing the page deletes all post-it notes, they are not saved to the database
 
 ///////////////////////////////////////////////////////////////////////////////
-/*
+
 class PostItNote {
   constructor(text, backgroundColor) {
     this.text = text;
@@ -50,7 +41,7 @@ evan.backgroundColor
 evan = new PostItNote("This is my message", 1)
 evan.backgroundColor = evan.generateRandomColor()
 evan.backgroundColor
-*/
+
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
@@ -70,6 +61,10 @@ fetch(STORAGE_AREAS_URL)
   })
 }
 
+/*
+
+// This function was generating transient failures [Uncaught (in promise)]
+// It was therefore replaced with the function below
 function importPalletsFromRailsAPItoDOM(){
 fetch(PALLETS_URL)
   .then(function(response) {
@@ -77,8 +72,6 @@ fetch(PALLETS_URL)
   })
   .then(function(json) {
     for (const element of json) {
-  // createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
-  // createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat )
       createPallet(
         element.storage_area_id,
         element.id,
@@ -100,8 +93,49 @@ fetch(PALLETS_URL)
     totalPalletWeight();
   })
 }
+*/
 
+// The bug still exists where the pallets do not get imported from the
+// Rails API, and an Uncaught (in promise) error is generated,
+function importPalletsFromRailsAPItoDOM(retries = 10){
+  async function getPalletsWithAsyncAwait(){
+    let response = await fetch(PALLETS_URL);
+    let data = await response.json()
+    return data;
+  }
 
+  getPalletsWithAsyncAwait()
+    .then(function(json) {
+      for (const element of json) {
+        createPallet(
+          element.storage_area_id,
+          element.id,
+          element.name,
+          element.priority_category,
+          element.weight_category,
+          element.first_content,
+          element.second_content,
+          element.third_content,
+          element.weight,
+          element.hazmat)
+      }
+    })
+    .then(function(json) {
+      console.log("pallet has been added");
+      removeDeleteButtonsWhereNecessary();
+      labelButtonForStorageAreasThatAreFull();
+      totalNumberOfPallets();
+      totalPalletWeight();
+    })
+    // This is required because the pallets fail to load into the DOM about
+    // every 18 to 25 times or so...this seems to have fixed the problem.
+    .catch(error => {
+      if (retries <= 0) {
+        throw error;
+      }
+      return importPalletsFromRailsAPItoDOM(retries - 1);
+    })
+}
 
 function createANewPallet(pallet_data){
  fetch(PALLETS_URL, {
@@ -124,8 +158,6 @@ function createANewPallet(pallet_data){
    .then(function(json) {
      console.log(json);
      updateAStorageArea(pallet_data.storage_area_id.value) // this will reload the page
-     // document.location.reload(true);
-     // some action will go here involving a page re-load
    });
 }
 
@@ -147,9 +179,9 @@ function createANewStorageArea(storage_area_data){
 }
 
 // NOTE: this doesn't change the storage areas themselves, but rather, it
-// re-colors the pallets accordith to their relative weight compared to other
-// pallets inside the same storage area when a pallet is added to
-// or deleted from that same storage area
+// re-colors the pallets according to their relative weight when compared to
+// other pallets inside the same storage area...whenever a pallet is added to
+// or deleted from that same storage area.
 function updateAStorageArea(storageAreaId){
   return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
       method: 'PATCH',
@@ -171,7 +203,6 @@ function deleteASpecifiedPallet(palletId, storageAreaID) {
     },
   }),
   updateAStorageArea(storageAreaID); // this will reload the page like
-  // document.location.reload(true);
 }
 
 function deleteASpecifiedStorageArea(storageAreaId) {
@@ -182,7 +213,6 @@ function deleteASpecifiedStorageArea(storageAreaId) {
         Accept: "application/json"
       },
     }),
- // This will refresh the page
  window.location.reload(); // alternative => document.location.reload(true);
 }
 
@@ -242,7 +272,7 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
 
   // this takes the completed pallet and places it into the correct node ont the DOM
   let insertPoint = document.querySelector(`[data-pallet-group="${storageAreaID}"]`)
-      insertPoint.appendChild(palletBuilder1)///////////////////////////////////////////////////////////THIS IS CAUSING A BUG
+      insertPoint.appendChild(palletBuilder1)
 }
 
 function createStorageArea(storageAreaName, storageAreaID, squareFootage){
@@ -275,7 +305,9 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
         }
       })
 
-      // this the the delete button for empty areas:
+  // this the the delete button that will appear on empty storage areas.  It is
+  // initially constructed for each storage area in the DOM, but is then removed
+  // on condition that there are no pallets inside the storage area.
   let storageAreaBuilder6 = document.createElement('button')
       storageAreaBuilder6.setAttribute('class', 'master')
       storageAreaBuilder6.setAttribute('id', 'delete-area')
@@ -283,7 +315,6 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder6.addEventListener('click', event => {
         deleteASpecifiedStorageArea(storageAreaID)
         event.preventDefault()
-        //deleteASpecifiedStorageArea(storageAreaID)
       })
 
   let storageAreaBuilder6B = document.createElement('div')
@@ -302,15 +333,14 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
       storageAreaBuilder1.appendChild(storageAreaBuilder6B) // arranging subcomponents
       storageAreaBuilder1.appendChild(storageAreaBuilder7) // arranging subcomponents
 
-      // this takes the completed storage area and places it into the correct node ont the DOM
-      // this will select the scope we want to insert the element into
-      let insertScope = document.querySelector('main')
+  // this takes the completed storage area and places it into the correct node ont the DOM
+  // this will select the scope we want to insert the element into
+  let insertScope = document.querySelector('main')
 
-      // we want to insert it before this node
-      let insertBeforeMe = insertScope.lastElementChild
-
-          // here we execute the final placement on the DOM
-          insertScope.insertBefore(storageAreaBuilder1, insertBeforeMe)
+  // we want to insert it before this node
+  let insertBeforeMe = insertScope.lastElementChild
+  // here we execute the final placement on the DOM
+  insertScope.insertBefore(storageAreaBuilder1, insertBeforeMe)
 
 }
 
@@ -362,7 +392,7 @@ function createNewPalletForm(storageAreaID){
 
   // Iterates over the arrayOfConcearns and generates HTML for each element.
   for (const singleConcearn of arrayOfConcearns){
-      dashNRegex = singleConcearn // .replace(/\s+/g, '-').toLowerCase() /////////////////////this prevents the form from pushing data to the rails api...apparently dashes are a no-go
+      dashNRegex = singleConcearn.replace(/\s+/g, '-').toLowerCase()
       let newPalletFormBuilder8 = document.createElement('div')
           newPalletFormBuilder8.setAttribute('class', `${dashNRegex}-input-n-label`)
           newPalletFormBuilder8.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
@@ -371,18 +401,19 @@ function createNewPalletForm(storageAreaID){
           newPalletFormBuilder9.setAttribute('class', 'push')
           newPalletFormBuilder9.setAttribute('type', 'radio')
           newPalletFormBuilder9.setAttribute('name', 'priority')
-          newPalletFormBuilder9.setAttribute('value', `${dashNRegex}`)
+          // you cannot include dashes "-" here or the Rails API will not accept these falues for some reason:
+          newPalletFormBuilder9.setAttribute('value', `${singleConcearn}`)
           newPalletFormBuilder9.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
 
       let newPalletFormBuilder10 = document.createElement('label')
-          newPalletFormBuilder10.setAttribute('for', `${dashNRegex}`)
+          // you cannot include dashes "-" here or the Rails API will not accept these falues for some reason:
+          newPalletFormBuilder10.setAttribute('for', `${singleConcearn}`)
           newPalletFormBuilder10.innerText = singleConcearn
           newPalletFormBuilder10.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
 
           newPalletFormBuilder8.appendChild(newPalletFormBuilder9)  // arranging subcomponents
           newPalletFormBuilder8.appendChild(newPalletFormBuilder10) // arranging subcomponents
 
-      // <div class="radio-buttons" id="priorties">
       let insertPoint = newPalletFormBuilder7
           insertPoint.appendChild(newPalletFormBuilder8)
   }
@@ -461,10 +492,9 @@ function createNewPalletForm(storageAreaID){
       newPalletFormBuilder11.appendChild(newPalletFormBuilder22) // arranging subcomponents
       newPalletFormBuilder1.appendChild(newPalletFormBuilder11) // arranging subcomponents
       // The section on the table ends on the line above
-      // newPalletFormBuilder1.appendChild(newPalletFormBuilder11) // arranging subcomponents
 
-      // now the rest of the form has to be made; left off on
-      // the HAZMAT section of the new pallet form.
+  // now the rest of the form has to be made; left off on
+  // the HAZMAT section of the new pallet form.
   let newPalletFormBuilder26 = document.createElement('div')
       newPalletFormBuilder26.setAttribute('class', 'new-pallet-fields')
       newPalletFormBuilder26.setAttribute('id', 'hazmat')
@@ -527,7 +557,7 @@ function createNewPalletForm(storageAreaID){
   let newPalletFormBuilder35 = document.createElement('input')
       newPalletFormBuilder35.setAttribute('class', 'master')
       newPalletFormBuilder35.setAttribute('type', 'submit')
-      newPalletFormBuilder35.setAttribute('name', 'submit') /////////////////////////////////////////// This may or not be required to get the form to submit properly
+      newPalletFormBuilder35.setAttribute('name', 'submit')
       newPalletFormBuilder35.setAttribute('value', 'Create a new pallet')
 
       newPalletFormBuilder1.appendChild(newPalletFormBuilder26) // arranging subcomponents
@@ -552,44 +582,23 @@ function createNewPalletForm(storageAreaID){
       insertPoint.appendChild(newPalletFormBuilder1)
 
 }
-// <div class="new-pallet-form-placeholder" data-new-pallet-form-storage-area-id="1">
+
 function removeNewPalletForm(storageAreaID){
   parent = document.querySelector(`[data-new-pallet-form-storage-area-id="${storageAreaID}"]`)
   target = parent.querySelector('form.new-pallet-form');
   parent.removeChild(target);
 }
 
-// You can only delete an area that is empty & doesn't have any pallets in it.
-// This function iterates over all areas & removes the delete button from those containing pallets
-// function removeDeleteButtonFromStorageArea(storageAreaID){
-//   const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
-//   if (startPoint.querySelector('div.pallet-box') != null){
-//     let target = startPoint.querySelector('#delete-area');
-//     let parent = target.parentNode;
-//     parent.removeChild(target);
-//   }
-// }
-
-// function removeDeleteButtonsWhereNecessary(){
-//   let panelArray = document.querySelectorAll('div.panel');
-//   for (let e = 1; e < panelArray.length - 1; e++) {
-//     removeDeleteButtonFromStorageArea(e); //////////////// This bug is that this won't work when the "e"
-//   }
-// }
 function removeDeleteButtonsWhereNecessary(){
   let panelArray = document.querySelectorAll('div.panel');
   panelArray.forEach(function(panelArray) {
-
     if (panelArray.querySelector('div.pallets') != null){
-
       if (panelArray.querySelector('div.pallet-box') != null){
         let target = panelArray.querySelector('#delete-area');
-        let parent = target.parentNode; ///////////////////////////////////////////THIS IS CAUSING A BUG
+        let parent = target.parentNode;
         parent.removeChild(target);
       }
-
     }
-
   });
 }
 
@@ -606,7 +615,6 @@ function totalPalletWeight(){
   let weightValues = []
   let palletWeights = document.querySelectorAll('div.pallet-weight');
   for (const singleWeight of palletWeights) {
-    //console.log(parseInt(singleWeight.innerText.replace(/\,/g, '')))
     weightValues.push(parseInt(singleWeight.innerText.replace(/\,/g, '')))
   }
   calcOutput = numberWithCommas(weightValues.reduce((a, b) => a + b, 0))
@@ -615,7 +623,6 @@ function totalPalletWeight(){
 
 function totalSquareFootage(){
   let areaValues = []
-  // <span class="storage-area-value">12,300</span>
   let areaSpaces = document.querySelectorAll('span.storage-area-value');
   for (const singleSpace of areaSpaces) {
     areaValues.push(parseInt(singleSpace.innerText.replace(/\,/g, '')))
@@ -623,40 +630,6 @@ function totalSquareFootage(){
   calcOutput = numberWithCommas(areaValues.reduce((a, b) => a + b, 0))
   document.querySelector('span.gross-area#total-value').innerText = calcOutput;
 }
-
-// function checkToSeeIfStorageAreaIsFull(storageAreaID){
-//   const startPoint = document.querySelector(`[data-storage-area-id="${storageAreaID}"]`);
-//   // this code hardwires the space required for each pallet to be 103 square feet
-//   // this is based on the size of a 436L pallet (88in x 108in) with 24 inches of clearance around each pallet
-//   let squareFootageRequiredForPallets = startPoint.querySelectorAll('div.pallet-box').length * 103;
-//   let storageAreaValue = startPoint.querySelector('span.storage-area-value').innerText;
-//   // transform the string to an integer
-//   let realStorageAreaValue = parseInt(storageAreaValue.replace(/,/g, ''), 10);
-//
-//   if (realStorageAreaValue <= squareFootageRequiredForPallets){
-//     // This button currently has an event listener on it; the only way to get rid of the eventListener
-//     // is to remove the button and re-create it.
-//     let target = startPoint.querySelector('button.master#create-pallet')
-//     let parent = target.parentNode;
-//         parent.removeChild(target)
-//
-//     let replacementButton = document.createElement('button')
-//         replacementButton.setAttribute('class', 'master')
-//         replacementButton.setAttribute('id', 'create-pallet')
-//         replacementButton.innerText = "Storage Area Full"
-//
-//         let insertScope = startPoint
-//         let insertBeforeMe = startPoint.querySelector('div.new-pallet-form-placeholder')
-//             insertScope.insertBefore(replacementButton, insertBeforeMe)
-//   }
-// }
-
-// function labelButtonForStorageAreasThatAreFull(){
-//   let panelArray = document.querySelectorAll('div.panel');
-//   for (let e = 1; e < panelArray.length - 1; e++) {
-//     checkToSeeIfStorageAreaIsFull(e);
-//   }
-// }
 
 function labelButtonForStorageAreasThatAreFull(){
   let deleteButtonArray = document.querySelectorAll('div.storage-area');
@@ -670,23 +643,18 @@ function labelButtonForStorageAreasThatAreFull(){
       // This button currently has an event listener on it; the only way to get rid of the eventListener
       // is to remove the button and re-create it.
       let theParent = deleteButtonArray.parentNode;
-
-
-
-
-
-      let target = theParent.querySelector('button.master#create-pallet')
+      let target = theParent.querySelector('button.master#create-pallet');
       let parent = target.parentNode;
-          parent.removeChild(target)
+          parent.removeChild(target);
 
-      let replacementButton = document.createElement('button')
-          replacementButton.setAttribute('class', 'master')
-          replacementButton.setAttribute('id', 'create-pallet')
+      let replacementButton = document.createElement('button');
+          replacementButton.setAttribute('class', 'master');
+          replacementButton.setAttribute('id', 'create-pallet');
           replacementButton.innerText = "Storage Area Full"
 
-          let insertScope = theParent
-          let insertBeforeMe = theParent.querySelector('div.new-pallet-form-placeholder')
-              insertScope.insertBefore(replacementButton, insertBeforeMe)
+      let insertScope = theParent
+      let insertBeforeMe = theParent.querySelector('div.new-pallet-form-placeholder')
+          insertScope.insertBefore(replacementButton, insertBeforeMe)
     }
   });
 }
@@ -699,42 +667,8 @@ function listenForNewStorageAreaFormSubmittal(){
   })
 }
 
-// The following is seed data:
-/*
-createStorageArea("North Tarmac", "1", "12,300")
-createStorageArea("Clamshell", "2", "8,500")
-createStorageArea("West Lot", "3", "15,700")
-createStorageArea("Old Storage", "4", "3,000")
-createStorageArea("Connex Yard", "5", "500")
-
-createPallet(1, 1, "436L-1", "green", "lightweight", "Bottled Water", "Rice Bags", "Cooking Oil", "224", false)
-createPallet(1, 2, "436L-4", "amber", "lightweight", "Wheat", "Barley", "Hopps", "424", false)
-createPallet(1, 3, "436L-12", "green", "heavyweight", "Buckwheat", "Salt", " ", "1,024", true)
-createPallet(1, 4, "436L-15", "red", "middleweight", "Tooth paste", "Gause", "Rice", "704", true)
-createPallet(1, 5, "436L-5W", "red", "lightweight", "Farrekeh", "Cloth diapers", "misc. clothes", "509", false)
-createPallet(1, 6, "436L-G2", "amber", "middleweight", "Soyeans", "Bottled Water", "My New Pallet", "724", false)
-createPallet(2, 7, "436L-PQ", "red", "middleweight", "Bleach", "2nd Item", "Bandages", "720", false)
-createPallet(2, 8, "436L-16", "green", "lightweight", "Fenoa", "IV dripps", "Construction tools", "203", true)
-createPallet(2, 9, "436L-M1", "amber", "middleweight", "Flour", "Vaccines", "Misc. shoes for adults", "264", false)
-createPallet(5, 10, "436L-12A", "red", "heavyweight", "Maze", "Rice", "My New Pallet", "702", false)
-createPallet(5, 11, "436L-4E", "red", "lightweight", "1st Item", "2nd Item", "Towels", "1,000", false)
-createPallet(5, 12, "436L-J9", "amber", "lightweight", "Kid's shoes", "Towels", "WD-40", "394", true)
-createPallet(5, 13, "436L-54", "red", "lightweight", "Medical supplies", "Dried figs", "toddler clothes", "777", true)
-createPallet(5, 13, "436L-22", "green", "heavyweight", "School supplies", " ", "Dried cans of Tuna", "430", true)
-*/
 importStorageAreasFromRailsAPItoDOM()
 importPalletsFromRailsAPItoDOM()
+
 removeDeleteButtonsWhereNecessary()
-
-// totalNumberOfPallets()
-
-// totalPalletWeight()
-
-// totalSquareFootage()
-
-// labelButtonForStorageAreasThatAreFull()
-
 listenForNewStorageAreaFormSubmittal()
-
-// This is needed to query the data sets in the HTML:
-// https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
