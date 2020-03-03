@@ -86,54 +86,45 @@ function importPostItNoteFromClassInstanceToDOM(){
       insertPoint.appendChild(noteBuilder1)
 }
 
-function importStorageAreasFromRailsAPItoDOM(){
+// This class is introduced to meet the following project requirement:
+// "Translate JSON responses into JavaScript model objects using ES6 class or constructor function syntax."
+// The storage areas already have object models in the backend because of the
+// other project requirement that stipulates:
+// "The domain model served by the Rails backend must include a resource with at least one has-many relationship..."
+class StorageArea {
+  constructor(name, id, area) {
+    this.name = name;
+    this.id = id;
+    this.area = area;
+  }
+}
+StorageArea.instances = [];
+
+function transferStorageAreaObjectInstancesToDOM(){
+  StorageArea.instances.forEach(function(element) {
+    createStorageArea(element.name, element.id, element.area)
+  });
+}
+
+function importStorageAreasFromRailsAPItoJsClassObject(){
 fetch(STORAGE_AREAS_URL)
   .then(function(response) {
     return response.json();
   })
   .then(function(json) {
     for (const element of json) {
-      createStorageArea(element.name, element.id, element.area)
+      // createStorageArea(element.name, element.id, element.area) // <= This is easier, but it would skip creating Javascript model objects per the project requirements set by Flatiron School
+      let newArea = new StorageArea(element.name, element.id, element.area)
+      StorageArea.instances.push(newArea);
     }
   })
   .then(function(json) {
+    transferStorageAreaObjectInstancesToDOM();
     totalSquareFootage();
   })
 }
 
-/*
 
-// This function was generating transient failures [Uncaught (in promise)]
-// It was therefore replaced with the function below
-function importPalletsFromRailsAPItoDOM(){
-fetch(PALLETS_URL)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    for (const element of json) {
-      createPallet(
-        element.storage_area_id,
-        element.id,
-        element.name,
-        element.priority_category,
-        element.weight_category,
-        element.first_content,
-        element.second_content,
-        element.third_content,
-        element.weight,
-        element.hazmat)
-    }
-  })
-  .then(function(json) {
-    console.log("pallet has been added");
-    removeDeleteButtonsWhereNecessary();
-    labelButtonForStorageAreasThatAreFull();
-    totalNumberOfPallets();
-    totalPalletWeight();
-  })
-}
-*/
 
 // The bug still exists where the pallets do not get imported from the
 // Rails API, and an Uncaught (in promise) error is generated,
@@ -743,7 +734,7 @@ function listenForNewPostItNoteSubmittal(){
   })
 }
 
-importStorageAreasFromRailsAPItoDOM()
+importStorageAreasFromRailsAPItoJsClassObject()
 importPalletsFromRailsAPItoDOM()
 
 removeDeleteButtonsWhereNecessary()
