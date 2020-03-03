@@ -113,7 +113,9 @@ fetch(STORAGE_AREAS_URL)
   })
   .then(function(json) {
     for (const element of json) {
-      // createStorageArea(element.name, element.id, element.area) // <= This is easier, but it would skip creating Javascript model objects per the project requirements set by Flatiron School
+      // This is easier, but it would skip creating Javascript model objects
+      // per the project requirements discussed in the notes above
+      // createStorageArea(element.name, element.id, element.area)
       let newArea = new StorageArea(element.name, element.id, element.area)
       StorageArea.instances.push(newArea);
     }
@@ -124,10 +126,6 @@ fetch(STORAGE_AREAS_URL)
   })
 }
 
-
-
-// The bug still exists where the pallets do not get imported from the
-// Rails API, and an Uncaught (in promise) error is generated,
 function importPalletsFromRailsAPItoDOM(retries = 10){
   async function getPalletsWithAsyncAwait(){
     let response = await fetch(PALLETS_URL);
@@ -212,7 +210,7 @@ function createANewStorageArea(storage_area_data){
 
 // NOTE: this doesn't change the storage areas themselves, but rather, it
 // re-colors the pallet backgrounds according to their relative weight when
-// compared to other pallets inside the same storage area  Whenever a pallet is
+// compared to other pallets inside the same storage area.  Whenever a pallet is
 // added to or deleted from a storage area, all pallet background color values
 // assigned to that storage area will be re-calculated.
 function updateAStorageArea(storageAreaId){
@@ -427,6 +425,7 @@ function createNewPalletForm(storageAreaID){
 
   // Iterates over the arrayOfConcearns and generates HTML for each element.
   for (const singleConcearn of arrayOfConcearns){
+      // Replaces spaces with dashes & makes all letters lower case for various descriptors in the DOM
       dashNRegex = singleConcearn.replace(/\s+/g, '-').toLowerCase()
       let newPalletFormBuilder8 = document.createElement('div')
           newPalletFormBuilder8.setAttribute('class', `${dashNRegex}-input-n-label`)
@@ -436,7 +435,7 @@ function createNewPalletForm(storageAreaID){
           newPalletFormBuilder9.setAttribute('class', 'push')
           newPalletFormBuilder9.setAttribute('type', 'radio')
           newPalletFormBuilder9.setAttribute('name', 'priority')
-          // you cannot include dashes "-" here or the Rails API will not accept these falues for some reason:
+          // you cannot include dashes "-" here or the Rails API will not accept these values for some reason:
           newPalletFormBuilder9.setAttribute('value', `${singleConcearn}`)
           newPalletFormBuilder9.setAttribute('id', `${arrayOfConcearns.indexOf(singleConcearn)+1}`)
 
