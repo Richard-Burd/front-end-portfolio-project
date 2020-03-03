@@ -1,46 +1,67 @@
 //////////////////////// LEFT OFF HERE ////////////////////////////////////////
 
-// 1.) create a graphic for the post-it that is the right size (smaller) & will accept a background color
-// 2.) The edge of the post-it-note is the same color as the background
-// 3.) the post-it note has a place for you to add text to it and that is all
+// 1.) add a font to the post-it notes & fix size & color
+// 2.) add a createPostItNote() function that creates a new instance of the post it class
+// 3.) add the eventListener that creates a new post-it note
 // 4.) refreshing the page deletes all post-it notes, they are not saved to the database
+// 5.) - done
+// 6.) delete the textarea expansion tab
 
 ///////////////////////////////////////////////////////////////////////////////
 
 class PostItNote {
-  constructor(text, backgroundColor) {
-    this.text = text;
-    this.backgroundColor = backgroundColor;
+  constructor(id, noteColor, fontColor) {
+    this.id = id;
+    this.noteColor = noteColor;
+    this.fontColor = fontColor;
   }
+
+  doNotRepeatRandomColorOfPreviousInstance(){
+    if (PostItNote.instances.length > 0){
+      if (this.noteColor == PostItNote.instances[PostItNote.instances.length-1].noteColor){
+        this.noteColor = "yellow"
+      }
+    }
+  }
+
   generateRandomColor() {
-    let selector = Math.floor(Math.random() * 4)
+    let selector = Math.floor(Math.random() * 3)
     switch(selector) {
       case 0:
-        return "#FF7C7C";
+        return "blue";
         break;
       case 1:
-        return "#FFF77CF";
+        return "green";
         break;
       case 2:
-        return "#7CFF7E";
+        return "orange";
         break;
       case 3:
-        return "#7CE5FF";
-        break;
-      case 4:
-        return "#D97CFF";
+        return "purple";
         break;
     }
   }
 }
 
-evan = new PostItNote("This is my message", 1)
-evan.backgroundColor = evan.generateRandomColor()
-evan.backgroundColor
+PostItNote.instances = [];
 
-evan = new PostItNote("This is my message", 1)
-evan.backgroundColor = evan.generateRandomColor()
-evan.backgroundColor
+
+abe = new PostItNote(1, "null", "null")
+abe.noteColor = abe.generateRandomColor()
+abe.doNotRepeatRandomColorOfPreviousInstance()
+PostItNote.instances.push(abe);
+
+bob = new PostItNote(2, "null", "null")
+bob.noteColor = bob.generateRandomColor()
+bob.doNotRepeatRandomColorOfPreviousInstance()
+PostItNote.instances.push(bob);
+
+cat = new PostItNote(3, "null", "null")
+cat.noteColor = cat.generateRandomColor()
+cat.doNotRepeatRandomColorOfPreviousInstance()
+PostItNote.instances.push(cat);
+
+PostItNote.instances
 
 const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
@@ -194,16 +215,44 @@ function updateAStorageArea(storageAreaId){
   document.location.reload(true);
 }
 
-function deleteASpecifiedPallet(palletId, storageAreaID) {
-  return fetch(`${PALLETS_URL}/${palletId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: "application/json"
-    },
-  }),
-  updateAStorageArea(storageAreaID); // this will reload the page like
+// This isn't working properly because the updateAStorageArea isn't firing every time
+// function deleteASpecifiedPallet(palletId, storageAreaID) {
+//   return fetch(`${PALLETS_URL}/${palletId}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Accept: "application/json"
+//     },
+//   }),
+//   updateAStorageArea(storageAreaID); // this will reload the page like
+// }
+
+
+function deleteASpecifiedPallet(palletId, storageAreaID){
+ fetch(`${PALLETS_URL}/${palletId}`, {
+     method: 'DELETE',
+     headers: {
+       'Content-Type': 'application/json',
+       Accept: "application/json"
+     },
+   })
+   .then(function(json) {
+     console.log(json);
+     updateAStorageArea(storageAreaID); // this will reload the page like
+   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function deleteASpecifiedStorageArea(storageAreaId) {
   return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
