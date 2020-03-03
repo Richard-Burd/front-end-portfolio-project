@@ -1,19 +1,16 @@
-//////////////////////// LEFT OFF HERE ////////////////////////////////////////
-
-// 1.) add a font to the post-it notes & fix size & color
-// 2.) add a createPostItNote() function that creates a new instance of the post it class
-// 3.) add the eventListener that creates a new post-it note
-// 4.) refreshing the page deletes all post-it notes, they are not saved to the database
-// 5.) - done
-// 6.) delete the textarea expansion tab
-
-///////////////////////////////////////////////////////////////////////////////
+const BASE_URL = "http://localhost:3000"
+const PALLETS_URL = `${BASE_URL}/pallets`
+const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
 
 class PostItNote {
-  constructor(id, noteColor, fontColor) {
+  constructor(id, noteColor, textColor) {
     this.id = id;
     this.noteColor = noteColor;
-    this.fontColor = fontColor;
+    this.textColor = textColor;
+  }
+
+  generateId(){
+    this.id = PostItNote.instances.length+1
   }
 
   doNotRepeatRandomColorOfPreviousInstance(){
@@ -25,7 +22,7 @@ class PostItNote {
   }
 
   generateRandomColor() {
-    let selector = Math.floor(Math.random() * 3)
+    let selector = Math.floor(Math.random() * 4)
     switch(selector) {
       case 0:
         return "blue";
@@ -41,31 +38,53 @@ class PostItNote {
         break;
     }
   }
+
+  generateTextColor(){
+    if (this.noteColor == "yellow"){
+      this.textColor = "#414406"
+    } else if (this.noteColor == "green") {
+      this.textColor = "#086609"
+    } else if (this.noteColor == "orange") {
+      this.textColor = "#664408"
+    } else if (this.noteColor == "blue") {
+      this.textColor = "#086266"
+    } else if (this.noteColor == "purple") {
+    this.textColor = "#3a138"
+    }
+  }
 }
 
 PostItNote.instances = [];
 
+function generatePostItNoteClassInstance(note){
+  note = new PostItNote("null", "null", "null")
+  note.noteColor = note.generateRandomColor()
+  note.doNotRepeatRandomColorOfPreviousInstance()
+  note.generateId()
+  note.generateTextColor()
+  PostItNote.instances.push(note);
+}
 
-abe = new PostItNote(1, "null", "null")
-abe.noteColor = abe.generateRandomColor()
-abe.doNotRepeatRandomColorOfPreviousInstance()
-PostItNote.instances.push(abe);
+function importPostItNoteFromClassInstanceToDOM(){
+  generatePostItNoteClassInstance("note")
+  let noteBuilder1 = document.createElement('div')
+      noteBuilder1.setAttribute('class', `textpanel ${PostItNote.instances[PostItNote.instances.length-1].noteColor}`)
+      noteBuilder1.setAttribute('id', `${PostItNote.instances[PostItNote.instances.length-1].id}`)
 
-bob = new PostItNote(2, "null", "null")
-bob.noteColor = bob.generateRandomColor()
-bob.doNotRepeatRandomColorOfPreviousInstance()
-PostItNote.instances.push(bob);
+      noteBuilder2 = document.createElement('img')
+      noteBuilder2.setAttribute('class', 'post-it-note-image')
+      noteBuilder2.setAttribute('src', `src/images/postit_note_${PostItNote.instances[PostItNote.instances.length-1].noteColor}.svg`)
 
-cat = new PostItNote(3, "null", "null")
-cat.noteColor = cat.generateRandomColor()
-cat.doNotRepeatRandomColorOfPreviousInstance()
-PostItNote.instances.push(cat);
+      noteBuilder3 = document.createElement('textarea')
+      noteBuilder3.setAttribute('maxlength', '50')
+      noteBuilder3.setAttribute('style', `color: ${PostItNote.instances[PostItNote.instances.length-1].textColor}`)
 
-PostItNote.instances
+      noteBuilder1.appendChild(noteBuilder2) // arranging subcomponents
+      noteBuilder1.appendChild(noteBuilder3) // arranging subcomponents
 
-const BASE_URL = "http://localhost:3000"
-const PALLETS_URL = `${BASE_URL}/pallets`
-const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
+  let insertPoint = document.querySelector('div.post-it-note-collection')
+      insertPoint.appendChild(noteBuilder1)
+}
 
 function importStorageAreasFromRailsAPItoDOM(){
 fetch(STORAGE_AREAS_URL)
@@ -716,8 +735,17 @@ function listenForNewStorageAreaFormSubmittal(){
   })
 }
 
+function listenForNewPostItNoteSubmittal(){
+  let newPostItNoteButton = document.querySelector("button#create-post-it-note")
+      newPostItNoteButton.addEventListener('click', event => {
+        event.preventDefault()
+        importPostItNoteFromClassInstanceToDOM(event.target)
+  })
+}
+
 importStorageAreasFromRailsAPItoDOM()
 importPalletsFromRailsAPItoDOM()
 
 removeDeleteButtonsWhereNecessary()
 listenForNewStorageAreaFormSubmittal()
+listenForNewPostItNoteSubmittal()
