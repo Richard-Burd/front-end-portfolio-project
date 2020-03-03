@@ -1,5 +1,3 @@
-require 'pry'
-
 class PalletsController < ApplicationController
   def index
     pallets = Pallet.all
@@ -22,7 +20,9 @@ class PalletsController < ApplicationController
       hazmat: params[:java_script_hazmat],
       storage_area_id: params[:java_script_storage_area_id]
     }
-    Pallet.create(palletData)
+    pallet = Pallet.new(palletData)
+    pallet.assign_priority_category
+    pallet.save
   end
 
   def destroy

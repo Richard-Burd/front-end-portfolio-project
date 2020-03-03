@@ -158,6 +158,7 @@ function importPalletsFromRailsAPItoDOM(retries = 10){
       totalNumberOfPallets();
       totalPalletWeight();
     })
+
     // This is required because the pallets fail to load into the DOM about
     // every 18 to 25 times or so...this seems to have fixed the problem.
     .catch(error => {
@@ -210,9 +211,10 @@ function createANewStorageArea(storage_area_data){
 }
 
 // NOTE: this doesn't change the storage areas themselves, but rather, it
-// re-colors the pallets according to their relative weight when compared to
-// other pallets inside the same storage area...whenever a pallet is added to
-// or deleted from that same storage area.
+// re-colors the pallet backgrounds according to their relative weight when
+// compared to other pallets inside the same storage area  Whenever a pallet is
+// added to or deleted from a storage area, all pallet background color values
+// assigned to that storage area will be re-calculated.
 function updateAStorageArea(storageAreaId){
   return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
       method: 'PATCH',
@@ -221,22 +223,8 @@ function updateAStorageArea(storageAreaId){
         Accept: "application/json"
       },
     }),
-  // This will refresh the page
-  document.location.reload(true);
+  document.location.reload(true); // This will reload the page
 }
-
-// This isn't working properly because the updateAStorageArea isn't firing every time
-// function deleteASpecifiedPallet(palletId, storageAreaID) {
-//   return fetch(`${PALLETS_URL}/${palletId}`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Accept: "application/json"
-//     },
-//   }),
-//   updateAStorageArea(storageAreaID); // this will reload the page like
-// }
-
 
 function deleteASpecifiedPallet(palletId, storageAreaID){
  fetch(`${PALLETS_URL}/${palletId}`, {
@@ -248,21 +236,9 @@ function deleteASpecifiedPallet(palletId, storageAreaID){
    })
    .then(function(json) {
      console.log(json);
-     updateAStorageArea(storageAreaID); // this will reload the page like
+     updateAStorageArea(storageAreaID); // this will reload the page
    });
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function deleteASpecifiedStorageArea(storageAreaId) {
   return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
