@@ -1,27 +1,8 @@
-# Front-End Portfolio Project
-This is a portfolio project submittal for Module 14 of the Full-Stack Web Development program at Flatiron School.&nbsp;  This project is a Single Page Application (SPA) that uses a Rails API back-end and a Javascript + HTML + CSS front-end per assignment specifications.
+# Organizing DOM Manipulation
 
-This app is designed for military & humanitarian logisticians working in an expeditionary environment with airborne-pallets like the ones shown below:
-<a href="https://cdn10.picryl.com/photo/2003/03/18/at-charleston-air-force-base-afb-south-carolina-sc-numerous-cargo-pallets-and-a3f710-1600.jpg"><img src="https://cdn10.picryl.com/photo/2003/03/18/at-charleston-air-force-base-afb-south-carolina-sc-numerous-cargo-pallets-and-a3f710-1600.jpg"/></a>
-These pallets are actually made up of several sub components that are bundled together under a sort-of net, then the net is clipped on to a base board (pallet) made of wood or aluminum.&nbsp;  These wood or aluminum pallets are then loaded onto aircraft for transport around the world.&nbsp;  NATO military forces use the standard [436L Master Pallet](https://en.wikipedia.org/wiki/463L_master_pallet) as do several other entities.  
-
-
-<a href="https://i.imgur.com/42TjmBm"><img src="https://i.imgur.com/42TjmBm.jpg" title="source: imgur.com" /></a>
-
-
-## What Exactly Is This Application Supposed to Accomplish for the User!?
-There are several variables in play when considering what pallets go on what aircraft:
-
- 1. How much space is available on the next airplane going to a given destination you want to ship a pallet to?
- 2. How much extra weight can an airplane carry to that next destination vs. the weight of a pallet you want to load onto that plane.
- 3. Is the aircraft authorized or capable of transporting hazardous materials (HAZMAT) that may be on your pallet?
- 4. How important is the pallet you want to ship in terms of its overall priority?  Should you ship a smaller (or lighter) high-priority pallet or a larger (heavier) pallet with lower priority contents?  Which would save more lives or have the greatest cost-benefit reward?
- 5. The airfield you're working at has given you one or more locations (i.e. storage areas) to stage your pallets - usually you will put all pallets going to destination **x** in one storage area, and all pallets going to destination **y** in another etc.  Do you have enough space in the storage areas to store all of their respective pallets or do you need to cross-stage pallet storage?
-
-Although this single page application does not attempt to answer most of these questions above, it gives the decision-maker a visual map of pallets on hand for when they do.&nbsp;  Most of these decision makers currently use Microsoft Excel spreadsheets which make visualization of the variables difficult.&nbsp;  Additionally, this app is setup to be expanded down the road into something that could begin to prioritize pallets more thoroughly and start to answer more, if not all, the above questions.
-
-## Some notes on Javascript Functions and Document Object Model Manipulation
-One of the most frustrating aspects of this module (14) in the Flatiron curriculum was the total lack of any framework around Document Object Model (DOM) manipulation.&nbsp;  The adding & removing of DOM elements seemed to exist in a vacuum with no rhyme or reason to it.&nbsp;  This is either how things are done in the real world, or I assume there is some framework that solves this problem which I have not yet encountered.  Either way, I came up with my own system of adding & deleting DOM elements that I'll just call the **builder-method.**  Let's look at the code for generating a single pallet in the DOM:
+One of the most frustrating aspects of this module (14) in the Flatiron curriculum was the total lack of any framework around Document Object Model (DOM) manipulation.&nbsp;  The adding & removing of DOM elements seemed to exist in a vacuum with no rhyme or reason to it.&nbsp;  This is either how things are done in the real world, or I assume there is some framework that solves this problem which I have not yet encountered.  Either way, I came up with my own system of adding & deleting DOM elements that I'll just call the **builder-method.**  and used it on my front-end portfolio project [here](https://github.com/Richard-Burd/front-end-portfolio-project).  
+<br><br><br>
+In my protfolio project, I have a DOM element called "pallet," let's look at the code for generating a single pallet in the DOM from this file [here](https://github.com/Richard-Burd/front-end-portfolio-project/blob/master/front-end/src/index.js):
 ```javascript
 function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
 
@@ -82,7 +63,7 @@ function createPallet(storageAreaID, palletId, palletName, timeScale, weightScal
       insertPoint.appendChild(palletBuilder1)
 }
 ```
-There are a few simple rules being followed here:
+This code looks quite cumbersome & odd, but there are just a few simple rules being followed here:
 
  1. The variable names are first declared, then when modified, they are indented so as to align with the declaration on the line above.
  2. There is a space between variables so as to see when one ends and the
@@ -110,28 +91,9 @@ Everything used in the construction of a pallet is a ```palletBuilder``` variabl
 ```
 Here I've added the ```palletBuilder``` numbering on the right-hand side of the HTML, and once I have this on one of my computer monitors, I can use the other monitor to fill out each ```palletBuilder```variable in the Javascript file so it has everything it needs to properly render.
 
-## Project File Structure
-```
-front-end-portfolio-project
-├── back-end
-│   ├── app
-│   │   ├── controllers
-│   │   │   ├── pallets_controller.rb
-│   │   │   └── storage_areas_controller.rb
-│   │   ├── models
-│   │   │   ├── pallet.rb
-│   │   │   └── storage_area.rb
-│   │   └── views
-│   └── db
-│       ├── migrate
-│       │   └── storage_area.rb
-│       ├── 20200225220758_create_pallets.rb
-│       └── 20200225221159_create_storage_areas.rb
-├── front-end
-│   ├── src
-│   │   ├── images
-│   │   └── index.js
-│   ├── index.html  
-│   └── styles.css
-└── README.md
-```
+Because I am new to Javascript DOM manipulation, I don't know if there is a convention that is used to do something similiar to my newfound "*builder-method*" or if there is some sort of framework that can organize these elements in a way that makes writing Javascript easier.&nbsp;  When I study different labs in Module 14 of the Flatiron Curriculum, I find Javascript files that seem to have no organization.  In example, we can compare my early solution to the Flatiron solution in the Dog Fetch CEO Challenge lab below:
+<a href="https://imgur.com/Gp7XTqb"><img src="https://i.imgur.com/Gp7XTqb.jpg" title="source: imgur.com" /></a>
+You can see here that fetching functions are interspersed with functions that build DOM elements.  There is no correlation to where the DOM elements occur in the code vs. where they occur in the rendered browser.  Additionally, the elements that *are* created have no class or id properties assigned to them, and this will make functionality expansion difficult down the road.&nbsp;  To be sure, this is a practice lab not meant for production, but adding additional properties will make the code more difficult to read&nbsp;  Compare that to the ```palletBuilder``` variables above, and how they are arranged&nbsp;  You could tack on an extra 20 properties to say, for example, ```palletBuilder9``` and you would have code just as readable.
+
+Now let's check out the illustration for the Front-End Portfolio Project below:
+///////////////////////////////////// THIS ILLUSTRATION IS UNDER CONSTRUCTION ////////////////////////////////////////
