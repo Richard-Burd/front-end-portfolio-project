@@ -16,8 +16,9 @@ There are several variables in play when considering what pallets go on what air
  3. Is the aircraft authorized or capable of transporting hazardous materials (HAZMAT) that may be on your pallet?
  4. How important is the pallet you want to ship in terms of its overall priority?
  5. Should you ship a smaller (or lighter) high-priority pallet or a larger (heavier) pallet with lower priority contents?  Which would save more lives or have the greatest cost-benefit reward?
+ 6. The airfield you're working at has given you one or more locations to stage your pallets (storage areas) - usually you will put all pallets going to destination **x** in one storage area, and all pallets going to destination **y** in another etc.  Do you have enough space in the storage areas to store all of their respective pallets or do you need to offset pallet storage?
 
-Although this single page application does not attempt to answer any of those questions, it gives the decision-maker a visual map of pallets on hand for when the do.  Most of these decision makers currently use Microsoft Excel spreadsheets which make visualization of the variables difficult.  Additionally, this app is setup to be expanded down the road into something that could begin to prioritize pallets more thoroughly and start to answer some of the questions above.
+Although this single page application does not attempt to answer most of those questions, it gives the decision-maker a visual map of pallets on hand for when they do.  Most of these decision makers currently use Microsoft Excel spreadsheets which make visualization of the variables difficult.  Additionally, this app is setup to be expanded down the road into something that could begin to prioritize pallets more thoroughly and start to answer some of the questions above.
 
 
 <br><br>
