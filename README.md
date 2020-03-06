@@ -110,6 +110,9 @@ Everything used in the construction of a pallet is a ```palletBuilder``` variabl
 ```
 Here I've added the ```palletBuilder``` numbering on the right-hand side of the HTML, and once I have this on one of my computer monitors, I can use the other monitor to fill out each ```palletBuilder```variable in the Javascript file so it has everything it needs to properly render.
 
+Here is a schematic diagram showing the architecture down to the Ruby method / Javascript function level of detail:
+<a href="https://imgur.com/kuZNkUJ"><img src="https://i.imgur.com/kuZNkUJ.jpg" title="source: imgur.com" /></a>
+I've gone ahead and divided the Javascript into three separate layers within the stack; a ***fetch*** layer for communicating with the Rails API, a ***DOM manipulation*** layer for rendering HTML into the browser, and an ***object models*** layer to act as an intermediary when necessary.&nbsp;
 ## Project File Structure
 ```
 front-end-portfolio-project
