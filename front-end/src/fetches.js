@@ -81,11 +81,11 @@ function createANewPallet(palletData){
    })
    .then(function(json) {
      console.log(json);
-     updateAStorageArea(pallet_data.storage_area_id.value) // this will reload the page
+     updateAStorageArea(palletData.storage_area_id.value) // this will reload the page
    });
 }
 
-function createANewStorageArea(storage_area_data){
+function createANewStorageArea(storageAreaData){
   fetch(STORAGE_AREAS_URL, {
     method: 'POST',
     headers: {
@@ -93,8 +93,8 @@ function createANewStorageArea(storage_area_data){
       Accept: "application/json"
     },
     body: JSON.stringify({
-      "java_script_name": storage_area_data.name.value,
-      "java_script_area": storage_area_data.area.value,
+      "java_script_name": storageAreaData.name.value,
+      "java_script_area": storageAreaData.area.value,
     })
   })
   .then(function(json) {
