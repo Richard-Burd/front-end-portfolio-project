@@ -21,7 +21,7 @@ There are several variables in play when considering what pallets go on what air
 Although this single page application does not attempt to answer most of these questions above, it gives the decision-maker a visual map of pallets on hand for when they do.&nbsp;  Most of these decision makers currently use Microsoft Excel spreadsheets which make visualization of the variables difficult.&nbsp;  Additionally, this app is setup to be expanded down the road into something that could begin to prioritize pallets more thoroughly and start to answer more, if not all, the above questions.
 
 ## Some notes on Javascript Functions and Document Object Model Manipulation
-One of the most frustrating aspects of this module (14) in the Flatiron curriculum was the total lack of any framework around Document Object Model (DOM) manipulation.&nbsp;  The adding & removing of DOM elements seemed to exist in a vacuum with no rhyme or reason to it.&nbsp;  This is either how things are done in the real world, or I assume there is some framework that solves this problem which I have not yet encountered.  Either way, I came up with my own system of adding & deleting DOM elements that I'll just call the **builder-method.**  Let's look at the code for generating a single pallet in the DOM:
+One of the most frustrating aspects of this module (14) in the Flatiron curriculum was the total lack of any framework around Document Object Model (DOM) manipulation.&nbsp;  The adding & removing of DOM elements seemed to exist in a vacuum with no rhyme or reason to it.&nbsp;  This is either how things are done in the real world, or I assume there is some framework that solves this problem which I have not yet encountered.  Either way, I came up with my own system of adding & deleting DOM elements that I'll just call the **builder-method.**  Let's look at the code in *./front-end/src/index.js* for generating a single pallet in the DOM:
 ```javascript
 function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
 
@@ -111,8 +111,8 @@ Everything used in the construction of a pallet is a ```palletBuilder``` variabl
 Here I've added the ```palletBuilder``` numbering on the right-hand side of the HTML, and once I have this on one of my computer monitors, I can use the other monitor to fill out each ```palletBuilder```variable in the Javascript file so it has everything it needs to properly render.
 
 Here is a schematic diagram showing the architecture down to the Ruby method / Javascript function level of detail:
-<a href="https://imgur.com/ERctRDq"><img src="https://i.imgur.com/ERctRDq.jpg" title="source: imgur.com" /></a>
-I've gone ahead and divided the Javascript into three separate layers within the stack; a ***fetch*** layer for communicating with the Rails API, a ***DOM manipulation*** layer for rendering HTML into the browser, and an ***object models*** layer to act as an intermediary when necessary.&nbsp;
+<a href="https://imgur.com/8MgRbQK"><img src="https://i.imgur.com/8MgRbQK.jpg" title="source: imgur.com" /></a>
+I've gone ahead and divided the Javascript into three separate layers within the stack; a ***fetch*** layer for communicating with the Rails API, a ***DOM manipulation*** layer for rendering HTML into the browser, and an ***object models*** layer to act as an intermediary when necessary.&nbsp;Each layer has its own Javascript file.
 ## Project File Structure
 ```
 front-end-portfolio-project
@@ -133,7 +133,9 @@ front-end-portfolio-project
 ├── front-end
 │   ├── src
 │   │   ├── images
-│   │   └── index.js
+│   │   ├── fetches.js
+│   │   ├── index.js
+│   │   └── objects.js
 │   ├── index.html  
 │   └── styles.css
 └── README.md

@@ -2,60 +2,6 @@ const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
 
-class PostItNote {
-  constructor(id, noteColor, textColor) {
-    this.id = id;
-    this.noteColor = noteColor;
-    this.textColor = textColor;
-  }
-
-  generateId(){
-    this.id = PostItNote.instances.length+1
-  }
-
-  doNotRepeatRandomColorOfPreviousInstance(){
-    if (PostItNote.instances.length > 0){
-      if (this.noteColor == PostItNote.instances[PostItNote.instances.length-1].noteColor){
-        this.noteColor = "yellow"
-      }
-    }
-  }
-
-  generateRandomColor() {
-    let selector = Math.floor(Math.random() * 4)
-    switch(selector) {
-      case 0:
-        return "blue";
-        break;
-      case 1:
-        return "green";
-        break;
-      case 2:
-        return "orange";
-        break;
-      case 3:
-        return "purple";
-        break;
-    }
-  }
-
-  generateTextColor(){
-    if (this.noteColor == "yellow"){
-      this.textColor = "#414406"
-    } else if (this.noteColor == "green") {
-      this.textColor = "#086609"
-    } else if (this.noteColor == "orange") {
-      this.textColor = "#664408"
-    } else if (this.noteColor == "blue") {
-      this.textColor = "#086266"
-    } else if (this.noteColor == "purple") {
-    this.textColor = "#3a138"
-    }
-  }
-}
-
-PostItNote.instances = [];
-
 function generatePostItNoteClassInstance(note){
   note = new PostItNote("null", "null", "null")
   note.noteColor = note.generateRandomColor()
@@ -86,167 +32,10 @@ function importPostItNoteFromClassInstanceToDOM(){
       insertPoint.appendChild(noteBuilder1)
 }
 
-// This class is introduced to meet the following project requirement:
-// "Translate JSON responses into JavaScript model objects using ES6 class or constructor function syntax."
-// The storage areas already have object models in the backend because of the
-// other project requirement that stipulates:
-// "The domain model served by the Rails backend must include a resource with at least one has-many relationship..."
-class StorageArea {
-  constructor(name, id, area) {
-    this.name = name;
-    this.id = id;
-    this.area = area;
-  }
-}
-StorageArea.instances = [];
-
 function transferStorageAreaObjectInstancesToDOM(){
   StorageArea.instances.forEach(function(element) {
     createStorageArea(element.name, element.id, element.area)
   });
-}
-
-function importStorageAreasFromRailsAPItoJsClassObject(){
-fetch(STORAGE_AREAS_URL)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    for (const element of json) {
-      // This is easier, but it would skip creating Javascript model objects
-      // per the project requirements discussed in the notes above
-      // createStorageArea(element.name, element.id, element.area)
-      let newArea = new StorageArea(element.name, element.id, element.area)
-      StorageArea.instances.push(newArea);
-    }
-  })
-  .then(function(json) {
-    transferStorageAreaObjectInstancesToDOM();
-    totalSquareFootage();
-  })
-}
-
-function importPalletsFromRailsAPItoDOM(retries = 10){
-  async function getPalletsWithAsyncAwait(){
-    let response = await fetch(PALLETS_URL);
-    let data = await response.json()
-    return data;
-  }
-
-  getPalletsWithAsyncAwait()
-    .then(function(json) {
-      for (const element of json) {
-        createPallet(
-          element.storage_area_id,
-          element.id,
-          element.name,
-          element.priority_category,
-          element.weight_category,
-          element.first_content,
-          element.second_content,
-          element.third_content,
-          element.weight,
-          element.hazmat)
-      }
-    })
-    .then(function(json) {
-      console.log("pallet has been added");
-      removeDeleteButtonsWhereNecessary();
-      labelButtonForStorageAreasThatAreFull();
-      totalNumberOfPallets();
-      totalPalletWeight();
-    })
-
-    // This is required because the pallets fail to load into the DOM about
-    // every 18 to 25 times or so...this seems to have fixed the problem.
-    .catch(error => {
-      if (retries <= 0) {
-        throw error;
-      }
-      return importPalletsFromRailsAPItoDOM(retries - 1);
-    })
-}
-
-function createANewPallet(pallet_data){
- fetch(PALLETS_URL, {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-       Accept: "application/json"
-     },
-     body: JSON.stringify({
-       "java_script_name": pallet_data.name.value,
-       "java_script_weight": pallet_data.weight.value,
-       "java_script_priority": pallet_data.priority.value,
-       "java_script_first_content": pallet_data.first_content.value,
-       "java_script_second_content": pallet_data.second_content.value,
-       "java_script_third_content": pallet_data.third_content.value,
-       "java_script_hazmat": pallet_data.hazmat.value,
-       "java_script_storage_area_id": pallet_data.storage_area_id.value
-     })
-   })
-   .then(function(json) {
-     console.log(json);
-     updateAStorageArea(pallet_data.storage_area_id.value) // this will reload the page
-   });
-}
-
-function createANewStorageArea(storage_area_data){
-  fetch(STORAGE_AREAS_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: "application/json"
-    },
-    body: JSON.stringify({
-      "java_script_name": storage_area_data.name.value,
-      "java_script_area": storage_area_data.area.value,
-    })
-  })
-  .then(function(json) {
-    document.location.reload(true);
-  });
-}
-
-// NOTE: this doesn't change the storage areas themselves, but rather, it
-// re-colors the pallet backgrounds according to their relative weight when
-// compared to other pallets inside the same storage area.  Whenever a pallet is
-// added to or deleted from a storage area, all pallet background color values
-// assigned to that storage area will be re-calculated.
-function updateAStorageArea(storageAreaId){
-  return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: "application/json"
-      },
-    }),
-  document.location.reload(true); // This will reload the page
-}
-
-function deleteASpecifiedPallet(palletId, storageAreaID){
- fetch(`${PALLETS_URL}/${palletId}`, {
-     method: 'DELETE',
-     headers: {
-       'Content-Type': 'application/json',
-       Accept: "application/json"
-     },
-   })
-   .then(function(json) {
-     console.log(json);
-     updateAStorageArea(storageAreaID); // this will reload the page
-   });
-}
-
-function deleteASpecifiedStorageArea(storageAreaId) {
-  return fetch(`${STORAGE_AREAS_URL}/${storageAreaId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: "application/json"
-      },
-    }),
- window.location.reload(); // alternative => document.location.reload(true);
 }
 
 function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
@@ -322,7 +111,7 @@ function createStorageArea(storageAreaName, storageAreaID, squareFootage){
 
   let storageAreaBuilder4 = document.createElement('span')
       storageAreaBuilder4.setAttribute('class', 'storage-area-value')
-      storageAreaBuilder4.innerText = squareFootage
+      storageAreaBuilder4.innerText = numberWithCommas(squareFootage)
 
   let storageAreaBuilder5 = document.createElement('button')
       storageAreaBuilder5.setAttribute('class', 'master')
@@ -636,9 +425,11 @@ function removeDeleteButtonsWhereNecessary(){
   });
 }
 
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+//function numberWithCommas(x) {
+//    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//}
+
+const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 function totalNumberOfPallets(){
   let value = document.querySelectorAll('div.pallet-box').length
