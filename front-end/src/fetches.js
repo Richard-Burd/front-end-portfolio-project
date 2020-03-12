@@ -5,8 +5,9 @@ fetch(STORAGE_AREAS_URL)
   })
   .then(function(json) {
     for (const element of json) {
-      // This is easier, but it would skip creating Javascript model objects
-      // per the project requirements discussed in the notes above
+      // This code below is easier, but it would skip creating Javascript model
+      // objects per the following specific project requirement @ Flatiron School:
+      // "Translate JSON responses into JavaScript model objects using ES6 class or constructor function syntax."
       // createStorageArea(element.name, element.id, element.area)
       let newArea = new StorageArea(element.name, element.id, element.area)
       StorageArea.instances.push(newArea);
@@ -19,14 +20,14 @@ fetch(STORAGE_AREAS_URL)
 }
 
 function importPalletsFromRailsAPItoDOM(retries = 10){
-  async function getPalletsWithAsyncAwait(){             //probably redundant, consider refactoring
-    let response = await fetch(PALLETS_URL); // let this finish, then move onto the next line of code...
+  async function getPalletsWithAsyncAwait(){
+    let response = await fetch(PALLETS_URL);
     let data = await response.json()
     return data;
   }
 
-  getPalletsWithAsyncAwait()                             //probably redundant, consider refactoring
-    .then(function(json) {                               //probably redundant, consider refactoring
+  getPalletsWithAsyncAwait()
+    .then(function(json) {
       for (const element of json) {
         createPallet(
           element.storage_area_id,
@@ -60,7 +61,7 @@ function importPalletsFromRailsAPItoDOM(retries = 10){
     })
 }
 
-function createANewPallet(pallet_data){                    // this should be formatted to lowerCamelCase
+function createANewPallet(palletData){
  fetch(PALLETS_URL, {
      method: 'POST',
      headers: {
@@ -68,14 +69,14 @@ function createANewPallet(pallet_data){                    // this should be for
        Accept: "application/json"
      },
      body: JSON.stringify({
-       "java_script_name": pallet_data.name.value,
-       "java_script_weight": pallet_data.weight.value,
-       "java_script_priority": pallet_data.priority.value,
-       "java_script_first_content": pallet_data.first_content.value,
-       "java_script_second_content": pallet_data.second_content.value,
-       "java_script_third_content": pallet_data.third_content.value,
-       "java_script_hazmat": pallet_data.hazmat.value,
-       "java_script_storage_area_id": pallet_data.storage_area_id.value
+       "java_script_name": palletData.name.value,
+       "java_script_weight": palletData.weight.value,
+       "java_script_priority": palletData.priority.value,
+       "java_script_first_content": palletData.first_content.value,
+       "java_script_second_content": palletData.second_content.value,
+       "java_script_third_content": palletData.third_content.value,
+       "java_script_hazmat": palletData.hazmat.value,
+       "java_script_storage_area_id": palletData.storage_area_id.value
      })
    })
    .then(function(json) {
