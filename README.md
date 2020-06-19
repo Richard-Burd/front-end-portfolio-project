@@ -1,6 +1,15 @@
 # Front-End Portfolio Project
 This is a portfolio project submittal for Module 14 of the Full-Stack Web Development program at Flatiron School.&nbsp;  This project is a Single Page Application (SPA) that uses a Rails API back-end and a Javascript + HTML + CSS front-end per assignment specifications.
 
+## Getting Started
+To run this app locally, you will need to have [Rails](https://rubyonrails.org/) installed.  Once you do, navigate to the Rails back end located at: `./front-end-portfolio-project/back-end` and run the following commands in terminal:
+1. `$ rails db: migrate` to run the ActiveRecord migrations.
+2. `$ rails db: seed` to seed the database.
+3. `$ rails s` to boot up the Rails server.
+With the Rails back end API server running, open a browser and navigate it to the following file location:
+`front-end-portfolio-project/front-end/index.html` and the front end should automatically populate with data from the server.  The page should look similiar to the drawing below entitled: *Application Features*
+
+## About This App
 This app is designed for military & humanitarian logisticians working in an expeditionary environment with airborne-pallets like the ones shown below:
 <a href="https://cdn10.picryl.com/photo/2003/03/18/at-charleston-air-force-base-afb-south-carolina-sc-numerous-cargo-pallets-and-a3f710-1600.jpg"><img src="https://cdn10.picryl.com/photo/2003/03/18/at-charleston-air-force-base-afb-south-carolina-sc-numerous-cargo-pallets-and-a3f710-1600.jpg"/></a>
 These pallets are actually made up of several sub components that are bundled together under a sort-of net, then the net is clipped on to a base board (pallet) made of wood or aluminum.&nbsp;  These wood or aluminum pallets are then loaded onto aircraft for transport around the world.&nbsp;  NATO military forces use the standard [436L Master Pallet](https://en.wikipedia.org/wiki/463L_master_pallet) as do several other entities.  
