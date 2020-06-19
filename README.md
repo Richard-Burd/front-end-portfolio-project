@@ -1,5 +1,5 @@
 # Front-End Portfolio Project
-This is a portfolio project submittal for Module 14 of the Full-Stack Web Development program at Flatiron School.&nbsp;  This project is a Single Page Application (SPA) that uses a Rails API back-end and a Javascript + HTML + CSS front-end per assignment specifications.
+This is a portfolio project submittal for Module 14 of the Full-Stack Web Development program at Flatiron School.&nbsp;  This project is a Single Page Application (SPA) that uses a Rails API back-end and a JavaScript + HTML + CSS front-end per assignment specifications.
 
 ## Getting Started
 To run this app locally, you will need to have [Rails](https://rubyonrails.org/) installed.  Once you do, navigate to the Rails back end located at: `./front-end-portfolio-project/back-end` and run the following commands in terminal:
@@ -29,8 +29,8 @@ There are several variables in play when considering what pallets go on what air
 
 Although this single page application does not attempt to answer most of these questions above, it gives the decision-maker a visual map of pallets on hand for when they do.&nbsp;  Most of these decision makers currently use Microsoft Excel spreadsheets which make visualization of the variables difficult.&nbsp;  Additionally, this app is setup to be expanded down the road into something that could begin to prioritize pallets more thoroughly and start to answer more, if not all, the above questions.
 
-## Some notes on Javascript Functions and Document Object Model Manipulation
-One of the most frustrating aspects of this module (14) in the Flatiron curriculum was the total lack of any framework around Document Object Model (DOM) manipulation.&nbsp;  The adding & removing of DOM elements seemed to exist in a vacuum with no rhyme or reason to it.&nbsp;  This is either how things are done in the real world, or I assume there is some framework that solves this problem which I have not yet encountered.  Either way, I came up with my own system of adding & deleting DOM elements that I'll just call the **builder-method.**  Let's look at the code in *./front-end/src/index.js* for generating a single pallet in the DOM:
+## This is Pure JavaScript by Design
+This app was designed for the the [Flatiron School's](https://flatironschool.com) *'Front-End Module'* that requires students to use JavaScript without a library such as React or a framework like Angular or Vue.&nbsp;  This meant having to create complex objects without the use of something like JavaScript XML (JSX) which in turn meant having to declare a ton of *'create'* statements followed by setting various attributes for each Document Object Model (DOM) element.&nbsp;  For this reason, I made up my own system of adding & deleting DOM elements that I'll just call the **builder-method.**&nbsp;  To see how it works, let's look at the code in *./front-end/src/index.js* for generating a single pallet in the DOM:
 ```javascript
 function createPallet(storageAreaID, palletId, palletName, timeScale, weightScale, firstItem, secondItem, thirdItem, weight, hazmat ){
 
@@ -117,11 +117,12 @@ Everything used in the construction of a pallet is a ```palletBuilder``` variabl
    <img class="hazmat-icon" src="src/images/HAZMAT.svg" title="hazmat-icon"><!--(palletBuilder9) -->
 </div>
 ```
-Here I've added the ```palletBuilder``` numbering on the right-hand side of the HTML, and once I have this on one of my computer monitors, I can use the other monitor to fill out each ```palletBuilder```variable in the Javascript file so it has everything it needs to properly render.
+Here I've added the ```palletBuilder``` numbering on the right-hand side of the HTML, and once I have this on one of my computer monitors, I can use the other monitor to fill out each ```palletBuilder```variable in the JavaScript file so it has everything it needs to properly render.
 
-Here is a schematic diagram showing the architecture down to the Ruby method / Javascript function level of detail:
+Here is a schematic diagram showing the architecture down to the Ruby method / JavaScript function level of detail:
 <a href="https://imgur.com/8MgRbQK"><img src="https://i.imgur.com/8MgRbQK.jpg" title="source: imgur.com" /></a>
-I've gone ahead and divided the Javascript into three separate layers within the stack; a ***fetch*** layer for communicating with the Rails API, a ***DOM manipulation*** layer for rendering HTML into the browser, and an ***object models*** layer to act as an intermediary when necessary.&nbsp;Each layer has its own Javascript file.
+I've gone ahead and divided the JavaScript into three separate layers within the stack; a ***fetch*** layer for communicating with the Rails API, a ***DOM manipulation*** layer for rendering HTML into the browser, and an ***object models*** layer to act as an intermediary when necessary.&nbsp;Each layer has its own JavaScript file.
+
 ## Project File Structure
 ```
 front-end-portfolio-project
