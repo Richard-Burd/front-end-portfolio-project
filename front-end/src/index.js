@@ -2,15 +2,6 @@ const BASE_URL = "http://localhost:3000"
 const PALLETS_URL = `${BASE_URL}/pallets`
 const STORAGE_AREAS_URL = `${BASE_URL}/storage_areas`
 
-function generatePostItNoteClassInstance(note){
-  note = new PostItNote("null", "null", "null")
-  note.noteColor = note.generateRandomColor()
-  note.doNotRepeatRandomColorOfPreviousInstance()
-  note.generateId()
-  note.generateTextColor()
-  PostItNote.instances.push(note);
-}
-
 function importPostItNoteFromClassInstanceToDOM(){
   generatePostItNoteClassInstance("note")
   let noteBuilder1 = document.createElement('div')

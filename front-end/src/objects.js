@@ -66,4 +66,14 @@ class StorageArea {
     this.area = area;
   }
 }
+
 StorageArea.instances = [];
+
+function generatePostItNoteClassInstance(note){
+  note = new PostItNote("null", "null", "null")
+  note.noteColor = note.generateRandomColor()
+  note.doNotRepeatRandomColorOfPreviousInstance()
+  note.generateId()
+  note.generateTextColor()
+  PostItNote.instances.push(note);
+}
