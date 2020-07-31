@@ -5,9 +5,21 @@ This is a portfolio project submittal for Module 14 of the Full-Stack Web Develo
 To run this app locally, you will need to have [Rails](https://rubyonrails.org/) installed.  Once you do, navigate to the Rails back end located at: `./front-end-portfolio-project/back-end` and run the following commands in terminal:
 1. `$ rails db: migrate` to run the ActiveRecord migrations.
 2. `$ rails db: seed` to seed the database.
-3. `$ rails s` to boot up the Rails server.
-With the Rails back end API server running, open a browser and navigate it to the following file location:
-`front-end-portfolio-project/front-end/index.html` and the front end should automatically populate with data from the server.  The page should look similiar to the drawing below entitled: *Application Features*
+~~With the Rails back end API server running, open a browser and navigate it to the following file location:
+`front-end-portfolio-project/front-end/index.html` and the front end should automatically populate with data from the server.  The page should look similiar to the drawing below entitled: *Application Features*~~
+3. `$ npm install -g http-server` To get a server going (globally) if you don't already have one set up.
+4. `$ sudo npm install -g typescript` To get TypeScript installed globally as well.
+
+## TypeScript
+I am in the process of implementing TypeScript with modules on the front end of this app, so loading the root `index.html` into a browser no longer works (because of CORS) and therefore it  requires a server.&nbsp;  I have some cool TypeScript cheat sheets [here](https://github.com/Richard-Burd/typescript-sandbox#cool-graphics).
+
+## Fire Everything Up
+To get everything running, execute these commands in the appropriate directories:
+1. `~./front-end-portfolio-project/back-end (master) $ rails s
+` to boot up the Rails back-end server.
+2. `~./front-end-portfolio-project/front-end (master) $ http-server -c-1` to boot up the front-end Node.js server
+3. `~./front-end-portfolio-project/front-end (master) $ tsc -w
+` to listen for changes in the TypeScript `.ts` files and check for errors in them before they compile to the commensurate JavaScript `.js` files according to the directories specified in `./front-end/tsconfig.json` - for more information on how it works, check out the upper right-hand corner of this graphic [here](https://github.com/Richard-Burd/typescript-sandbox#cool-graphics).
 
 ## About This App
 This app is designed for military & humanitarian logisticians working in an expeditionary environment with airborne-pallets like the ones shown below:
